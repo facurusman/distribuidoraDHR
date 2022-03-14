@@ -1,0 +1,49 @@
+<mat-toolbar class="mat-elevation-z8">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">
+          menu
+      </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+          close
+      </mat-icon>
+  </button>
+  Distribuidora DHR
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+      <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+
+      <h4 class="name">John Smith</h4>
+      <p class="designation">Software Engineer</p>
+
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button">
+        <mat-icon>perm_identity</mat-icon>
+          <span>Clientes</span>
+      </button>
+      <button mat-button class="menu-button">
+          <mat-icon>store</mat-icon>
+          <span>Productos</span>
+      </button>
+      <button mat-button class="menu-button">
+          <mat-icon>shopping_cart</mat-icon>
+          <span>Ventas</span>
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button">
+        <mat-icon>exit_to_app</mat-icon>
+          <span>Salir</span>
+      </button>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <div class="content mat-elevation-z8">
+          Main content here!
+      </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

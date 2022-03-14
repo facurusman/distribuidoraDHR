@@ -8,8 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { SideBarComponent } from './components/sidebar/sidebar.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { ClientsComponent } from './components/clients/clients.component';
@@ -23,8 +22,7 @@ import { HomeComponentComponent } from './components/home-component/home-compone
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    NavbarComponent,
+    SideBarComponent,
     ProductsComponent,
     SalesComponent,
     ClientsComponent,
