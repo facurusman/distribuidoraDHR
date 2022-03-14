@@ -18,6 +18,7 @@ import { LoginService } from './services/login.service';
 import { ProductsService } from './services/products.service';
 import { SalesService } from './services/sales.service';
 import { HomeComponentComponent } from './components/home-component/home-component.component';
+import { ErroresComponent } from './components/errores/errores.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HomeComponentComponent } from './components/home-component/home-compone
     ClientsComponent,
     LoginComponent,
     HomeComponentComponent,
+    ErroresComponent,
   ],
   imports: [
     BrowserModule,

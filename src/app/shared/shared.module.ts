@@ -96,7 +96,7 @@ export const MaterialModules = [
 
 @NgModule({
   declarations: [],
-  exports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModules, FormsModule, FlexLayoutModule  ],
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModules, FormsModule, FlexLayoutModule  ],
+  exports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModules, FormsModule, FlexLayoutModule, MatTableModule  ],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModules, FormsModule, FlexLayoutModule, MatTableModule  ],
 })
 export class SharedModule {}

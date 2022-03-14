@@ -2,6 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
+import { ClientsService } from '../../services/clients.service';
+
+
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +16,11 @@ import { delay } from 'rxjs/operators';
 export class SideBarComponent{
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
+  clientes: any;
 
-  constructor(private observer: BreakpointObserver) {}
+
+
+  constructor(private readonly observer: BreakpointObserver) {}
 
   ngAfterViewInit() {
     this.observer
@@ -28,5 +36,7 @@ export class SideBarComponent{
         }
       });
   }
+
+
 
 }
