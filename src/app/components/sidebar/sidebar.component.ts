@@ -9,7 +9,7 @@ import { ClientsService } from '../../services/clients.service';
 
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
