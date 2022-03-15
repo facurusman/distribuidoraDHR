@@ -3,6 +3,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
 import { ClientsService } from '../../services/clients.service';
+import { Router } from '@angular/router';
 
 
 
@@ -16,11 +17,10 @@ import { ClientsService } from '../../services/clients.service';
 export class SideBarComponent{
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  clientes: any;
 
 
 
-  constructor(private readonly observer: BreakpointObserver) {}
+  constructor(private readonly observer: BreakpointObserver, private readonly router : Router) {}
 
   ngAfterViewInit() {
     this.observer
@@ -35,6 +35,11 @@ export class SideBarComponent{
           this.sidenav.open();
         }
       });
+  }
+
+
+  clientes(){
+    this.router.navigateByUrl('/clientes');
   }
 
 
