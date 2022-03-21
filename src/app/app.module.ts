@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { SideBarComponent } from './components/sidebar/sidebar.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { ClientsComponent } from './components/clients/clients.component';
@@ -24,7 +23,6 @@ import { CoreComponent } from './components/core/core.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SideBarComponent,
     ProductsComponent,
     SalesComponent,
     ClientsComponent,

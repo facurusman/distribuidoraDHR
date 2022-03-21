@@ -23,26 +23,27 @@
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
-    <button mat-button class="menu-button" (click)="clientes()">
+    <button mat-button class="menu-button" (click)="goToClientsPage()">
       <mat-icon>perm_identity</mat-icon>
       <span>Clientes</span>
     </button>
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" (click)="goToProductsPage()">
       <mat-icon>store</mat-icon>
       <span>Productos</span>
     </button>
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" (click)="goToSalesPage()">
       <mat-icon>shopping_cart</mat-icon>
       <span>Ventas</span>
     </button>
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
       <span>Salir</span>
     </button>
   </mat-sidenav>
+  <router-outlet></router-outlet>
 </mat-sidenav-container>
 
-<router-outlet></router-outlet>
+

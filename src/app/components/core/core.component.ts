@@ -11,7 +11,19 @@ export class CoreComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  clientes() {
-    this.router.navigateByUrl('/clientes');
+  goToClientsPage() {
+    this.router.navigateByUrl('/dhr/clients');
+  }
+
+  goToProductsPage() {
+    this.router.navigateByUrl('/dhr/products');
+  }
+
+  goToSalesPage() {
+    this.router.navigateByUrl('/dhr/sales');
+  }
+
+  logout() {
+    this.router.navigateByUrl('/');
   }
 }
