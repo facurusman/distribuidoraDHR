@@ -36,10 +36,10 @@ import { ErroresComponent } from './components/errores/errores.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [RouterModule],
   providers: [ClientsService, LoginService, ProductsService, SalesService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

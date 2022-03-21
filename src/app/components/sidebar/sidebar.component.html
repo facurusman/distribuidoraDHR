@@ -1,47 +1,48 @@
 <mat-toolbar class="mat-elevation-z8">
-  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
-      <mat-icon *ngIf="!sidenav.opened">
-          menu
-      </mat-icon>
-      <mat-icon *ngIf="sidenav.opened">
-          close
-      </mat-icon>
+  <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
   Distribuidora DHR
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <!-- <img
+      class="avatar mat-elevation-z8"
+      src="../../../assets/images/logo-DHR.jpg"
+    /> -->
 
-      <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+    <mat-divider></mat-divider>
 
-      <h4 class="name">John Smith</h4>
-      <p class="designation">Software Engineer</p>
+    <button mat-button class="menu-button">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-button class="menu-button" (click)="clientes()">
+      <mat-icon>perm_identity</mat-icon>
+      <span>Clientes</span>
+    </button>
+    <button mat-button class="menu-button">
+      <mat-icon>store</mat-icon>
+      <span>Productos</span>
+    </button>
+    <button mat-button class="menu-button">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>Ventas</span>
+    </button>
 
-      <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-      <button mat-button class="menu-button" (click)="clientes()">
-        <mat-icon>perm_identity</mat-icon>
-          <span>Clientes</span>
-      </button>
-      <button mat-button class="menu-button">
-          <mat-icon>store</mat-icon>
-          <span>Productos</span>
-      </button>
-      <button mat-button class="menu-button">
-          <mat-icon>shopping_cart</mat-icon>
-          <span>Ventas</span>
-      </button>
-
-      <mat-divider></mat-divider>
-
-      <button mat-button class="menu-button">
-        <mat-icon>exit_to_app</mat-icon>
-          <span>Salir</span>
-      </button>
-
-    </mat-sidenav>
-
-
-
+    <button mat-button class="menu-button">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Salir</span>
+    </button>
+  </mat-sidenav>
+  <app-home-component></app-home-component>
 </mat-sidenav-container>
+

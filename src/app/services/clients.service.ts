@@ -4,19 +4,17 @@ import { environment } from 'src/environments/environment';
 import { Client } from '../models/client';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClientsService {
+  constructor(private readonly http: HttpClient) {}
 
-  constructor(private readonly http: HttpClient) { }
-
-
-  getClients(){
+  getClients() {
     return this.http.get(`${environment.apiUrl}/clientes`);
   }
 
-  postClient(client:Client){
-    console.log(client)
-    return this.http.post(`${environment.apiUrl}/clientes`, client)
+  postClient(client: Client) {
+    console.log(client);
+    return this.http.post(`${environment.apiUrl}/clientes`, client);
   }
 }

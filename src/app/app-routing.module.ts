@@ -10,8 +10,9 @@ import { SideBarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'home', component: HomeComponentComponent },
   { path: 'clientes', component: ClientsComponent },
-  { path: 'productos', component:ProductsComponent },
+  { path: 'productos', component: ProductsComponent },
   { path: 'ventas', component: SalesComponent },
   { path: 'dashboard', component: SideBarComponent },
   { path: '**', component: ErroresComponent },
@@ -19,6 +20,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
