@@ -86,9 +86,16 @@
         <input matInput name="adress" [(ngModel)]="adress" minlength="5" />
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label class="title">Email</mat-label>
-        <input matInput name="email" [(ngModel)]="email" minlength="5" />
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+               placeholder="Ex. pat@example.com">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Por favor ingrese una direccion de email valida
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email es <strong>obligatorio</strong>
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">

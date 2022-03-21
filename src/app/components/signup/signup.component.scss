@@ -6,7 +6,7 @@
   background-color: #f5f5f5;
   height: 100%;
 }
-.signup {
+.login {
   width: 100%;
   max-width: 330px;
   padding: 15px;
@@ -14,10 +14,19 @@
   text-align: center;
 }
 
-.signup img{
+.login img{
   width: 70%;
 }
 
-.ancho {
+.example-full-width {
   width: 80%;
+}
+
+
+.signup{
+  margin-top: 3%;
+}
+
+.signup a{
+  color: #002b5c;
 }

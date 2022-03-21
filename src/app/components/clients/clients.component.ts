@@ -5,6 +5,8 @@ import {MatSort, Sort} from '@angular/material/sort';
 import { Client } from 'src/app/models/client';
 import { ClientsService } from 'src/app/services/clients.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 export interface PeriodicElement {
   name: string;
@@ -13,6 +15,13 @@ export interface PeriodicElement {
   adress: string;
   email: string;
   detail: string;
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -43,7 +52,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
 })
+
 export class ClientsComponent implements AfterViewInit {
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  matcher = new MyErrorStateMatcher();
   displayedColumns: string[] = ['name', 'phone_number', 'zone', 'adress', 'email', 'detail'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
