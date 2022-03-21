@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Client } from 'src/app/models/client';
 import { ClientsService } from 'src/app/services/clients.service';
 
@@ -29,9 +31,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
 })
-export class ClientsComponent implements OnInit {
+export class ClientsComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'phone_number', 'zone', 'adress', 'email', 'detail'];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   name:any
   phone_number:any
@@ -39,10 +41,14 @@ export class ClientsComponent implements OnInit {
   adress:any
   email:any
   detail:any
-
   constructor(private readonly clientService: ClientsService) {}
 
-  ngOnInit(): void {}
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   allClients() {
     this.clientService.getClients().subscribe( (response) => {
