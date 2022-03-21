@@ -3,23 +3,20 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService implements OnDestroy {
-
-  private _authSub$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private _authSub$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
   public get isAuthenticated$(): Observable<boolean> {
     return this._authSub$.asObservable();
   }
 
-  constructor(private _router: Router) {
-
-  }
+  constructor(private _router: Router) {}
 
   public ngOnDestroy(): void {
     this._authSub$.next(false);
     this._authSub$.complete();
   }
-
-
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -91,12 +91,28 @@ export const MaterialModules = [
   MatFormFieldModule,
   MatRadioModule,
   MatDatepickerModule,
-  MatTooltipModule
+  MatTooltipModule,
 ];
 
 @NgModule({
   declarations: [],
-  exports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModules, FormsModule, FlexLayoutModule, MatTableModule  ],
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModules, FormsModule, FlexLayoutModule, MatTableModule  ],
+  exports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    MaterialModules,
+    FormsModule,
+    FlexLayoutModule,
+    MatTableModule,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    MaterialModules,
+    FormsModule,
+    FlexLayoutModule,
+    MatTableModule,
+  ],
 })
 export class SharedModule {}

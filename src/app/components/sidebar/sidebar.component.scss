@@ -12,6 +12,7 @@ mat-sidenav {
   border-radius: 10px;
   padding: 16px;
   text-align: center;
+  margin-right: 40px;
 }
 
 .content {
@@ -46,9 +47,10 @@ mat-sidenav-container {
 
 .avatar {
   margin-top: 16px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 150px;
+  height: 125px;
+  object-fit:fill;
+  border-radius: 10px;
 }
 
 .name {

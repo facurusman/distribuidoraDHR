@@ -5,22 +5,19 @@ import { delay } from 'rxjs/operators';
 import { ClientsService } from '../../services/clients.service';
 import { Router } from '@angular/router';
 
-
-
-
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
-export class SideBarComponent{
+export class SideBarComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-
-
-  constructor(private readonly observer: BreakpointObserver, private readonly router : Router) {}
+  constructor(
+    private readonly observer: BreakpointObserver,
+    private readonly router: Router
+  ) {}
 
   ngAfterViewInit() {
     this.observer
@@ -37,11 +34,7 @@ export class SideBarComponent{
       });
   }
 
-
-  clientes(){
+  clientes() {
     this.router.navigateByUrl('/clientes');
   }
-
-
-
 }

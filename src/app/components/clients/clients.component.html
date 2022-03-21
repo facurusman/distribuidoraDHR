@@ -43,7 +43,7 @@
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
 
@@ -55,49 +55,47 @@
               [pageSizeOptions]="[5, 10, 25, 100]"
               aria-label="Select page">
     </mat-paginator>
-
-
   </mat-tab>
 
-
   <mat-tab label="Crear Cliente">
-
-
     <div class="container">
       <mat-form-field appearance="fill">
         <mat-label class="title">Nombre</mat-label>
-        <input matInput name="name" [(ngModel)]="name" minlength="5">
+        <input matInput name="name" [(ngModel)]="name" minlength="5" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="number" placeholder="Telefono" class="phone_number" [(ngModel)]="phone_number" minlength="8">
+        <input
+          matInput
+          type="number"
+          placeholder="Teléfono"
+          class="phone_number"
+          [(ngModel)]="phone_number"
+          minlength="8"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Zona</mat-label>
-        <input matInput name="zone" [(ngModel)]="zone" minlength="5">
+        <input matInput name="zone" [(ngModel)]="zone" minlength="5" />
       </mat-form-field>
 
-
       <mat-form-field appearance="fill">
-        <mat-label class="title">Adress</mat-label>
-        <input matInput name="adress" [(ngModel)]="adress" minlength="5">
+        <mat-label class="title">Dirección</mat-label>
+        <input matInput name="adress" [(ngModel)]="adress" minlength="5" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label class="title">Email</mat-label>
-        <input matInput name="email" [(ngModel)]="email" minlength="5">
+        <input matInput name="email" [(ngModel)]="email" minlength="5" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label class="title">Detalle</mat-label>
-        <input matInput name="detail" [(ngModel)]="detail" minlength="5">
+        <input matInput name="detail" [(ngModel)]="detail" minlength="5" />
       </mat-form-field>
 
-      <button mat-raised-button color="warn"(click)="onSend()">Send</button>
+      <button mat-raised-button color="warn" (click)="onSend()">Send</button>
     </div>
-
-
   </mat-tab>
 </mat-tab-group>
-
