@@ -19,6 +19,7 @@ import { ProductsService } from './services/products.service';
 import { SalesService } from './services/sales.service';
 import { HomeComponentComponent } from './components/home-component/home-component.component';
 import { ErroresComponent } from './components/errores/errores.component';
+import { CoreComponent } from './components/core/core.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ErroresComponent } from './components/errores/errores.component';
     LoginComponent,
     HomeComponentComponent,
     ErroresComponent,
+    CoreComponent
   ],
   imports: [
     BrowserModule,
