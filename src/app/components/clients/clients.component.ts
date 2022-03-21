@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import {MatSort, Sort} from '@angular/material/sort';
 import { Client } from 'src/app/models/client';
 import { ClientsService } from 'src/app/services/clients.service';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 export interface PeriodicElement {
   name: string;
@@ -15,12 +17,12 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-6600", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2349", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
   {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
   {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Facundo", phone_number : "11-7777", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
   {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
   {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
   {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
@@ -41,14 +43,32 @@ export class ClientsComponent implements AfterViewInit {
   adress:any
   email:any
   detail:any
-  constructor(private readonly clientService: ClientsService) {}
+  constructor(private readonly clientService: ClientsService, private readonly _liveAnnouncer: LiveAnnouncer) {}
+
+  @ViewChild(MatSort)
+  sort!: MatSort;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
+
   ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
+
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+
 
   allClients() {
     this.clientService.getClients().subscribe( (response) => {

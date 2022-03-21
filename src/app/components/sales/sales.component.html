@@ -1,3 +1,61 @@
-<div class="container">
-  <h1>VENTAS</h1>
-</div>
+<mat-tab-group>
+  <mat-tab label="Mostrar Ventas">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- description Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- price Column -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef> Total </th>
+          <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements">
+</mat-paginator>
+    </div>
+
+
+
+
+  </mat-tab>
+
+  <mat-tab label="Crear Venta">
+    <div class="container">
+      <mat-form-field appearance="fill">
+        <mat-label class="title">Nombre</mat-label>
+        <input matInput name="name" [(ngModel)]="name" minlength="5" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label class="title">Total</mat-label>
+        <input matInput name="detail" [(ngModel)]="total" minlength="5" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label class="title">Fecha</mat-label>
+        <input matInput name="detail" [(ngModel)]="date" minlength="5" />
+      </mat-form-field>
+
+      <button mat-raised-button color="warn" (click)="onCreateProduct()">Crear Producto</button>
+    </div>
+  </mat-tab>
+</mat-tab-group>
