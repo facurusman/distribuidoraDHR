@@ -16,16 +16,26 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-6600", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2349", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Facundo", phone_number : "11-7777", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
-  {name : "Lucas", phone_number : "11-2176", zone : "villa", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-6600", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2349", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Facundo", phone_number : "11-7777", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-6600", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2349", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Facundo", phone_number : "11-7777", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
+  {name : "Lucas", phone_number : "11-2176", zone : "villa bosch", adress : "murialdo", email : "rusman", detail : "holaaa"},
 ];
 
 @Component({

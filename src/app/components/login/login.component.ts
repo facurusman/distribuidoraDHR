@@ -14,4 +14,8 @@ export class LoginComponent implements OnInit {
   ingresar() {
     this.router.navigateByUrl('/dhr/home');
   }
+
+  registrarse(){
+    this.router.navigateByUrl('/signup')
+  }
 }

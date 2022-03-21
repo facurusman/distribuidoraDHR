@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientsComponent } from './components/clients/clients.component';
 import { ErroresComponent } from './components/errores/errores.component';
@@ -7,6 +7,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { LoginComponent } from './components/login/login.component';
 import { CoreComponent } from './components/core/core.component';
+import { SignupComponent } from './components/signup/signup.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   {
@@ -17,8 +18,9 @@ const routes: Routes = [
       { path: 'clients', component: ClientsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'sales', component: SalesComponent },
-    ]
+    ],
   },
+  {path:'signup', component: SignupComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

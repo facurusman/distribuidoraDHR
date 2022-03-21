@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService implements OnDestroy {
+export class UsersService implements OnDestroy {
   private _authSub$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );

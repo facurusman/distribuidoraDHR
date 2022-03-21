@@ -1,7 +1,7 @@
 <div class="body">
-  <div class="login">
+  <div class="signup">
     <img src="../../../assets/images/logo-DHR.jpg" alt="" />
-    <h1 class="h3 mb-3 fw-normal">Login</h1>
+    <h1 class="h3 mb-3 fw-normal">Registro</h1>
     <mat-form-field class="ancho" appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput />
@@ -16,12 +16,9 @@
       mat-raised-button
       mat-button
       color="primary"
-      (click)="ingresar()"
+      (click)="goToLogin()"
     >
-      Entrar
+      Registrarme
     </button>
-    <div class="signup">
-      <p>¿No tienes una cuenta? <a (click)="registrarse()">Registrate</a></p>
-    </div>
   </div>
 </div>
