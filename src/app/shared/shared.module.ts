@@ -35,6 +35,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatSortModule } from '@angular/material/sort';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 export const MaterialModules = [
   MatCardModule,
@@ -94,6 +95,7 @@ export const MaterialModules = [
   MatRadioModule,
   MatDatepickerModule,
   MatTooltipModule,
+  MatButtonToggleModule
 ];
 
 @NgModule({
