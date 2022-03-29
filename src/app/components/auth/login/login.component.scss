@@ -1,0 +1,50 @@
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #002b5c;
+  height: 100%;
+}
+.login {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  gap: 1.5em;
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 4%;
+}
+
+.login img{
+  width: 50%;
+  height: 15%;
+  display: block;
+  margin: auto;
+}
+
+.login button{
+  display: block;
+  text-align: center;
+}
+
+.example-full-width {
+  width: 80%;
+}
+
+
+.signup{
+  margin-top: 3%;
+}
+
+.signup a{
+  color: #002b5c;
+}
+
+.login button{
+  display: block;
+  margin: auto;
+}

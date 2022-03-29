@@ -5,9 +5,9 @@ import { ErroresComponent } from './components/errores/errores.component';
 import { HomeComponentComponent } from './components/home-component/home-component.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { CoreComponent } from './components/core/core.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   {

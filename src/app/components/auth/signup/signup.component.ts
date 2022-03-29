@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -26,10 +27,12 @@ export class SignupComponent implements ErrorStateMatcher {
 
 
   matcher = new MyErrorStateMatcher();
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
   isErrorState(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean {
     throw new Error('Method not implemented.');
   }
+
+  isLoading = false;
 
   ngOnInit(): void {}
 
@@ -48,6 +51,15 @@ export class SignupComponent implements ErrorStateMatcher {
     this.router.navigateByUrl('')
   }
   enterEmail:any
+
+  onSignup(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    this.isLoading = true;
+    this.authService.postRegister(form.value.email, form.value.password);
+    this.goToLogin()
+  }
 
 
 }
