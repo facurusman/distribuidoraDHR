@@ -1,9 +1,31 @@
 table {
   width: 100%;
-
 }
 
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 
+td, th {
+  width: 25%;
+}
+.filter-class {
+  background-color: #fafafa;
+}
+.label-search{
+  margin-left: 15px;
+}
+.input-search{
+  margin-left: 15px;
+}
+.tabla-completa {
+  background-color: #B8B5B4;
+  padding: 30px;
+}
+.mat-tab-labels {
+  background-color: red;
+}
 
 .container{
   display: flex;
