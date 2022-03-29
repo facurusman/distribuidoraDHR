@@ -26,25 +26,16 @@
   margin: auto;
 }
 
+.login mat-form-field{
+  margin-bottom: 15px;
+}
+
 .login button{
   display: block;
   text-align: center;
+  margin: auto;
 }
 
 .example-full-width {
   width: 80%;
-}
-
-
-.signup{
-  margin-top: 3%;
-}
-
-.signup a{
-  color: #002b5c;
-}
-
-.login button{
-  display: block;
-  margin: auto;
 }

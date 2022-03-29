@@ -18,7 +18,6 @@ import { SalesService } from './services/sales.service';
 import { HomeComponentComponent } from './components/home-component/home-component.component';
 import { ErroresComponent } from './components/errores/errores.component';
 import { CoreComponent } from './components/core/core.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
 import { UsersService } from './services/users.service';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
@@ -33,7 +32,6 @@ import { AuthService } from './services/auth.service';
     HomeComponentComponent,
     ErroresComponent,
     CoreComponent,
-    SignupComponent,
     AuthComponent
   ],
   imports: [

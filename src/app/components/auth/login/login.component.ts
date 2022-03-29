@@ -38,9 +38,6 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/dhr/home');
   }
 
-  registrarse(){
-    this.router.navigateByUrl('/signup')
-  }
 
   onLogin(form: NgForm) {
     if (form.invalid) {
@@ -48,7 +45,8 @@ export class LoginComponent implements OnInit {
     }
     this.isLoading = true;
     this.authService.postLogin(form.value.email, form.value.password);
-    this.ingresar()
+    //TODO
+    //this.ingresar()
   }
 
 }

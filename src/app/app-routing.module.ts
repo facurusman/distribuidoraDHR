@@ -7,7 +7,6 @@ import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { CoreComponent } from './components/core/core.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
 import { AuthGuard } from './components/auth/login/auth.guard';
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,8 +19,7 @@ const routes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'sales', component: SalesComponent  },
     ],
-  },
-  {path:'signup', component: SignupComponent}
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
