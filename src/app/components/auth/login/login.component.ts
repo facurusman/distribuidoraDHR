@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     }
     this.isLoading = true;
     this.authService.postLogin(form.value.email, form.value.password);
-    //this.ingresar()
+    this.ingresar()
   }
 
 }
