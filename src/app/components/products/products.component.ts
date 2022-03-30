@@ -41,7 +41,7 @@ export class ProductsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     throw new Error('Method not implemented.');
   }
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
