@@ -1,22 +1,16 @@
 <mat-toolbar class="mat-elevation-z8">
-  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()" (click)="onToggleSidenav()">
       <mat-icon *ngIf="!sidenav.opened">
           menu
       </mat-icon>
       <mat-icon *ngIf="sidenav.opened">
-          close
+        close
       </mat-icon>
   </button>
-  Distribuidora DHR
+  DyG combos
 </mat-toolbar>
-
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <!-- <img
-      class="avatar mat-elevation-z8"
-      src="../../../assets/images/logo-DHR.jpg"
-    /> -->
-
     <mat-divider></mat-divider>
 
     <button mat-button class="menu-button"(click)="goToHomePage()">
