@@ -163,6 +163,7 @@ export class ClientsComponent implements AfterViewInit {
 @Component({
   selector: 'eliminar-dialog',
   templateUrl: 'eliminar-dialog.html',
+  styleUrls: ['eliminar-dialog.scss'],
 })
 export class DialogOverviewExampleDialog {
   constructor(
