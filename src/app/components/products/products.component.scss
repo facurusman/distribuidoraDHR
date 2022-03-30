@@ -82,7 +82,15 @@ input::-webkit-inner-spin-button{
   -webkit-appearance: none;
 }
 
-.exports mat-button-toggle-group{
+.exports{
+  display: flex;
+  justify-content: flex-end;
+}
+.exports button{
   border-radius: 10px;
   margin-bottom: 25px;
+  background-color: #002b5c;
+  color: #fafafa;
+  display: flex;
+  justify-content: center;
 }
