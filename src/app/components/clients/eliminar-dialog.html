@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+  <p>¿Estas seguro de que quieres eliminar este cliente?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" color="primary">Cancelar</button>
+  <button mat-button cdkFocusInitial color="warn">Eliminar Definitivamente</button>
+  <!-- se deberia agregar esta propiedad [mat-dialog-close]="data.delete" al button de arriba -->
+</div>
