@@ -82,7 +82,36 @@ input::-webkit-inner-spin-button{
   -webkit-appearance: none;
 }
 
-.exports mat-button-toggle-group{
+.exports{
+  display: flex;
+  justify-content: flex-end;
+}
+.exports button{
   border-radius: 10px;
   margin-bottom: 25px;
+  background-color: #002b5c;
+  color: #fafafa;
+  display: flex;
+  justify-content: center;
+}
+
+.busqueda{
+  display: flex;
+  width: 20%;
+  gap: 0.75em;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.busqueda h1{
+  font-size:larger;
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+
+
+
 }
