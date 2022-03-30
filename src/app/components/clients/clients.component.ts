@@ -1,6 +1,8 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { ComponentType } from '@angular/cdk/portal';
+import {AfterViewInit, Component, ViewChild, Inject} from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -12,6 +14,9 @@ export interface UserData {
   name: string;
   progress: string;
   fruit: string;
+}
+export interface DialogData {
+  delete : boolean
 }
 
 /** Constants used to fill up our data base. */
@@ -79,7 +84,10 @@ export class ClientsComponent implements AfterViewInit {
   adress : string = ''
   email : string = ''
   detail : string = ''
-  constructor(private readonly clientService :ClientsService) {
+
+  delete !: boolean
+
+  constructor(private readonly clientService :ClientsService, private dialog: MatDialog) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
 
@@ -139,10 +147,31 @@ export class ClientsComponent implements AfterViewInit {
     });
   }
 
-
-
-
+    openDialog(): void{
+      this.dialog.open(DialogOverviewExampleDialog, {
+        width: '250px',
+        data: {delete : this.delete},
+      }).afterClosed().subscribe((result: boolean) => {
+        console.log('The dialog was closed');
+        this.delete = result;
+      })
+    }
 
 
 
 }
+@Component({
+  selector: 'eliminar-dialog',
+  templateUrl: 'eliminar-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<ClientsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+

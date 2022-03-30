@@ -1,5 +1,8 @@
 <mat-tab-group class="tab-group" >
   <mat-tab label="Mostrar Productos">
+    <div class="exports">
+      <button mat-button>PDF</button>
+    </div>
     <mat-form-field appearance="standard">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
