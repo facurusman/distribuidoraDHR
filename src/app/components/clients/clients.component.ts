@@ -6,6 +6,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
 import { ClientsService } from '../../services/clients.service';
 
@@ -87,7 +88,7 @@ export class ClientsComponent implements AfterViewInit {
 
   delete !: boolean
 
-  constructor(private readonly clientService :ClientsService, private dialog: MatDialog) {
+  constructor(private readonly clientService :ClientsService, private dialog: MatDialog, private readonly router : Router) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
 
@@ -126,7 +127,9 @@ export class ClientsComponent implements AfterViewInit {
   };
 
 }
-
+  goToSalesPage(){
+    this.router.navigateByUrl('/dhr/sales');
+  }
   allClients() {
     this.clientService.getClients().subscribe( (response) => {
      console.log(response)
