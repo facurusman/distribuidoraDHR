@@ -7,6 +7,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { CoreComponent } from './components/core/core.component';
+import { EditComponent } from './components/edit/edit.component';
 import { AuthGuard } from './components/auth/login/auth.guard';
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponentComponent  },
       { path: 'clients', component: ClientsComponent },
+      { path: 'edit', component: EditComponent  },
       { path: 'products', component: ProductsComponent },
       { path: 'sales', component: SalesComponent  },
     ],

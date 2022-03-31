@@ -1,12 +1,12 @@
 import { ComponentType } from '@angular/cdk/portal';
-import {AfterViewInit, Component, ViewChild, Inject} from '@angular/core';
+import { AfterViewInit, Component, ViewChild, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
 import { ClientsService } from '../../services/clients.service';
 
@@ -68,7 +68,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./clients.component.scss'],
 })
 
-export class ClientsComponent implements AfterViewInit {
+export class ClientsComponent implements AfterViewInit{
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'editar', 'eliminar', 'ventas'];
   dataSource: MatTableDataSource<UserData>;
@@ -88,7 +88,7 @@ export class ClientsComponent implements AfterViewInit {
 
   delete !: boolean
 
-  constructor(private readonly clientService :ClientsService, private dialog: MatDialog, private readonly router : Router) {
+  constructor(private readonly clientService :ClientsService, private dialog: MatDialog, private readonly router : Router, private route:ActivatedRoute) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
 
@@ -125,10 +125,14 @@ export class ClientsComponent implements AfterViewInit {
     progress: Math.round(Math.random() * 100).toString(),
     fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
   };
-
 }
+
+
   goToSalesPage(){
     this.router.navigateByUrl('/dhr/sales');
+  }
+  goToEditPage(){
+    this.router.navigateByUrl('/dhr/edit');
   }
   allClients() {
     this.clientService.getClients().subscribe( (response) => {
@@ -137,12 +141,12 @@ export class ClientsComponent implements AfterViewInit {
   }
   onSend() {
     const client = new Client({
-      name: this.name,
-      phone_number: this.phone_number,
-      zone: this.zone,
-      adress: this.adress,
-      email: this.email,
-      detail: this.detail,
+      name : this.name,
+      phone_number : this.phone_number,
+      zone : this.zone,
+      adress : this.adress,
+      email : this.email,
+      detail : this.detail
     });
     this.clientService.postClient(client).subscribe((response) => {
       location.reload();
@@ -160,8 +164,6 @@ export class ClientsComponent implements AfterViewInit {
       })
     }
 
-
-
 }
 @Component({
   selector: 'eliminar-dialog',
@@ -178,4 +180,3 @@ export class DialogOverviewExampleDialog {
     this.dialogRef.close();
   }
 }
-

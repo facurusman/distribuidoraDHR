@@ -21,6 +21,7 @@ import { CoreComponent } from './components/core/core.component';
 import { UsersService } from './services/users.service';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AuthService } from './services/auth.service';
     HomeComponentComponent,
     ErroresComponent,
     CoreComponent,
-    AuthComponent
+    AuthComponent,
+    EditComponent
   ],
   imports: [
     NgChartsModule,

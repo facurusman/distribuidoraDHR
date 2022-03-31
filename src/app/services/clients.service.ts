@@ -13,8 +13,18 @@ export class ClientsService {
     return this.http.get(`${environment.apiUrl}/clientes`);
   }
 
+  getClient(id :number){
+    const url = `${environment.apiUrl}/${id}`;
+    return this.http.get(url);
+  }
+
   postClient(client: Client) {
     console.log(client);
     return this.http.post(`${environment.apiUrl}/clientes`, client);
+  }
+  editClient(client : Client, id: number){
+    //agarrar lo que viene de la base y editarlo.
+    //console.log(client)
+    return this.http.post(`${environment.apiUrl}/edit/${id}`, client)
   }
 }
