@@ -1,14 +1,19 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from '../../services/products.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface PeriodicElement {
   name: string;
   position: number;
   weight: number;
   symbol: string;
+}
+
+export interface DialogData {
+  delete : boolean
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -41,7 +46,9 @@ export class ProductsComponent {
 
   description: string = '';
   price: number = 0;
-  constructor(private readonly productService: ProductsService){}
+
+  delete !: boolean
+  constructor(private readonly productService: ProductsService, private dialog: MatDialog){}
 
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -84,5 +91,30 @@ export class ProductsComponent {
     });
   }
 
+  openDialog(): void{
+    this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {delete : this.delete},
+    }).afterClosed().subscribe((result: boolean) => {
+      console.log('The dialog was closed');
+      this.delete = result;
+    })
+  }
+}
 
+
+@Component({
+  selector: 'eliminar-dialog',
+  templateUrl: 'eliminar-dialog.html',
+  styleUrls: ['eliminar-dialog.scss'],
+})
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<ProductsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
