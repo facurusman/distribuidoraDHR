@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  ingresar() {
+  goToHomePage() {
     this.router.navigateByUrl('/dhr/home');
   }
 
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.authService.postLogin(form.value.email, form.value.password);
     //TODO
-    //this.ingresar()
+    //this.goToHomePage()
   }
 
 }
