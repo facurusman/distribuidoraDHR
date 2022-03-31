@@ -131,6 +131,9 @@ export class ClientsComponent implements AfterViewInit{
   goToSalesPage(){
     this.router.navigateByUrl('/dhr/sales');
   }
+  goToProductsforClientPage(){
+    this.router.navigateByUrl('/dhr/productsClient');
+  }
   goToEditPage(){
     this.router.navigateByUrl('/dhr/edit');
   }
