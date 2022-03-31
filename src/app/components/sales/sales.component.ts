@@ -6,6 +6,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Sale } from 'src/app/models/sale';
 import { SalesService } from '../../services/sales.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { PeriodicElement } from '../products/products.component';
 
 export interface UserData {
   id: string;
@@ -64,8 +66,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class SalesComponent implements AfterViewInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'action'];
+  displayedColumns: string[] = ['select', 'id', 'name', 'progress', 'fruit', 'action'];
   dataSource: MatTableDataSource<UserData>;
+  selection = new SelectionModel<UserData>(true, []);
 
 
   matcher = new MyErrorStateMatcher();
@@ -87,6 +90,20 @@ export class SalesComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   applyFilter(event: Event) {
