@@ -20,8 +20,9 @@ export class CoreComponent implements OnInit {
   public onSidenavClose = () => {
     this.sidenavClose.emit();
   }
-  
+
   goToHomePage(){
+    this.sidenavClose.emit();
     this.router.navigateByUrl('/dhr/home');
   }
 

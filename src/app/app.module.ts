@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -35,6 +35,7 @@ import { AuthService } from './services/auth.service';
     AuthComponent
   ],
   imports: [
+    NgChartsModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

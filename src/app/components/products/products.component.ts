@@ -1,9 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from '../../services/products.service';
@@ -37,11 +33,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./products.component.scss'],
 })
 
-export class ProductsComponent implements AfterViewInit {
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'editar', 'eliminar'];
+export class ProductsComponent {
+
+  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
