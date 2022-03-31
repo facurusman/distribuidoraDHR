@@ -7,7 +7,7 @@
       </div>
       <mat-form-field appearance="standard" class="filter-class">
         <mat-label class="label-search">Busqueda</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input class="input-search">
       </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
