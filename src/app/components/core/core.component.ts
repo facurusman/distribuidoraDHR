@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,6 +12,8 @@ export class CoreComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
   constructor(private router: Router) {}
 
+  @ViewChild("sidenav")
+  sidenav?: MatSidenav;
   ngOnInit(): void {}
 
   public onToggleSidenav = () => {
@@ -22,23 +25,27 @@ export class CoreComponent implements OnInit {
   }
 
   goToHomePage(){
-    this.sidenavClose.emit();
+    this.sidenav?.toggle();
     this.router.navigateByUrl('/dhr/home');
   }
 
   goToClientsPage() {
+    this.sidenav?.toggle();
     this.router.navigateByUrl('/dhr/clients');
   }
 
   goToProductsPage() {
+    this.sidenav?.toggle();
     this.router.navigateByUrl('/dhr/products');
   }
 
   goToSalesPage() {
+    this.sidenav?.toggle();
     this.router.navigateByUrl('/dhr/sales');
   }
 
   logout() {
+    this.sidenav?.toggle();
     this.router.navigateByUrl('/');
     this.onSidenavClose()
   }
