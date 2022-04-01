@@ -2,7 +2,7 @@
   <div class="login">
     <img src="../../../assets/images/logo-dygcombos.png" alt="" />
     <h1 class="h3 mb-3 fw-normal">Login</h1>
-    <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
         <input matInput name="email" ngModel type="email" placeholder="E-Mail" #emailInput="ngModel" required email>
         <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
@@ -11,7 +11,7 @@
         <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
         <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit" (click)="goToHomePage()">Login</button>
+      <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Login</button>
     </form>
   </div>
 </div>

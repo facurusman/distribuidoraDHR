@@ -34,10 +34,6 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  goToHomePage() {
-    this.router.navigateByUrl('/dhr/home');
-  }
-
 
   onLogin(form: NgForm) {
     if (form.invalid) {
@@ -45,8 +41,6 @@ export class LoginComponent implements OnInit {
     }
     this.isLoading = true;
     this.authService.postLogin(form.value.email, form.value.password);
-    //TODO
-    //this.goToHomePage()
   }
 
 }

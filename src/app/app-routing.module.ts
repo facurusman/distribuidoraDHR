@@ -10,18 +10,19 @@ import { CoreComponent } from './components/core/core.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AuthGuard } from './components/auth/login/auth.guard';
 import { ProductClientComponent } from './components/product-client/product-client.component';
+import { AuthComponent } from './components/auth/auth.component';
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: AuthComponent},
   {
     path: 'dhr',
-    component: CoreComponent,
+    component: CoreComponent, canActivate: [AuthGuard],
     children: [
-      { path: 'home', component: HomeComponentComponent  },
-      { path: 'clients', component: ClientsComponent },
-      { path: 'productsClient', component: ProductClientComponent },
-      { path: 'edit', component: EditComponent  },
-      { path: 'products', component: ProductsComponent },
-      { path: 'sales', component: SalesComponent  },
+      { path: 'home', component: HomeComponentComponent, canActivate: [AuthGuard]},
+      { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
+      { path: 'productsClient', component: ProductClientComponent, canActivate: [AuthGuard]},
+      { path: 'edit', component: EditComponent, canActivate: [AuthGuard]},
+      { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
+      { path: 'sales', component: SalesComponent, canActivate: [AuthGuard]},
     ],
   }
 ];
