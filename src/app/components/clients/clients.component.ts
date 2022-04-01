@@ -70,7 +70,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class ClientsComponent implements AfterViewInit{
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'editar', 'eliminar', 'ventas'];
+  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'editar', 'eliminar', 'ventas', 'productos'];
   dataSource: MatTableDataSource<UserData>;
 
   matcher = new MyErrorStateMatcher();
