@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from '../../services/products.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { PDFService } from 'src/app/services/pdf.service';
 
 export interface ProductElement {
   id: number;
@@ -26,7 +27,7 @@ export interface DialogData {
 
 export class ProductsComponent {
 
-  constructor(private readonly productService: ProductsService, private dialog: MatDialog){
+  constructor(private readonly productService: ProductsService, private dialog: MatDialog, private pdfService: PDFService){
     this.dataSource = new MatTableDataSource();
     this.allProducts();
 
@@ -48,6 +49,16 @@ export class ProductsComponent {
       //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
       this.dataSource.data = user
     })
+  }
+
+  generarPDF(){
+    console.log("estoy generando pdf")
+    this.pdfService.generarPDFProductos().subscribe((response) => {
+      console.log("termine")
+      console.log(response);
+      
+      console.log("termine2")
+    });;
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
