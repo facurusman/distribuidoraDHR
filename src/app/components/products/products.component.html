@@ -91,17 +91,20 @@
 
 <mat-tab label="Crear Producto">
     <div class="container">
-      <mat-form-field appearance="fill">
-        <mat-label class="title">Descripcion</mat-label>
-        <input matInput name="name" [(ngModel)]="description" minlength="5" />
-      </mat-form-field>
+      <div class="container-child">
+        <img src="../../../assets/images/logo-dygcombos.png" alt="" />
+        <mat-form-field>
+          <mat-label class="title">Descripcion</mat-label>
+          <input matInput name="name" [(ngModel)]="description" minlength="5" />
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label class="title">Precio</mat-label>
-        <input matInput name="detail" [(ngModel)]="price" minlength="5" />
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label class="title">Precio</mat-label>
+          <input matInput name="detail" [(ngModel)]="price" minlength="5" />
+        </mat-form-field>
 
-      <button mat-raised-button color="warn" (click)="onCreateProduct()">Crear Producto</button>
+        <button mat-raised-button color="warn" (click)="onCreateProduct()">Crear Producto</button>
+      </div>
     </div>
   </mat-tab>
 </mat-tab-group>

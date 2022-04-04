@@ -95,44 +95,46 @@
 
   <mat-tab label="Crear Cliente">
     <div class="container">
-      <mat-form-field appearance="fill">
-        <mat-label class="title">Nombre</mat-label>
-        <input matInput name="name" [(ngModel)]="name" minlength="5" />
-      </mat-form-field>
+      <div class="container-child">
+        <img src="../../../assets/images/logo-dygcombos.png" alt="" />
+        <mat-form-field>
+          <mat-label class="title">Nombre</mat-label>
+          <input matInput name="name" [(ngModel)]="name" minlength="5" />
+        </mat-form-field>
 
-      <mat-form-field>
-        <input
+        <mat-form-field>
+          <input
           matInput
           type="number"
           placeholder="Teléfono"
           class="phone_number"
           [(ngModel)]="phone_number"
           minlength="8"
-        />
-      </mat-form-field>
+          />
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Zona</mat-label>
-        <input matInput name="zone" [(ngModel)]="zone" minlength="5" />
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Zona</mat-label>
+          <input matInput name="zone" [(ngModel)]="zone" minlength="5" />
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label class="title">Dirección</mat-label>
-        <input matInput name="adress" [(ngModel)]="adress" minlength="5" />
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label class="title">Dirección</mat-label>
+          <input matInput name="adress" [(ngModel)]="adress" minlength="5" />
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Email</mat-label>
-        <input
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input
           type="email"
           matInput
           [formControl]="emailFormControl"
           [errorStateMatcher]="matcher"
           placeholder="Ex. pat@example.com"
-        />
-        <mat-error
+          />
+          <mat-error
           *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"
-        >
+          >
           Por favor ingrese una direccion de email valida
         </mat-error>
         <mat-error *ngIf="emailFormControl.hasError('required')">
@@ -140,12 +142,13 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field>
         <mat-label class="title">Detalle</mat-label>
         <input matInput name="detail" [(ngModel)]="detail" minlength="5" />
       </mat-form-field>
 
-      <button mat-raised-button color="warn" (click)="onSend()">Send</button>
+      <button mat-raised-button color="warn" (click)="onSend()">Agregar Cliente</button>
     </div>
+  </div>
   </mat-tab>
 </mat-tab-group>
