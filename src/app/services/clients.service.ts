@@ -14,8 +14,7 @@ export class ClientsService {
   }
 
   getClient(id :number){
-    const url = `${environment.apiClients}/${id}`;
-    return this.http.get(url);
+    return this.http.get(`${environment.apiClients}/${id}`);
   }
 
   postClient(client: Client) {
