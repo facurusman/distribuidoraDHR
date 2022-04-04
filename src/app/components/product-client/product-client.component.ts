@@ -6,9 +6,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 
-export interface ProductData {
-  idCliente: number;
-  idProducto: number;
+export interface ProductClientData {
+  descripcion: string;
+  precio_base: string;
   precio: string;
 }
 
@@ -22,9 +22,9 @@ export interface ProductData {
   templateUrl: 'product-client.component.html',
 })
 export class ProductClientComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select', 'idCliente', 'idProducto', 'precio'];
-  dataSource: MatTableDataSource<ProductData>;
-  selection = new SelectionModel<ProductData>(true, []);
+  displayedColumns: string[] = ['select','descripcion', 'precio_base'];
+  dataSource: MatTableDataSource<ProductClientData>;
+  selection = new SelectionModel<ProductClientData>(true, []);
   disabled = false;
   precio : string = ''
   idcliente: string = '';
@@ -39,13 +39,17 @@ export class ProductClientComponent implements AfterViewInit {
     //falta mostrar el id recibo por params
     this.idcliente = this.route.snapshot.params['id'];
     this.dataSource = new MatTableDataSource();
-    this.getProducts();
+    this.getProductsByCliente();
   }
 
   
-  getProducts (){
-    this.productService.getProducts().subscribe( (response) => {
-      const user = response as ProductData[]
+  getProductsByCliente (){
+    this.productService.getProductsByCliente(1).subscribe( (response) => {
+      console.log("AAAAA");
+      const user = response as ProductClientData[]
+      console.log(response)
+      console.log("BBBBB");
+      console.log(user)
       this.dataSource.data = user
     });
   }

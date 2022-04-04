@@ -12,6 +12,10 @@ export class ProductsService {
     return this.http.get(`${environment.apiProducts}`);
   }
 
+  getProductsByCliente(id: number) {
+    return this.http.get(`${environment.apiProductsByCliente}`);
+  }
+  
   postProduct(product: Product) {
     console.log(product);
     return this.http.post(`${environment.apiProducts}/crear`, product);
