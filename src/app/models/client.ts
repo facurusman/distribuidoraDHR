@@ -1,31 +1,31 @@
 export class Client {
-  readonly name: string;
-  readonly phone_number: string;
-  readonly zone: string;
-  readonly adress: string;
+  readonly nombre: string;
+  readonly telefono: string;
   readonly email: string;
-  readonly detail: string;
+  readonly zona: string;
+  readonly direccion: string;
+  readonly detalle: string;
 
   constructor({
-    name,
-    phone_number,
-    zone,
-    adress,
+    nombre,
+    telefono,
     email,
-    detail,
+    zona,
+    direccion,
+    detalle,
   }: {
-    name: string;
-    phone_number: string;
-    zone: string;
-    adress: string;
+    nombre: string;
+    telefono: string;
     email: string;
-    detail: string;
+    zona: string;
+    direccion: string;
+    detalle: string;
   }) {
-    this.name = name;
-    this.phone_number = phone_number;
-    this.zone = zone;
-    this.adress = adress;
+    this.nombre = nombre;
+    this.telefono = telefono;
     this.email = email;
-    this.detail = detail;
+    this.zona = zona;
+    this.direccion = direccion;
+    this.detalle = detalle;
   }
 }

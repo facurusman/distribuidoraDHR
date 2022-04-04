@@ -1,7 +1,7 @@
 <div class="container">
   <mat-form-field appearance="fill">
     <mat-label class="title">Nombre</mat-label>
-    <input matInput name="name" [(ngModel)]="name" minlength="5" />
+    <input matInput name="name" [(ngModel)]="nombre" minlength="5" />
   </mat-form-field>
 
   <mat-form-field>
@@ -10,19 +10,19 @@
       type="number"
       placeholder="Teléfono"
       class="phone_number"
-      [(ngModel)]="phone_number"
+      [(ngModel)]="telefono"
       minlength="8"
     />
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Zona</mat-label>
-    <input matInput name="zone" [(ngModel)]="zone" minlength="5" />
+    <input matInput name="zone" [(ngModel)]="zona" minlength="5" />
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label class="title">Dirección</mat-label>
-    <input matInput name="adress" [(ngModel)]="adress" minlength="5" />
+    <input matInput name="adress" [(ngModel)]="direccion" minlength="5" />
   </mat-form-field>
 
   <mat-form-field class="example-full-width" appearance="fill">
@@ -36,7 +36,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label class="title">Detalle</mat-label>
-    <input matInput name="detail" [(ngModel)]="detail" minlength="5" />
+    <input matInput name="detail" [(ngModel)]="detalle" minlength="5" />
   </mat-form-field>
 
   <button mat-raised-button color="warn" (click)="onEdit()">Editar Cliente</button>

@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   apiUsers: 'http://localhost:3000/api/user',
   apiClients: 'http://localhost:3000/api/client',
+  apiProducts: 'http://localhost:3000/api/product',
+  apiSales: 'http://localhost:3000/api/sale'
 };
 
 /*

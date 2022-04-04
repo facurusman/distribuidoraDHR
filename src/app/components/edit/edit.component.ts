@@ -10,12 +10,12 @@ import { ClientsService } from 'src/app/services/clients.service';
 })
 export class EditComponent implements OnInit {
 
-  name : string = ''
-  phone_number : string = ''
-  zone : string = ''
-  adress : string = ''
+  nombre : string = ''
+  telefono : string = ''
+  zona : string = ''
+  direccion : string = ''
   email : string = ''
-  detail : string = ''
+  detalle : string = ''
   id: number = 0;
 
   constructor(private readonly clientService :ClientsService, private readonly router : Router, private route:ActivatedRoute) { }
@@ -23,23 +23,23 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.clientService.getClient(this.id).subscribe( (response: any) => {
-      this.name = response.name
-      this.phone_number = response.phone_number
-      this.zone = response.zone
-      this.adress = response.adress
+      this.nombre = response.nombre
+      this.telefono = response.telefono
+      this.zona = response.zona
+      this.direccion = response.direccion
       this.email = response.email
-      this.detail = response.detail
+      this.detalle = response.detalle
       //otrod
      })
   }
   onEdit(){
     const client = new Client({
-      name : this.name,
-      phone_number : this.phone_number,
-      zone : this.zone,
-      adress : this.adress,
+      nombre : this.nombre,
+      telefono : this.telefono,
       email : this.email,
-      detail : this.detail
+      zona : this.zona,
+      direccion : this.direccion,
+      detalle : this.detalle
     });
     this.clientService.editClient(client, this.id ).subscribe((response) => {
       return response

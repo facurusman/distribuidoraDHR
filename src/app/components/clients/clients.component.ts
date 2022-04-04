@@ -79,12 +79,12 @@ export class ClientsComponent implements AfterViewInit{
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  name : string = ''
-  phone_number : string = ''
-  zone : string = ''
-  adress : string = ''
+  nombre : string = ''
+  telefono : string = ''
+  zona : string = ''
+  direccion : string = ''
   email : string = ''
-  detail : string = ''
+  detalle : string = ''
 
   delete !: boolean
 
@@ -142,30 +142,30 @@ export class ClientsComponent implements AfterViewInit{
      console.log(response)
     })
   }
+
   onSend() {
     const client = new Client({
-      name : this.name,
-      phone_number : this.phone_number,
-      zone : this.zone,
-      adress : this.adress,
+      nombre : this.nombre,
+      telefono : this.telefono,
       email : this.email,
-      detail : this.detail
+      zona : this.zona,
+      direccion : this.direccion,
+      detalle : this.detalle
     });
-    this.clientService.postClient(client).subscribe((response) => {
-      location.reload();
-      console.log(response);
-    });
+    this.clientService.postClient(client).subscribe( (response) => {
+     console.log(response)
+    })
   }
 
-    openDialog(): void{
-      this.dialog.open(DialogOverviewExampleDialog, {
-        width: '250px',
-        data: {delete : this.delete},
-      }).afterClosed().subscribe((result: boolean) => {
-        console.log('The dialog was closed');
-        this.delete = result;
-      })
-    }
+  openDialog(): void{
+    this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {delete : this.delete},
+    }).afterClosed().subscribe((result: boolean) => {
+      console.log('The dialog was closed');
+      this.delete = result;
+    })
+  }
 
 }
 @Component({
@@ -173,13 +173,23 @@ export class ClientsComponent implements AfterViewInit{
   templateUrl: 'eliminar-dialog.html',
   styleUrls: ['eliminar-dialog.scss'],
 })
-export class DialogOverviewExampleDialog {
-  constructor(
-    public dialogRef: MatDialogRef<ClientsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
+export class DialogOverviewExampleDialog implements OnInit{
+
+  id: number = 0;
+
+  constructor(public dialogRef: MatDialogRef<ClientsComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private clientService: ClientsService, private readonly router : Router,  private route:ActivatedRoute ) {}
+
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onDelete(){
+    this.clientService.deleteClient(this.id).subscribe( (response) => {
+      console.log(response)
+     })
   }
 }
