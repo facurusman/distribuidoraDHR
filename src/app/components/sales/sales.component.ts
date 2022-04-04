@@ -7,7 +7,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Sale } from 'src/app/models/sale';
 import { SalesService } from '../../services/sales.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { PeriodicElement } from '../products/products.component';
 
 export interface UserData {
   id: string;

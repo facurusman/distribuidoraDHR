@@ -5,29 +5,15 @@ import { Product } from 'src/app/models/product';
 import { ProductsService } from '../../services/products.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface ProductElement {
+  id: number;
+  descripcion: string;
+  precio_base: string;
 }
 
 export interface DialogData {
   delete : boolean
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -40,16 +26,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class ProductsComponent {
 
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'editar', 'eliminar'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  constructor(private readonly productService: ProductsService, private dialog: MatDialog){
+    this.dataSource = new MatTableDataSource();
+    this.allProducts();
+
+  }
+  displayedColumns: string[] = ['select', 'id' , 'descripcion', 'precio_base', 'editar', 'eliminar'];
+  dataSource = new MatTableDataSource<ProductElement>();
+  selection = new SelectionModel<ProductElement>(true, []);
 
   description: string = '';
   price: number = 0;
 
   delete !: boolean
-  constructor(private readonly productService: ProductsService, private dialog: MatDialog){}
 
+  allProducts() {
+    this.productService.getProducts().subscribe( (response) => {
+     console.log(response)
+     const user = response as ProductElement[]
+      console.log(user)
+      //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+      this.dataSource.data = user
+    })
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -74,11 +73,6 @@ export class ProductsComponent {
     }
   }
 
-  allProducts() {
-    this.productService.getProducts().subscribe( (response) => {
-     console.log(response)
-    })
-  }
 
   onCreateProduct() {
     const product = new Product({
