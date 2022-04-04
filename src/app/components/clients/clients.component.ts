@@ -11,47 +11,19 @@ import { Client } from 'src/app/models/client';
 import { ClientsService } from '../../services/clients.service';
 
 export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
+  id: number;
+  nombre : string;
+  telefono : string;
+  zona : string;
+  direccion : string;
+  email : string;
+  detalle : string;
 }
+
 export interface DialogData {
   delete : boolean
 }
 
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -70,7 +42,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class ClientsComponent implements AfterViewInit{
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'editar', 'eliminar', 'ventas', 'productos'];
+  displayedColumns: string[] = ['id', 'nombre', 'telefono', 'zona', 'direccion', 'email', 'detalle', 'editar', 'eliminar', 'ventas', 'productos'];
   dataSource: MatTableDataSource<UserData>;
 
   matcher = new MyErrorStateMatcher();
@@ -89,11 +61,19 @@ export class ClientsComponent implements AfterViewInit{
   delete !: boolean
 
   constructor(private readonly clientService :ClientsService, private dialog: MatDialog, private readonly router : Router, private route:ActivatedRoute) {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+    this.dataSource = new MatTableDataSource();
+    this.getUsers();
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  }
+
+  getUsers (){
+     this.clientService.getClients().subscribe( (response) => {
+      console.log(response);
+      const user = response as UserData[]
+      console.log(user)
+      //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+      this.dataSource.data = user
+    });
   }
 
   ngAfterViewInit() {
@@ -111,31 +91,14 @@ export class ClientsComponent implements AfterViewInit{
   }
 
 
-/** Builds and returns a new User. */
-  createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
-}
-
-
   goToSalesPage(){
     this.router.navigateByUrl('/dhr/sales');
   }
   goToProductsforClientPage(){
     this.router.navigateByUrl('/dhr/productsClient');
   }
-  goToEditPage(){
-    this.router.navigateByUrl('/dhr/edit');
+  goToEditPage(id:number){
+    this.router.navigateByUrl(`/dhr/edit/${id}`);
   }
   allClients() {
     this.clientService.getClients().subscribe( (response) => {
@@ -157,7 +120,7 @@ export class ClientsComponent implements AfterViewInit{
     })
   }
 
-  openDialog(): void{
+  openDialog(id:number): void{
     this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
       data: {delete : this.delete},
@@ -165,6 +128,11 @@ export class ClientsComponent implements AfterViewInit{
       console.log('The dialog was closed');
       this.delete = result;
     })
+    if (this.delete = true) {
+      this.clientService.deleteClient(id).subscribe( (response) => {
+        console.log(response)
+       })
+    }
   }
 
 }
