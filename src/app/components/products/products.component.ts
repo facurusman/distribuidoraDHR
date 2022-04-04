@@ -59,6 +59,7 @@ export class ProductsComponent {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
+    console.log(this.selection);
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
@@ -73,6 +74,9 @@ export class ProductsComponent {
     }
   }
 
+  aumentar(){
+    console.log(this.selection.selected);
+  }
 
   onCreateProduct() {
     const product = new Product({
