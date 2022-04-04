@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { ErrorStateMatcher } from '@angular/material/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -24,16 +25,21 @@ export class LoginComponent implements OnInit {
   public showPassword: boolean = false;
 
   isLoading = false;
+  durationInSeconds = 5;
 
   matcher = new MyErrorStateMatcher();
-  constructor(private router: Router, private authService : AuthService) {}
+  constructor(private router: Router, private authService : AuthService, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {}
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
-
+  // openSnackBar() {
+  //   this._snackBar.openFromComponent(PizzaPartyComponent, {
+  //     duration: this.durationInSeconds * 1000,
+  //   });
+  // }
 
   onLogin(form: NgForm) {
     if (form.invalid) {

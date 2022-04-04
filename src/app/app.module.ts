@@ -23,6 +23,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
 import { EditComponent } from './components/edit/edit.component';
 import { ProductClientComponent } from './components/product-client/product-client.component';
+import { SnackbarComponent } from './components/auth/login/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ProductClientComponent } from './components/product-client/product-clie
     CoreComponent,
     AuthComponent,
     EditComponent,
-    ProductClientComponent
+    ProductClientComponent,
+    SnackbarComponent
   ],
   imports: [
     NgChartsModule,
