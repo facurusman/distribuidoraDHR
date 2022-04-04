@@ -42,6 +42,7 @@ export class ProductClientComponent implements AfterViewInit {
     this.getProducts();
   }
 
+  
   getProducts (){
     this.productService.getProducts().subscribe( (response) => {
       const user = response as ProductData[]
