@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -28,7 +29,7 @@ export class ProductClientComponent implements AfterViewInit {
   disabled = false;
   precio : string = ''
   idcliente: string = '';
-
+  valores = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -86,7 +87,23 @@ export class ProductClientComponent implements AfterViewInit {
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
+
+  marcar(ob: MatCheckboxChange,row: ProductClientData){
+    console.log(this.selection)
+    if(ob.checked){
+      this.selection.toggle(row);
+    }else{
+      this.selection.deselect(row);
+    }
+  }
+
+  editarProductos(){
+    console.log("los productos a editar son:")
+    console.log(this.selection.selected);
+    console.log(this.valores)
+  }
 }
+
 
 
 

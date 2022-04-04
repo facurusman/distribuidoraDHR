@@ -1,3 +1,4 @@
+
 <div class="tabla-completa">
 
   <mat-form-field appearance="standard" class="filter-class">
@@ -18,7 +19,7 @@
             </th>
             <td mat-cell *matCellDef="let row">
               <mat-checkbox (click)="$event.stopPropagation()"
-              (change)="$event ? selection.toggle(row) : null"
+              (change)="$event ? marcar($event, row) : null"
               [checked]="selection.isSelected(row)">
             </mat-checkbox>
           </td>
@@ -36,7 +37,9 @@
       <ng-container matColumnDef="precio_base">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
         <td mat-cell *matCellDef="let row"> 
-          <input type="text" value="{{row.precio ? row.precio : row.precio_base}} "></td>
+          <input type="text" value="{{row.precio ? row.precio : row.precio_base}}" 
+                [readonly]="!selection.isSelected(row)"
+                [name]="row.id"></td>
       </ng-container>
 
      
@@ -55,6 +58,6 @@
 
 
 </div>
-<button mat-raised-button color="primary" (click)="goToClientPage()">Guardar</button>
+<button mat-raised-button color="primary" (click)="editarProductos()">Guardar</button>
 
 </div>
