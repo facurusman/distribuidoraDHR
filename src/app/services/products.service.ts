@@ -9,11 +9,11 @@ import { Product } from '../models/product';
 export class ProductsService {
   constructor(private readonly http: HttpClient) {}
   getProducts() {
-    return this.http.get(`${environment.apiProducts}/productos`);
+    return this.http.get(`${environment.apiProducts}`);
   }
 
   postProduct(product: Product) {
     console.log(product);
-    return this.http.post(`${environment.apiProducts}/productos`, product);
+    return this.http.post(`${environment.apiProducts}/crear`, product);
   }
 }

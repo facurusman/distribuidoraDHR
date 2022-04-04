@@ -89,7 +89,7 @@
           <ng-container matColumnDef="productos">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Productos</th>
             <td mat-cell *matCellDef="let row">
-              <button mat-icon-button (click)="goToProductsforClientPage()">
+              <button mat-icon-button (click)="goToProductsforClientPage(row.id)">
                 <mat-icon> local_offer</mat-icon>
               </button>
             </td>

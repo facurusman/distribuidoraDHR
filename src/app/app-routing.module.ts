@@ -19,7 +19,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponentComponent, canActivate: [AuthGuard]},
       { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
-      { path: 'productsClient', component: ProductClientComponent, canActivate: [AuthGuard]},
+      { path: 'productsClient/:id', component: ProductClientComponent, canActivate: [AuthGuard]},
       { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]},
       { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
       { path: 'sales', component: SalesComponent, canActivate: [AuthGuard]},
