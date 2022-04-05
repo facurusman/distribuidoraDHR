@@ -43,9 +43,9 @@ export class ProductClientComponent implements AfterViewInit {
     this.getProductsByCliente();
   }
 
-  
+
   getProductsByCliente (){
-    this.productService.getProductsByCliente(1).subscribe( (response) => {
+    this.productService.getProductsByCliente(this.idcliente).subscribe( (response) => {
       console.log("AAAAA");
       const user = response as ProductClientData[]
       console.log(response)
