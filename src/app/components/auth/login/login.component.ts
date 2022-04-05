@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   isLoading = false;
   durationInSeconds = 5;
+  error : boolean = false
 
   matcher = new MyErrorStateMatcher();
   constructor(private router: Router, private authService : AuthService, private _snackBar: MatSnackBar) {}

@@ -7,6 +7,7 @@ import {
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
+import { AuthComponent } from "../auth.component";
 
 
 @Injectable({
@@ -14,13 +15,13 @@ import { AuthService } from "src/app/services/auth.service";
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
-
+  private isAuth :boolean = false
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     console.log("estoy aca 1")
-    const isAuth = this.authService.getIsAuth();
+    const isAuth = AuthComponent.getIsAuth();
     if (!isAuth) {
       console.log(isAuth);
       // DESCOMENTAR

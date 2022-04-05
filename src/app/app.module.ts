@@ -23,7 +23,6 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
 import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { ProductClientComponent } from './components/product-client/product-client.component';
-import { SnackbarComponent } from './components/auth/login/snackbar/snackbar.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 @NgModule({
@@ -39,7 +38,6 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     AuthComponent,
     EditClientComponent,
     ProductClientComponent,
-    SnackbarComponent,
     EditProductComponent
   ],
   imports: [
