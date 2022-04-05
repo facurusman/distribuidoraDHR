@@ -16,10 +16,10 @@ const routes: Routes = [
   { path: '', component: AuthComponent},
   {
     path: 'dhr',
-    component: CoreComponent, canActivate: [AuthGuard],
+    component: CoreComponent,
     children: [
       { path: 'home', component: HomeComponentComponent, canActivate: [AuthGuard]},
-      { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
+      { path: 'clients', component: ClientsComponent},
       { path: 'productsClient/:id', component: ProductClientComponent, canActivate: [AuthGuard]},
       { path: 'edit/:id', component: EditClientComponent, canActivate: [AuthGuard] },
       { path: 'edit/un-producto/:id', component: EditProductComponent, canActivate: [AuthGuard]},

@@ -122,7 +122,7 @@ export class ClientsComponent implements AfterViewInit{
     this.creado = true
     setTimeout(() => {
       location.reload()
-    }, 1000);
+    }, 500);
 
   }
 
@@ -154,7 +154,6 @@ export class DialogOverviewExampleDialog implements OnInit{
   constructor(public dialogRef: MatDialogRef<ClientsComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private clientService: ClientsService, private readonly router : Router,  private route:ActivatedRoute ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
   }
 
   onNoClick(): void {
@@ -163,7 +162,11 @@ export class DialogOverviewExampleDialog implements OnInit{
 
   onDelete(){
     this.clientService.deleteClient(this.id).subscribe( (response) => {
-      console.log(response)
-     })
+      this.onNoClick()
+    })
+    setTimeout(() => {
+      location.reload()
+    }, 500);
+
   }
 }
