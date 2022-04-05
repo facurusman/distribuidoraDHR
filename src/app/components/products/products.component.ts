@@ -5,7 +5,7 @@ import { Product } from 'src/app/models/product';
 import { ProductsService } from '../../services/products.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { PDFService } from 'src/app/services/pdf.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface ProductElement {
   id: number;
@@ -105,7 +105,7 @@ export class ProductsComponent {
     });
   }
 
-  openDialog(): void{
+  openDialog(id:number): void{
     this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
       data: {delete : this.delete},
@@ -113,6 +113,11 @@ export class ProductsComponent {
       console.log('The dialog was closed');
       this.delete = result;
     })
+    if (this.delete = true) {
+      this.productService.deleteProduct(id).subscribe( (response) => {
+        console.log(response)
+       })
+    }
   }
 }
 
@@ -123,12 +128,26 @@ export class ProductsComponent {
   styleUrls: ['eliminar-dialog.scss'],
 })
 export class DialogOverviewExampleDialog {
+  id: number = 0;
   constructor(
     public dialogRef: MatDialogRef<ProductsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private productService: ProductsService,
+    private readonly router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+  onDelete() {
+    this.productService.deleteProduct(this.id).subscribe((response) => {
+      this.onNoClick()
+      setTimeout(() => {
+        location.reload()
+      }, 500);
+
+    })
+  }
+
 }

@@ -26,4 +26,7 @@ export class ProductsService {
     console.log(product);
     return this.http.post(`${environment.apiProducts}/crear`, product);
   }
+  deleteProduct( id: number){
+    return this.http.delete(`${environment.apiProducts}/${id}`)
+  }
 }

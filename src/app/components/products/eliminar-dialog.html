@@ -3,6 +3,6 @@
 </div>
 <div mat-dialog-actions class="actions">
   <button mat-button (click)="onNoClick()" class="cancelar">Cancelar</button>
-  <button mat-button cdkFocusInitial class="delete">Eliminar Definitivamente</button>
+  <button mat-button cdkFocusInitial class="delete" (click)="onDelete()">Eliminar Definitivamente</button>
   <!-- se deberia agregar esta propiedad [mat-dialog-close]="data.delete" al button de arriba -->
 </div>
