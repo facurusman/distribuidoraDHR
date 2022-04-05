@@ -7,10 +7,11 @@ import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { CoreComponent } from './components/core/core.component';
-import { EditComponent } from './components/edit/edit.component';
+import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { AuthGuard } from './components/auth/login/auth.guard';
 import { ProductClientComponent } from './components/product-client/product-client.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 const routes: Routes = [
   { path: '', component: AuthComponent},
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
       { path: 'home', component: HomeComponentComponent, canActivate: [AuthGuard]},
       { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
       { path: 'productsClient/:id', component: ProductClientComponent, canActivate: [AuthGuard]},
-      { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]},
+      { path: 'edit/:id', component: EditClientComponent, canActivate: [AuthGuard] },
+      { path: 'edit/un-producto/:id', component: EditProductComponent, canActivate: [AuthGuard]},
       { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
       { path: 'sales', component: SalesComponent, canActivate: [AuthGuard]},
     ],

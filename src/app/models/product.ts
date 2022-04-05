@@ -1,9 +1,9 @@
 export class Product {
-  readonly description: string;
-  readonly price: number;
+  readonly descripcion: string;
+  readonly precio_base: number;
 
-  constructor({ description, price }: { description: string; price: number }) {
-    this.description = description;
-    this.price = price;
+  constructor({ descripcion, precio_base }: { descripcion: string; precio_base: number }) {
+    this.descripcion = descripcion;
+    this.precio_base = precio_base;
   }
 }

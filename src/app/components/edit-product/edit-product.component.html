@@ -1,0 +1,13 @@
+<div class="container">
+  <mat-form-field appearance="fill">
+    <mat-label class="title">Descripcion</mat-label>
+    <input matInput name="descripcion" [(ngModel)]="descripcion" minlength="5" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Precio</mat-label>
+    <input matInput name="precio" [(ngModel)]="precio_base"/>
+  </mat-form-field>
+
+  <button mat-button color="withe" (click)="onEdit()">Editar Producto</button>
+</div>

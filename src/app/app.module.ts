@@ -21,9 +21,10 @@ import { CoreComponent } from './components/core/core.component';
 import { UsersService } from './services/users.service';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
-import { EditComponent } from './components/edit/edit.component';
+import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { ProductClientComponent } from './components/product-client/product-client.component';
 import { SnackbarComponent } from './components/auth/login/snackbar/snackbar.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +37,10 @@ import { SnackbarComponent } from './components/auth/login/snackbar/snackbar.com
     ErroresComponent,
     CoreComponent,
     AuthComponent,
-    EditComponent,
+    EditClientComponent,
     ProductClientComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    EditProductComponent
   ],
   imports: [
     NgChartsModule,

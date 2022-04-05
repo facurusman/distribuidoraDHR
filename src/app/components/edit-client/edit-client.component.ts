@@ -5,10 +5,10 @@ import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  templateUrl: './edit-client.component.html',
+  styleUrls: ['./edit-client.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditClientComponent implements OnInit {
 
   nombre : string = ''
   telefono : string = ''

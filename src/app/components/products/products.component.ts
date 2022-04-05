@@ -5,6 +5,7 @@ import { Product } from 'src/app/models/product';
 import { ProductsService } from '../../services/products.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { PDFService } from 'src/app/services/pdf.service';
+import { Router } from '@angular/router';
 
 export interface ProductElement {
   id: number;
@@ -27,7 +28,7 @@ export interface DialogData {
 
 export class ProductsComponent {
 
-  constructor(private readonly productService: ProductsService, private dialog: MatDialog, private pdfService: PDFService){
+  constructor(private readonly productService: ProductsService, private dialog: MatDialog, private pdfService: PDFService, private  readonly router : Router){
     this.dataSource = new MatTableDataSource();
     this.allProducts();
 
@@ -36,8 +37,8 @@ export class ProductsComponent {
   dataSource = new MatTableDataSource<ProductElement>();
   selection = new SelectionModel<ProductElement>(true, []);
 
-  description: string = '';
-  price: number = 0;
+  descripcion: string = '';
+  precio_base: number = 0;
 
   delete !: boolean
 
@@ -49,6 +50,10 @@ export class ProductsComponent {
       //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
       this.dataSource.data = user
     })
+  }
+
+  goToEditPage(id:number){
+    this.router.navigateByUrl(`/dhr/edit/un-producto/${id}`);
   }
 
   generarPDF(){
@@ -91,8 +96,8 @@ export class ProductsComponent {
 
   onCreateProduct() {
     const product = new Product({
-      description:this.description,
-      price:this.price
+      descripcion:this.descripcion,
+      precio_base:this.precio_base
     });
     console.log(product)
     this.productService.postProduct(product).subscribe((response) => {
