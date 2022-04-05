@@ -14,14 +14,14 @@ import { AuthComponent } from "../auth.component";
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authComponent: AuthComponent, private router: Router) {}
   private isAuth :boolean = false
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     console.log("estoy aca 1")
-    const isAuth = AuthComponent.getIsAuth();
+    const isAuth = this.authComponent.getIsAuth();
     if (!isAuth) {
       console.log(isAuth);
       // DESCOMENTAR

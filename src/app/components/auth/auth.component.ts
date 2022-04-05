@@ -19,9 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login/login.component.scss']
 })
 export class AuthComponent implements OnInit {
-  static getIsAuth() {
-    throw new Error("Method not implemented.");
-  }
+
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
@@ -75,11 +73,8 @@ export class AuthComponent implements OnInit {
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           this.saveAuthData(token, expirationDate);
-          console.log("antes");
-          if (this.error == false) {
-            console.log("estamos navegando")
-            this.router.navigateByUrl('/dhr/home');
-          }
+          console.log("estamos navegando")
+          this.router.navigateByUrl('/dhr/home');
         } else {
           this.error = true
         }
