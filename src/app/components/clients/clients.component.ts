@@ -59,11 +59,12 @@ export class ClientsComponent implements AfterViewInit{
   detalle : string = ''
 
   delete !: boolean
+  creado : boolean
 
   constructor(private readonly clientService :ClientsService, private dialog: MatDialog, private readonly router : Router, private route:ActivatedRoute) {
     this.dataSource = new MatTableDataSource();
     this.getUsers();
-
+    this.creado = false
   }
 
   getUsers (){
@@ -118,6 +119,11 @@ export class ClientsComponent implements AfterViewInit{
     this.clientService.postClient(client).subscribe( (response) => {
      console.log(response)
     })
+    this.creado = true
+    setTimeout(() => {
+      location.reload()
+    }, 1000);
+
   }
 
   openDialog(id:number): void{
