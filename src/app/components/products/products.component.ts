@@ -56,7 +56,7 @@ export class ProductsComponent {
     this.pdfService.generarPDFProductos().subscribe((response) => {
       console.log("termine")
       console.log(response);
-      
+
       console.log("termine2")
     });;
   }
@@ -94,8 +94,8 @@ export class ProductsComponent {
       description:this.description,
       price:this.price
     });
+    console.log(product)
     this.productService.postProduct(product).subscribe((response) => {
-      location.reload();
       console.log(response);
     });
   }
