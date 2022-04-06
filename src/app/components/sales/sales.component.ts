@@ -18,10 +18,10 @@ export interface SaleData {
 
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  id: number;
+  descripcion: string;
+  precio_base:string;
+  precio: string;
 }
 
 
@@ -65,7 +65,7 @@ export class SalesComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'idCliente', 'fecha'];
   dataSource: MatTableDataSource<SaleData>;
   selection = new SelectionModel<SaleData>(true, []);
-  displayedColumnsV: string[] = ['idCliente', 'idProducto', 'descripcion', 'precio_base'];
+  displayedColumnsV: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
   dataSourceV: PeriodicElement[] = [];
   productosEnCarrito: PeriodicElement[] = [];
   displayedColumnsP: string[] = ['id', 'descripcion', 'precio', 'agregar'];
@@ -151,16 +151,20 @@ export class SalesComponent implements AfterViewInit {
     })
   }
 
-  onCreateProduct() {
 
-  }
-
-  agregarElemento(){
-    console.log("adadasdadsasd")
+  agregarElemento(id:number, precio:string, precio_base:string, descripcion: string){
     this.dataSourceV = []
-    this.productosEnCarrito.push({ position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' })
+    this.productosEnCarrito.push({ id: id, precio: precio, precio_base: precio_base, descripcion: descripcion })
     this.dataSourceV = this.productosEnCarrito;
     console.log(this.productosEnCarrito);
+  }
+
+  eliminarElemento(){
+    //console.log("adadasdadsasd")
+    //this.dataSourceV = []
+    //this.productosEnCarrito.pop()
+    //this.dataSourceV = this.productosEnCarrito;
+    //console.log(this.productosEnCarrito);
   }
 
   clickEnSelector(idCliente: number){
