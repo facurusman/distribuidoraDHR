@@ -53,7 +53,7 @@ export class ProductsComponent {
   }
 
   goToEditPage(id:number){
-    this.router.navigateByUrl(`/dhr/edit/un-producto/${id}`);
+    this.router.navigateByUrl(`/dhr/edit/product/${id}`);
   }
 
   generarPDF(){

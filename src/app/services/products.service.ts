@@ -16,12 +16,12 @@ export class ProductsService {
     return this.http.get(`${environment.apiProductsByCliente}/${id}`);
   }
   getProduct(id: any) {
-    return this.http.get(`${environment.apiProducts}/un-producto/${id}`);
+    return this.http.get(`${environment.apiProducts}/${id}`);
   }
   editProduct(product : Product,id: any) {
     return this.http.put(`${environment.apiProducts}/${id}`, product)
   }
-
+  
   postProduct(product: Product) {
     console.log(product);
     return this.http.post(`${environment.apiProducts}/crear`, product);

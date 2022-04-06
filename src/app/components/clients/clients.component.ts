@@ -99,7 +99,7 @@ export class ClientsComponent implements AfterViewInit{
     this.router.navigateByUrl(`/dhr/productsClient/${id}`);
   }
   goToEditPage(id:number){
-    this.router.navigateByUrl(`/dhr/edit/${id}`);
+    this.router.navigateByUrl(`/dhr/edit/client/${id}`);
   }
   allClients() {
     this.clientService.getClients().subscribe( (response) => {
