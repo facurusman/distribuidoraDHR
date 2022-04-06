@@ -61,24 +61,7 @@ export class AuthComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    this.authService.postLogin(form.value.email, form.value.password).subscribe(response => {
-        const token = response.token;
-        this.token = token;
-        if (token) {
-          const expiresInDuration = response.expiresIn;
-          this.setAuthTimer(expiresInDuration);
-          this.isAuthenticated = true;
-          this.error = false
-          this.authStatusListener.next(true);
-          const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-          this.saveAuthData(token, expirationDate);
-          console.log("estamos navegando")
-          this.router.navigateByUrl('/dhr/home');
-        } else {
-          this.error = true
-        }
-      });
+    this.authService.postLogin(form.value.email, form.value.password);
   }
 
   autoAuthUser() {
