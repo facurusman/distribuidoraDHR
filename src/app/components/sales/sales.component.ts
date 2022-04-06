@@ -7,6 +7,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Sale } from 'src/app/models/sale';
 import { SalesService } from '../../services/sales.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { ProductsService } from '../../services/products.service';
+import { ClientsService } from '../../services/clients.service';
 
 export interface UserData {
   id: string;
@@ -47,6 +49,34 @@ const NAMES: string[] = [
   'Thomas',
   'Elizabeth',
 ];
+
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+
+];
+
+
+export interface ProductElement {
+  id: number;
+  descripcion: string;
+  precio_base: string;
+}
+
+
+
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -68,6 +98,18 @@ export class SalesComponent implements AfterViewInit {
   displayedColumns: string[] = ['select', 'id', 'name', 'progress', 'fruit', 'action'];
   dataSource: MatTableDataSource<UserData>;
   selection = new SelectionModel<UserData>(true, []);
+  displayedColumnsV: string[] = ['idCliente', 'idProducto', 'descripcion', 'precio_base'];
+  dataSourceV = ELEMENT_DATA;
+  displayedColumnsP: string[] = [ 'id' , 'descripcion', 'precio_base', 'agregar'];
+  dataSourceP = new MatTableDataSource<ProductElement>();
+
+  idCliente:any
+  fecha:any
+
+
+  client:any;
+  clientList = ['Cliente 1', 'Cliente 2', ]
+  selected = 'option2';
 
 
   matcher = new MyErrorStateMatcher();
@@ -75,15 +117,15 @@ export class SalesComponent implements AfterViewInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  name: string = "";
-  total: number = 0;
-  date: string = "";
-  constructor(private readonly saleService : SalesService) {
+  total_final: number = 0;
+  constructor(private readonly saleService : SalesService, private readonly productService : ProductsService, private readonly clientService:ClientsService) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
+    this.allClients()
+    this.allProducts()
   }
 
   ngAfterViewInit() {
@@ -132,23 +174,38 @@ export class SalesComponent implements AfterViewInit {
 
 }
 
-allProducts() {
-  this.saleService.getSales().subscribe( (response) => {
-   console.log(response)
-  })
-}
+  allProducts() {
+    this.productService.getProducts().subscribe( (response) => {
+      console.log(response)
+      const user = response as ProductElement[]
+      console.log(user)
+      //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+      this.dataSourceP.data = user
+    })
+  }
 
-onCreateProduct() {
-  const sale = new Sale({
-    name:this.name,
-    total:this.total,
-    date:this.date
-  });
-  this.saleService.postSale(sale).subscribe((response) => {
-    location.reload();
-    console.log(response);
-  });
-}
+  allClients() {
+    this.clientService.getClients().subscribe( (response:any) => {
+      for (let index = 0; index < response.length; index++) {
+        const element = response[index];
+        this.clientList.push(element)
 
+      }
+    })
+  }
+
+  onCreateProduct() {
+
+  }
+
+  onCreateSale(){
+    const sale = new Sale({
+        idCliente : this.idCliente,
+        fecha : this.fecha,
+    });
+    this.saleService.postSale(sale).subscribe((response) => {
+      console.log(response);
+    });
+  }
 
 }
