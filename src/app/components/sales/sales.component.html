@@ -95,8 +95,8 @@
         <mat-form-field appearance="fill">
           <mat-label>Clientes</mat-label>
           <mat-select >
-            <mat-option 
-              *ngFor="let client of clientList"  
+            <mat-option
+              *ngFor="let client of clientList"
               (click)="clickEnSelector(client.id)">
               {{client.nombre}}
             </mat-option>
@@ -126,9 +126,9 @@
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="precio_base">
+          <ng-container matColumnDef="precio">
             <th mat-header-cell *matHeaderCellDef> Precio </th>
-            <td mat-cell *matCellDef="let element"> {{element.precio_base}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.precio ? element.precio : element.precio_base}} </td>
           </ng-container>
 
           <!-- Name Column -->

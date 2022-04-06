@@ -62,7 +62,8 @@ export interface PeriodicElement {
 export interface ProductElement {
   id: number;
   descripcion: string;
-  precio_base: string;
+  precio_base:string;
+  precio: string;
 }
 
 export interface ClienteElement {
@@ -101,7 +102,7 @@ export class SalesComponent implements AfterViewInit {
   displayedColumnsV: string[] = ['idCliente', 'idProducto', 'descripcion', 'precio_base'];
   dataSourceV: PeriodicElement[] = [];
   productosEnCarrito: PeriodicElement[] = [];
-  displayedColumnsP: string[] = ['id', 'descripcion', 'precio_base', 'agregar'];
+  displayedColumnsP: string[] = ['id', 'descripcion', 'precio', 'agregar'];
   dataSourceP = new MatTableDataSource<ProductElement>();
 
   idCliente: any
@@ -119,7 +120,7 @@ export class SalesComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   total_final: number = 0;
-  constructor(private readonly saleService: SalesService, 
+  constructor(private readonly saleService: SalesService,
           private readonly productService: ProductsService, private readonly clientService: ClientsService) {
     // Create 100 users
     const users = Array.from({ length: 100 }, (_, k) => this.createNewUser(k + 1));
@@ -127,7 +128,6 @@ export class SalesComponent implements AfterViewInit {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
     this.allClients()
-    this.allProducts()
   }
 
   ngAfterViewInit() {
@@ -176,8 +176,8 @@ export class SalesComponent implements AfterViewInit {
 
   }
 
-  allProducts() {
-    this.productService.getProducts().subscribe((response) => {
+  allProductsClient(id:number) {
+    this.productService.getProductsByCliente(id).subscribe((response) => {
       const user = response as ProductElement[]
       this.dataSourceP.data = user
     })
@@ -205,10 +205,7 @@ export class SalesComponent implements AfterViewInit {
   }
 
   clickEnSelector(idCliente: number){
-    alert(idCliente);
-    //ya tengo el id del cliente
-    // tengo que llamar a la api,para que me traiga los productos por este cliente
-    // para mostrar en la tabla de abajo.
+    this.allProductsClient(idCliente)
   }
 
   onCreateSale() {
