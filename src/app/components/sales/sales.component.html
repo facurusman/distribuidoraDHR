@@ -94,8 +94,12 @@
       <div class="desplegable">
         <mat-form-field appearance="fill">
           <mat-label>Clientes</mat-label>
-          <mat-select [(ngModel)]="client.nombre">
-            <mat-option *ngFor="let client of clientList" [value]="client.nombre">{{client.nombre}}</mat-option>
+          <mat-select >
+            <mat-option 
+              *ngFor="let client of clientList"  
+              (click)="clickEnSelector(client.id)">
+              {{client.nombre}}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -130,7 +134,7 @@
           <!-- Name Column -->
           <ng-container matColumnDef="agregar">
             <th mat-header-cell *matHeaderCellDef> Agregar </th>
-            <td mat-cell *matCellDef="let element"><mat-icon class="button_add" (click)="onCreateSale()">add_circle</mat-icon></td>
+            <td mat-cell *matCellDef="let element"><mat-icon class="button_add" (click)="agregarElemento()">add_circle</mat-icon></td>
           </ng-container>
 
 
