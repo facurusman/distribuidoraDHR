@@ -1,9 +1,9 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import {AfterViewInit, Component, Inject, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from '../../services/products.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PDFService } from 'src/app/services/pdf.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export interface ProductElement {
 }
 
 export interface DialogData {
-  delete : boolean
+  delete: boolean
 }
 
 /**
@@ -28,12 +28,12 @@ export interface DialogData {
 
 export class ProductsComponent {
 
-  constructor(private readonly productService: ProductsService, private dialog: MatDialog, private pdfService: PDFService, private  readonly router : Router){
+  constructor(private readonly productService: ProductsService, private dialog: MatDialog, private pdfService: PDFService, private readonly router: Router) {
     this.dataSource = new MatTableDataSource();
     this.allProducts();
 
   }
-  displayedColumns: string[] = ['select', 'id' , 'descripcion', 'precio_base', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['select', 'id', 'descripcion', 'precio_base', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<ProductElement>();
   selection = new SelectionModel<ProductElement>(true, []);
 
@@ -43,9 +43,9 @@ export class ProductsComponent {
   delete !: boolean
 
   allProducts() {
-    this.productService.getProducts().subscribe( (response) => {
-     console.log(response)
-     const user = response as ProductElement[]
+    this.productService.getProducts().subscribe((response) => {
+      console.log(response)
+      const user = response as ProductElement[]
       console.log(user)
       //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
       this.dataSource.data = user
@@ -56,13 +56,14 @@ export class ProductsComponent {
     this.router.navigateByUrl(`/dhr/edit/product/${id}`);
   }
 
-  generarPDF(){
+  generarPDF() {
     console.log("estoy generando pdf")
-    this.pdfService.generarPDFProductos().subscribe((response) => {
-      console.log("termine")
-      console.log(response);
-
-      console.log("termine2")
+    this.pdfService.generarPDFProductos().subscribe((response: any) => {
+      const source = `data:application/pdf;base64,${response.finalString}`;
+      const link = document.createElement("a");
+      link.href = source;
+      link.download = `productos.pdf`;
+      link.click();
     });;
   }
 
@@ -77,8 +78,8 @@ export class ProductsComponent {
   masterToggle() {
     console.log(this.selection);
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   applyFilter(event: Event) {
@@ -90,14 +91,14 @@ export class ProductsComponent {
     }
   }
 
-  aumentar(){
+  aumentar() {
     console.log(this.selection.selected);
   }
 
   onCreateProduct() {
     const product = new Product({
-      descripcion:this.descripcion,
-      precio_base:this.precio_base
+      descripcion: this.descripcion,
+      precio_base: this.precio_base
     });
     console.log(product)
     this.productService.postProduct(product).subscribe((response) => {
@@ -105,18 +106,18 @@ export class ProductsComponent {
     });
   }
 
-  openDialog(id:number): void{
+  openDialog(id: number): void {
     this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {delete : this.delete},
+      data: { delete: this.delete },
     }).afterClosed().subscribe((result: boolean) => {
       console.log('The dialog was closed');
       this.delete = result;
     })
     if (this.delete = true) {
-      this.productService.deleteProduct(id).subscribe( (response) => {
+      this.productService.deleteProduct(id).subscribe((response) => {
         console.log(response)
-       })
+      })
     }
   }
 }

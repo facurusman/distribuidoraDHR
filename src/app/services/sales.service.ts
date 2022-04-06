@@ -10,11 +10,11 @@ export class SalesService {
 
   constructor(private readonly http: HttpClient) { }
   getSales() {
-    return this.http.get(`${environment.apiSales}/ventas`);
+    return this.http.get(`${environment.apiSales}/`);
   }
 
   postSale(sale: Sale) {
     console.log(sale);
-    return this.http.post(`${environment.apiSales}/ventas`, sale);
+    return this.http.post(`${environment.apiSales}/crear`, sale);
   }
 }

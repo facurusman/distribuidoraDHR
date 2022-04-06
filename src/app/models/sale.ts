@@ -1,19 +1,15 @@
 export class Sale {
-  readonly name: string;
-  readonly total: number;
-  readonly date: string;
+  readonly idCliente: number;
+  readonly fecha: string;
 
   constructor({
-    name,
-    total,
-    date,
+    idCliente,
+    fecha,
   }: {
-    name: string;
-    total: number;
-    date: string;
+    idCliente: number;
+    fecha: string;
   }) {
-    this.name = name;
-    this.total = total;
-    this.date = date;
+    this.idCliente = idCliente;
+    this.fecha = fecha;
   }
 }

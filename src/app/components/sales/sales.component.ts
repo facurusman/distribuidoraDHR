@@ -1,12 +1,14 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Sale } from 'src/app/models/sale';
 import { SalesService } from '../../services/sales.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { ProductsService } from '../../services/products.service';
+import { ClientsService } from '../../services/clients.service';
 
 export interface UserData {
   id: string;
@@ -47,6 +49,34 @@ const NAMES: string[] = [
   'Thomas',
   'Elizabeth',
 ];
+
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+
+export interface ProductElement {
+  id: number;
+  descripcion: string;
+  precio_base: string;
+}
+
+export interface ClienteElement {
+  detalle: string;
+  direccion: string;
+  email: string;
+  id: number;
+  nombre: string;
+  telefono: string;
+  zona: string;
+}
+
+
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -68,6 +98,19 @@ export class SalesComponent implements AfterViewInit {
   displayedColumns: string[] = ['select', 'id', 'name', 'progress', 'fruit', 'action'];
   dataSource: MatTableDataSource<UserData>;
   selection = new SelectionModel<UserData>(true, []);
+  displayedColumnsV: string[] = ['idCliente', 'idProducto', 'descripcion', 'precio_base'];
+  dataSourceV: PeriodicElement[] = [];
+  productosEnCarrito: PeriodicElement[] = [];
+  displayedColumnsP: string[] = ['id', 'descripcion', 'precio_base', 'agregar'];
+  dataSourceP = new MatTableDataSource<ProductElement>();
+
+  idCliente: any
+  fecha: any
+
+
+  client: any;
+  clientList: ClienteElement[] = []
+  selected = 'option2';
 
 
   matcher = new MyErrorStateMatcher();
@@ -75,15 +118,16 @@ export class SalesComponent implements AfterViewInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  name: string = "";
-  total: number = 0;
-  date: string = "";
-  constructor(private readonly saleService : SalesService) {
+  total_final: number = 0;
+  constructor(private readonly saleService: SalesService, 
+          private readonly productService: ProductsService, private readonly clientService: ClientsService) {
     // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+    const users = Array.from({ length: 100 }, (_, k) => this.createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
+    this.allClients()
+    this.allProducts()
   }
 
   ngAfterViewInit() {
@@ -101,8 +145,8 @@ export class SalesComponent implements AfterViewInit {
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   applyFilter(event: Event) {
@@ -115,40 +159,66 @@ export class SalesComponent implements AfterViewInit {
   }
 
 
-/** Builds and returns a new User. */
+  /** Builds and returns a new User. */
   createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
+    const name =
+      NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
+      ' ' +
+      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
+      '.';
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
+    return {
+      id: id.toString(),
+      name: name,
+      progress: Math.round(Math.random() * 100).toString(),
+      fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+    };
 
-}
+  }
 
-allProducts() {
-  this.saleService.getSales().subscribe( (response) => {
-   console.log(response)
-  })
-}
+  allProducts() {
+    this.productService.getProducts().subscribe((response) => {
+      const user = response as ProductElement[]
+      this.dataSourceP.data = user
+    })
+  }
 
-onCreateProduct() {
-  const sale = new Sale({
-    name:this.name,
-    total:this.total,
-    date:this.date
-  });
-  this.saleService.postSale(sale).subscribe((response) => {
-    location.reload();
-    console.log(response);
-  });
-}
+  allClients() {
+    this.clientService.getClients().subscribe((response: any) => {
+      const clientes = response as ClienteElement[];
+      clientes.forEach(element => {
+        this.clientList.push(element)
+      });
+    })
+  }
 
+  onCreateProduct() {
+
+  }
+
+  agregarElemento(){
+    console.log("adadasdadsasd")
+    this.dataSourceV = []
+    this.productosEnCarrito.push({ position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' })
+    this.dataSourceV = this.productosEnCarrito;
+    console.log(this.productosEnCarrito);
+  }
+
+  clickEnSelector(idCliente: number){
+    alert(idCliente);
+    //ya tengo el id del cliente
+    // tengo que llamar a la api,para que me traiga los productos por este cliente
+    // para mostrar en la tabla de abajo.
+  }
+
+  onCreateSale() {
+    const sale = new Sale({
+      idCliente: this.idCliente,
+      fecha: this.fecha,
+    });
+    this.saleService.postSale(sale).subscribe((response) => {
+      console.log(response);
+    });
+  }
 
 }
