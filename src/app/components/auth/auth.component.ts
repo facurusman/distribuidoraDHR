@@ -58,6 +58,12 @@ export class AuthComponent implements OnInit {
     return this.isAuthenticated;
   }
   onLogin(form: NgForm) {
+    console.log("99999999")
+    if(this.isAuthenticated){
+      this.error = false;
+    }else{
+      this.error = true;
+    }
     if (form.invalid) {
       return;
     }

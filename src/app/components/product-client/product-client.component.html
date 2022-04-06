@@ -12,15 +12,11 @@
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null"
-              [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()">
-              </mat-checkbox>
             </th>
             <td mat-cell *matCellDef="let row">
               <mat-checkbox (click)="$event.stopPropagation()"
               (change)="$event ? marcar($event, row) : null"
-              [checked]="selection.isSelected(row)">
+              [checked]="row.selected">
             </mat-checkbox>
           </td>
         </ng-container>
@@ -37,8 +33,8 @@
       <ng-container matColumnDef="precio_base">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
         <td mat-cell *matCellDef="let row"> 
-          <input type="text" value="{{row.precio ? row.precio : row.precio_base}}" 
-                [readonly]="!selection.isSelected(row)"
+          <input type="text" [(ngModel)]="row.precio_mostrar" 
+                [readonly]="!row.selected"
                 [name]="row.id"></td>
       </ng-container>
 

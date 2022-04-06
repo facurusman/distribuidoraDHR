@@ -32,12 +32,16 @@ export class AuthService {
   }
 
   postLogin(email: string, password: string) {
+    console.log("44444444")
     const authData: AuthData = { email: email, password: password };
     this.http.post<{ token: string; expiresIn: number }>(`${environment.apiUsers}/login`, authData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
+        console.log("5555555")
+        
         if (token) {
+          console.log("666666666")
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
           this.isAuthenticated = true;
@@ -46,6 +50,9 @@ export class AuthService {
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           this.saveAuthData(token, expirationDate);
           this.router.navigateByUrl('/dhr/home');
+        }else{
+          this.authStatusListener.next(false);
+          console.log("77777777")
         }
       });
   }

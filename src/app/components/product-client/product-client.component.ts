@@ -11,6 +11,9 @@ export interface ProductClientData {
   descripcion: string;
   precio_base: string;
   precio: string;
+  precio_mostrar: string;
+  selected: boolean;
+  id: number;
 }
 
 
@@ -30,14 +33,12 @@ export class ProductClientComponent implements AfterViewInit {
   precio : string = ''
   idcliente: string = '';
   valores = [];
+  productosSeleccionados: ProductClientData[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private readonly router : Router, private readonly productService: ProductsService, private readonly route: ActivatedRoute) {
-    //recibo el idCliente desde el params
-    //TODO
-    //falta mostrar el id recibo por params
     this.idcliente = this.route.snapshot.params['id'];
     this.dataSource = new MatTableDataSource();
     this.getProductsByCliente();
@@ -46,12 +47,11 @@ export class ProductClientComponent implements AfterViewInit {
 
   getProductsByCliente (){
     this.productService.getProductsByCliente(this.idcliente).subscribe( (response) => {
-      console.log("AAAAA");
-      const user = response as ProductClientData[]
-      console.log(response)
-      console.log("BBBBB");
-      console.log(user)
-      this.dataSource.data = user
+      const productos = response as ProductClientData[]
+      productos.forEach(element => {
+        element.precio_mostrar = element.precio ? element.precio : element.precio_base
+      });
+      this.dataSource.data = productos
     });
   }
 
@@ -89,18 +89,18 @@ export class ProductClientComponent implements AfterViewInit {
   }
 
   marcar(ob: MatCheckboxChange,row: ProductClientData){
-    console.log(this.selection)
+    console.log(row);
     if(ob.checked){
-      this.selection.toggle(row);
+      this.productosSeleccionados.push(row);
+      row.selected = true;
     }else{
-      this.selection.deselect(row);
+      this.productosSeleccionados = this.productosSeleccionados.filter(p => p.id != row.id)
+      row.selected = false;
     }
   }
 
   editarProductos(){
-    console.log("los productos a editar son:")
-    console.log(this.selection.selected);
-    console.log(this.valores)
+    console.log(this.productosSeleccionados);
   }
 }
 
