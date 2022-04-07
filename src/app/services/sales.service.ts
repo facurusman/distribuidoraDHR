@@ -12,6 +12,9 @@ export class SalesService {
   getSales() {
     return this.http.get(`${environment.apiSales}/`);
   }
+  getSalesByClient(id: number) {
+    return this.http.get(`${environment.apiSales}/${id}`)
+  }
 
   postSale(sale: Sale) {
     console.log(sale);

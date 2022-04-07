@@ -116,7 +116,6 @@ export class SalesComponent implements AfterViewInit {
         this.dataSource.data = sale
       })
     } else {
-
       this.saleService.getSales().subscribe( (response) => {
         const sale = response as SaleData[]
         this.dataSource.data = sale
