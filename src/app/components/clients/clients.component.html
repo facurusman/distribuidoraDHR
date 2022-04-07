@@ -80,7 +80,7 @@
           <ng-container matColumnDef="ventas">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Ventas</th>
             <td mat-cell *matCellDef="let row">
-              <button mat-icon-button (click)="goToSalesPage()">
+              <button mat-icon-button (click)="goToSalesByClientPage(row.id)">
                 <mat-icon>attach_money</mat-icon>
               </button>
             </td>
