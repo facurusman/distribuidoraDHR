@@ -13,14 +13,18 @@ export class EditProductComponent implements OnInit {
   descripcion: string = "";
   precio_base: number = 0;
 
+  creado : boolean
   constructor(private readonly productService :ProductsService, private readonly router : Router, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.productService.getProduct(this.id).subscribe( (response: any) => {
-      this.descripcion = response.descripcion;
-      this.precio_base = response.precio_base;
+      console.log(response);
+
+      this.descripcion = response[0].descripcion;
+      this.precio_base = response[0].precio_base;
       //otrod
+      this.creado = false
      })
   }
   onEdit(){
@@ -28,8 +32,12 @@ export class EditProductComponent implements OnInit {
       descripcion : this.descripcion,
       precio_base : this.precio_base,
     });
-    this.productService.editProduct(product, this.id ).subscribe((response) => {
+    this.productService.editProduct(this.id, product ).subscribe((response) => {
       return response
     });
+    this.creado = true
+    setTimeout(() => {
+      this.router.navigateByUrl('/dhr/products')
+    }, 500);
   }
 }

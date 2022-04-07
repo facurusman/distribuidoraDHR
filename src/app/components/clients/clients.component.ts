@@ -72,7 +72,6 @@ export class ClientsComponent implements AfterViewInit{
       console.log(response);
       const user = response as UserData[]
       console.log(user)
-      //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
       this.dataSource.data = user
     });
   }

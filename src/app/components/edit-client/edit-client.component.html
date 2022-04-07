@@ -7,7 +7,7 @@
   <mat-form-field>
     <input
       matInput
-      type="number"
+      type="string"
       placeholder="Teléfono"
       class="phone_number"
       [(ngModel)]="telefono"
@@ -28,9 +28,10 @@
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Email</mat-label>
     <input
-      type="email"
+      type="string"
       matInput
-      placeholder="Ex. pat@example.com"
+      placeholder="dygcombos@gmail.com"
+      [(ngModel)]="email"
     />
   </mat-form-field>
 
@@ -40,4 +41,10 @@
   </mat-form-field>
 
   <button mat-raised-button color="warn" (click)="onEdit()">Editar Cliente</button>
+
+  <ng-template [ngIf]="creado">
+
+    <div class="message_create">Cliente creado con exito</div>
+
+  </ng-template>
 </div>

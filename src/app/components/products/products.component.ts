@@ -6,6 +6,8 @@ import { ProductsService } from '../../services/products.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PDFService } from 'src/app/services/pdf.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 export interface ProductElement {
   id: number;
@@ -26,12 +28,13 @@ export interface DialogData {
   styleUrls: ['./products.component.scss'],
 })
 
-export class ProductsComponent {
+export class ProductsComponent implements AfterViewInit {
+  creado: boolean;
 
   constructor(private readonly productService: ProductsService, private dialog: MatDialog, private pdfService: PDFService, private readonly router: Router) {
     this.dataSource = new MatTableDataSource();
     this.allProducts();
-
+    this.creado = false
   }
   displayedColumns: string[] = ['select', 'id', 'descripcion', 'precio_base', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<ProductElement>();
@@ -41,6 +44,15 @@ export class ProductsComponent {
   precio_base: number = 0;
 
   delete !: boolean
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   allProducts() {
     this.productService.getProducts().subscribe((response) => {
@@ -104,6 +116,10 @@ export class ProductsComponent {
     this.productService.postProduct(product).subscribe((response) => {
       console.log(response);
     });
+    this.creado = true
+    setTimeout(() => {
+      location.reload()
+    }, 750);
   }
 
   openDialog(id: number): void {

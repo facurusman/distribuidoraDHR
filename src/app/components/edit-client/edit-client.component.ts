@@ -18,17 +18,19 @@ export class EditClientComponent implements OnInit {
   detalle : string = ''
   id: number = 0;
 
+  creado : boolean
   constructor(private readonly clientService :ClientsService, private readonly router : Router, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.clientService.getClient(this.id).subscribe( (response: any) => {
-      this.nombre = response.nombre
-      this.telefono = response.telefono
-      this.zona = response.zona
-      this.direccion = response.direccion
-      this.email = response.email
-      this.detalle = response.detalle
+      this.nombre = response[0].nombre
+      this.telefono = response[0].telefono
+      this.zona = response[0].zona
+      this.direccion = response[0].direccion
+      this.email = response[0].email
+      this.detalle = response[0].detalle
+      this.creado = false
       //otrod
      })
   }
@@ -44,5 +46,9 @@ export class EditClientComponent implements OnInit {
     this.clientService.editClient(client, this.id ).subscribe((response) => {
       return response
     });
+    this.creado = true
+    setTimeout(() => {
+      this.router.navigateByUrl('/dhr/clients')
+    }, 500);
   }
 }
