@@ -6,13 +6,13 @@
         <mat-form-field appearance="fill">
           <mat-label>Introduzca un rango de fechas</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate placeholder="Fecha Inicial">
-            <input matEndDate placeholder="Fecha Final">
+            <input matStartDate placeholder="Fecha Inicial" [(ngModel)]="fecha_inicial">
+            <input matEndDate placeholder="Fecha Final" [(ngModel)]="fecha_final">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
-        <button mat-raised-button color="primary">Buscar</button>
+        <button mat-raised-button color="primary" (click)="updateTableFilter()">Buscar</button>
       </div>
       <div class="exports">
         <button mat-button>Exportar Clientes</button>

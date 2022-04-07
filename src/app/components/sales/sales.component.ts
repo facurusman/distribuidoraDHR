@@ -76,10 +76,19 @@ export class SalesComponent implements AfterViewInit {
   clientList: ClienteElement[] = []
   selected = 'option2';
 
+  fecha_inicial:any
+  fecha_final:any
+
+
   matcher = new MyErrorStateMatcher();
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
 
   total_final: number = 0;
   constructor(
@@ -90,6 +99,8 @@ export class SalesComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource();
     this.getSales()
     this.allClients()
+
+
   }
 
   ngAfterViewInit() {
@@ -102,6 +113,10 @@ export class SalesComponent implements AfterViewInit {
       const sale = response as SaleData[]
       this.dataSource.data = sale
     });
+  }
+
+  updateTableFilter(){
+    
   }
 
   isAllSelected() {
@@ -151,7 +166,7 @@ export class SalesComponent implements AfterViewInit {
     }else{
       this.total_final += +precio_base;
     }
-    
+
   }
 
   eliminarElemento(producto: ProductElement){
@@ -161,7 +176,7 @@ export class SalesComponent implements AfterViewInit {
       this.total_final -= +producto.precio;
     }else{
       this.total_final -= +producto.precio_base;
-    } 
+    }
 
   }
 
