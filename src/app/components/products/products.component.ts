@@ -122,19 +122,19 @@ export class ProductsComponent implements AfterViewInit {
     }, 750);
   }
 
-  openDialog(id: number): void {
-    this.dialog.open(DialogOverviewExampleDialog, {
+  openDialog(id:number): void{
+    const dialogRef = this.dialog.open(EliminarDialogoProducts, {
       width: '250px',
-      data: { delete: this.delete },
-    }).afterClosed().subscribe((result: boolean) => {
-      console.log('The dialog was closed');
-      this.delete = result;
+      data: {delete : this.delete},
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.productService.deleteProduct(id).subscribe( (response) => {
+          console.log(response)
+         })
+      }
     })
-    if (this.delete = true) {
-      this.productService.deleteProduct(id).subscribe((response) => {
-        console.log(response)
-      })
-    }
   }
 }
 
@@ -144,7 +144,7 @@ export class ProductsComponent implements AfterViewInit {
   templateUrl: 'eliminar-dialog.html',
   styleUrls: ['eliminar-dialog.scss'],
 })
-export class DialogOverviewExampleDialog {
+export class EliminarDialogoProducts {
   id: number = 0;
   constructor(
     public dialogRef: MatDialogRef<ProductsComponent>,
@@ -154,17 +154,19 @@ export class DialogOverviewExampleDialog {
     private route: ActivatedRoute
   ) { }
 
+
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   onDelete() {
     this.productService.deleteProduct(this.id).subscribe((response) => {
       this.onNoClick()
-      setTimeout(() => {
-        location.reload()
-      }, 500);
-
     })
+    setTimeout(() => {
+      location.reload()
+    }, 500);
+
   }
 
 }

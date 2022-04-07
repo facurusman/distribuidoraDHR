@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './components/products/products.component';
+import { EliminarDialogoProducts, ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { ClientsComponent, EliminarDialogo } from './components/clients/clients.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -39,7 +39,8 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     EditClientComponent,
     ProductClientComponent,
     EditProductComponent,
-    EliminarDialogo
+    EliminarDialogo,
+    EliminarDialogoProducts
   ],
   imports: [
     NgChartsModule,

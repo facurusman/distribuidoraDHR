@@ -2,7 +2,7 @@
   <p>¿Estas seguro de que quieres eliminar este producto?</p>
 </div>
 <div mat-dialog-actions class="actions">
-  <button mat-button (click)="onNoClick()" class="cancelar">Cancelar</button>
-  <button mat-button cdkFocusInitial class="delete" (click)="onDelete()">Eliminar Definitivamente</button>
+  <button mat-button [mat-dialog-close]="false" class="cancelar">Cancelar</button>
+  <button mat-button cdkFocusInitial class="delete" [mat-dialog-close]="true">Eliminar Definitivamente</button>
   <!-- se deberia agregar esta propiedad [mat-dialog-close]="data.delete" al button de arriba -->
 </div>

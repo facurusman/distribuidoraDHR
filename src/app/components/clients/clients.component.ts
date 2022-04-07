@@ -135,7 +135,7 @@ export class ClientsComponent implements AfterViewInit{
       if (result) {
         this.clientService.deleteClient(id).subscribe( (response) => {
           console.log(response)
-         })
+        })
       }
     })
   }

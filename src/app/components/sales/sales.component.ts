@@ -15,6 +15,7 @@ export interface SaleData {
   id: number;
   idCliente: number;
   fecha: string;
+  total: string;
 }
 
 
@@ -73,6 +74,7 @@ export class SalesComponent implements AfterViewInit {
   dataSourceP:MatTableDataSource<ProductElement>;
   idCliente: any
   fecha: any
+  total : any
   client: any;
   clientList: ClienteElement[] = []
   selected = 'option2';
@@ -200,6 +202,7 @@ export class SalesComponent implements AfterViewInit {
     const sale = new Sale({
       idCliente: this.idCliente,
       fecha: this.fecha,
+      total : this.total
     });
     this.saleService.postSale(sale).subscribe((response) => {
       console.log(response);
