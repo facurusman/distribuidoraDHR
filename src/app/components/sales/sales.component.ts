@@ -66,19 +66,15 @@ export class SalesComponent implements AfterViewInit {
   dataSource: MatTableDataSource<SaleData>;
   selection = new SelectionModel<SaleData>(true, []);
   displayedColumnsV: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
-  dataSourceV: PeriodicElement[] = [];
-  productosEnCarrito: PeriodicElement[] = [];
+  dataSourceV: MatTableDataSource<ProductElement>;
+  productosEnCarrito: ProductElement[] = [];
   displayedColumnsP: string[] = ['id', 'descripcion', 'precio', 'agregar'];
-  dataSourceP = new MatTableDataSource<ProductElement>();
-
+  dataSourceP:MatTableDataSource<ProductElement>;
   idCliente: any
   fecha: any
-
-
   client: any;
   clientList: ClienteElement[] = []
   selected = 'option2';
-
 
   matcher = new MyErrorStateMatcher();
   @ViewChild(MatPaginator)
@@ -103,22 +99,17 @@ export class SalesComponent implements AfterViewInit {
 
   getSales (){
     this.saleService.getSales().subscribe( (response) => {
-      console.log(response);
       const sale = response as SaleData[]
-      console.log(sale)
-      //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
       this.dataSource.data = sale
     });
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
@@ -138,7 +129,7 @@ export class SalesComponent implements AfterViewInit {
   allProductsClient(id:number) {
     this.productService.getProductsByCliente(id).subscribe((response) => {
       const user = response as ProductElement[]
-      this.dataSourceP.data = user
+      this.dataSourceP = new MatTableDataSource<ProductElement>(user);
     })
   }
 
@@ -153,18 +144,25 @@ export class SalesComponent implements AfterViewInit {
 
 
   agregarElemento(id:number, precio:string, precio_base:string, descripcion: string){
-    this.dataSourceV = []
     this.productosEnCarrito.push({ id: id, precio: precio, precio_base: precio_base, descripcion: descripcion })
-    this.dataSourceV = this.productosEnCarrito;
-    console.log(this.productosEnCarrito);
+    this.dataSourceV = new MatTableDataSource<ProductElement>(this.productosEnCarrito);
+    if(precio){
+      this.total_final += +precio;
+    }else{
+      this.total_final += +precio_base;
+    }
+    
   }
 
-  eliminarElemento(){
-    //console.log("adadasdadsasd")
-    //this.dataSourceV = []
-    //this.productosEnCarrito.pop()
-    //this.dataSourceV = this.productosEnCarrito;
-    //console.log(this.productosEnCarrito);
+  eliminarElemento(producto: ProductElement){
+    this.productosEnCarrito = this.productosEnCarrito.filter(p => p.id != producto.id)
+    this.dataSourceV = new MatTableDataSource<ProductElement>(this.productosEnCarrito);
+    if(producto.precio){
+      this.total_final -= +producto.precio;
+    }else{
+      this.total_final -= +producto.precio_base;
+    } 
+
   }
 
   clickEnSelector(idCliente: number){

@@ -127,18 +127,18 @@ export class ClientsComponent implements AfterViewInit{
   }
 
   openDialog(id:number): void{
-    this.dialog.open(DialogOverviewExampleDialog, {
+    const dialogRef = this.dialog.open(EliminarDialogo, {
       width: '250px',
       data: {delete : this.delete},
-    }).afterClosed().subscribe((result: boolean) => {
-      console.log('The dialog was closed');
-      this.delete = result;
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.clientService.deleteClient(id).subscribe( (response) => {
+          console.log(response)
+         })
+      }
     })
-    if (this.delete = true) {
-      this.clientService.deleteClient(id).subscribe( (response) => {
-        console.log(response)
-       })
-    }
   }
 
 }
@@ -147,7 +147,7 @@ export class ClientsComponent implements AfterViewInit{
   templateUrl: 'eliminar-dialog.html',
   styleUrls: ['eliminar-dialog.scss'],
 })
-export class DialogOverviewExampleDialog implements OnInit{
+export class EliminarDialogo implements OnInit{
 
   id: number = 0;
 

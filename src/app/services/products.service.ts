@@ -3,6 +3,16 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
 
+export interface ProductClientData {
+  descripcion: string;
+  precio_base: string;
+  precio: string;
+  precio_mostrar: string;
+  selected: boolean;
+  id: number;
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,5 +38,9 @@ export class ProductsService {
   }
   deleteProduct( id: number){
     return this.http.delete(`${environment.apiProducts}/${id}`)
+  }
+
+  editarProductoPorCliente(idCliente: string, productos: ProductClientData[]){
+    return this.http.post(`${environment.apiProducts}/editarPrecioPorCliente`, {idCliente, productos});
   }
 }

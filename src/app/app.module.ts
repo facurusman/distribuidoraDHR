@@ -10,7 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
-import { ClientsComponent } from './components/clients/clients.component';
+import { ClientsComponent, EliminarDialogo } from './components/clients/clients.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ClientsService } from './services/clients.service';
 import { ProductsService } from './services/products.service';
@@ -38,7 +38,8 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     AuthComponent,
     EditClientComponent,
     ProductClientComponent,
-    EditProductComponent
+    EditProductComponent,
+    EliminarDialogo
   ],
   imports: [
     NgChartsModule,

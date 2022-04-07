@@ -101,6 +101,10 @@ export class ProductClientComponent implements AfterViewInit {
 
   editarProductos(){
     console.log(this.productosSeleccionados);
+    console.log(this.idcliente)
+    this.productService.editarProductoPorCliente(this.idcliente, this.productosSeleccionados).subscribe((response) => {
+      console.log(response)
+    });
   }
 }
 
