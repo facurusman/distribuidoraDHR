@@ -34,7 +34,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class SalesComponent implements AfterViewInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  displayedColumns: string[] = ['id', 'idCliente', 'fecha'];
+  displayedColumns: string[] = ['id', 'idCliente', 'fecha', 'total'];
   dataSource: MatTableDataSource<SaleData>;
   selection = new SelectionModel<SaleData>(true, []);
   displayedColumnsV: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
