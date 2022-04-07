@@ -17,4 +17,8 @@ export class SalesService {
     console.log(sale);
     return this.http.post(`${environment.apiSales}/crear`, sale);
   }
+
+  getSalesByClient(id: number) {
+    return this.http.get(`${environment.apiSales}/${id}`);
+  }
 }

@@ -9,6 +9,7 @@ import { SalesService } from '../../services/sales.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ProductsService } from '../../services/products.service';
 import { ClientsService } from '../../services/clients.service';
+import { ActivatedRoute } from '@angular/router';
 
 export interface SaleData {
   id: number;
@@ -75,6 +76,7 @@ export class SalesComponent implements AfterViewInit {
   client: any;
   clientList: ClienteElement[] = []
   selected = 'option2';
+  id : number = 0
 
   fecha_inicial:any
   fecha_final:any
@@ -94,7 +96,9 @@ export class SalesComponent implements AfterViewInit {
   constructor(
     private readonly saleService: SalesService,
     private readonly productService: ProductsService,
+    private route:ActivatedRoute,
     private readonly clientService: ClientsService) {
+    this.id = this.route.snapshot.params['id'];
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
     this.getSales()
@@ -108,15 +112,23 @@ export class SalesComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  getSales (){
-    this.saleService.getSales().subscribe( (response) => {
-      const sale = response as SaleData[]
-      this.dataSource.data = sale
-    });
+  getSales() {
+    if (this.id) {
+      this.saleService.getSalesByClient(this.id).subscribe((response) => {
+        const sale = response as SaleData[]
+        this.dataSource.data = sale
+      })
+    } else {
+
+      this.saleService.getSales().subscribe( (response) => {
+        const sale = response as SaleData[]
+        this.dataSource.data = sale
+      });
+    }
   }
 
   updateTableFilter(){
-    
+
   }
 
   isAllSelected() {
