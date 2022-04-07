@@ -85,11 +85,6 @@ export class SalesComponent implements AfterViewInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl(),
-  });
-
   total_final: number = 0;
   constructor(
     private readonly saleService: SalesService,
@@ -116,7 +111,10 @@ export class SalesComponent implements AfterViewInit {
   }
 
   updateTableFilter(){
-    
+    this.saleService.filterSale(this.fecha_inicial, this.fecha_final).subscribe( (response) => {
+      const sale = response as SaleData[]
+      this.dataSource.data = sale
+    });
   }
 
   isAllSelected() {
