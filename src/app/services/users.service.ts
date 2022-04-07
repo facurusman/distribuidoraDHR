@@ -13,7 +13,7 @@ export class UsersService implements OnDestroy {
     return this._authSub$.asObservable();
   }
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router) { }
 
   public ngOnDestroy(): void {
     this._authSub$.next(false);

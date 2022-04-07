@@ -8,16 +8,9 @@ import { PDFService } from 'src/app/services/pdf.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ProductData } from 'src/app/models/ProductData';
+import { DialogData } from 'src/app/models/DialogData';
 
-export interface ProductElement {
-  id: number;
-  descripcion: string;
-  precio_base: string;
-}
-
-export interface DialogData {
-  delete: boolean
-}
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -37,8 +30,8 @@ export class ProductsComponent implements AfterViewInit {
     this.creado = false
   }
   displayedColumns: string[] = ['select', 'id', 'descripcion', 'precio_base', 'editar', 'eliminar'];
-  dataSource = new MatTableDataSource<ProductElement>();
-  selection = new SelectionModel<ProductElement>(true, []);
+  dataSource = new MatTableDataSource<ProductData>();
+  selection = new SelectionModel<ProductData>(true, []);
 
   descripcion: string = '';
   precio_base: number = 0;
@@ -56,20 +49,16 @@ export class ProductsComponent implements AfterViewInit {
 
   allProducts() {
     this.productService.getProducts().subscribe((response) => {
-      console.log(response)
-      const user = response as ProductElement[]
-      console.log(user)
-      //const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+      const user = response as ProductData[]
       this.dataSource.data = user
     })
   }
 
-  goToEditPage(id:number){
+  goToEditPage(id: number) {
     this.router.navigateByUrl(`/dhr/edit/product/${id}`);
   }
 
   generarPDF() {
-    console.log("estoy generando pdf")
     this.pdfService.generarPDFProductos().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
       const link = document.createElement("a");
@@ -88,7 +77,6 @@ export class ProductsComponent implements AfterViewInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    console.log(this.selection);
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
@@ -104,7 +92,6 @@ export class ProductsComponent implements AfterViewInit {
   }
 
   aumentar() {
-    console.log(this.selection.selected);
   }
 
   onCreateProduct() {
@@ -112,9 +99,8 @@ export class ProductsComponent implements AfterViewInit {
       descripcion: this.descripcion,
       precio_base: this.precio_base
     });
-    console.log(product)
     this.productService.postProduct(product).subscribe((response) => {
-      console.log(response);
+
     });
     this.creado = true
     setTimeout(() => {
@@ -122,17 +108,17 @@ export class ProductsComponent implements AfterViewInit {
     }, 750);
   }
 
-  openDialog(id:number): void{
+  openDialog(id: number): void {
     const dialogRef = this.dialog.open(EliminarDialogoProducts, {
       width: '250px',
-      data: {delete : this.delete},
+      data: { delete: this.delete },
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.productService.deleteProduct(id).subscribe( (response) => {
-          console.log(response)
-         })
+        this.productService.deleteProduct(id).subscribe((response) => {
+
+        })
       }
     })
   }

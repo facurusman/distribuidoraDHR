@@ -8,13 +8,14 @@
         <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
+        <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel"
+          required>
         <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
       </mat-form-field>
       <div *ngIf="error">
         <div class="message_create">Inicio de sesion incorrecto</div>
       </div>
-      <button  mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Login</button>
+      <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Login</button>
     </form>
   </div>
 </div>

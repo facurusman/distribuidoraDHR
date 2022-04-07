@@ -9,8 +9,8 @@ export class Sale {
     total
   }: {
     idCliente: number;
-      fecha: string;
-    total : string
+    fecha: string;
+    total: string
   }) {
     this.idCliente = idCliente;
     this.fecha = fecha;

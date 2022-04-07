@@ -32,7 +32,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatSortModule } from '@angular/material/sort';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 export const MaterialModules = [
   MatCardModule,
@@ -116,4 +116,4 @@ export const MaterialModules = [
     MatTableModule,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

@@ -17,7 +17,7 @@ export interface ProductClientData {
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
   getProducts() {
     return this.http.get(`${environment.apiProducts}`);
   }
@@ -28,19 +28,18 @@ export class ProductsService {
   getProduct(id: any) {
     return this.http.get(`${environment.apiProducts}/${id}`);
   }
-  editProduct(id: any, product : Product) {
+  editProduct(id: any, product: Product) {
     return this.http.put(`${environment.apiProducts}/${id}`, product)
   }
 
   postProduct(product: Product) {
-    console.log(product);
     return this.http.post(`${environment.apiProducts}/crear`, product);
   }
-  deleteProduct( id: number){
+  deleteProduct(id: number) {
     return this.http.delete(`${environment.apiProducts}/${id}`)
   }
 
-  editarProductoPorCliente(idCliente: string, productos: ProductClientData[]){
-    return this.http.post(`${environment.apiProducts}/editarPrecioPorCliente`, {idCliente, productos});
+  editarProductoPorCliente(idCliente: string, productos: ProductClientData[]) {
+    return this.http.post(`${environment.apiProducts}/editarPrecioPorCliente`, { idCliente, productos });
   }
 }

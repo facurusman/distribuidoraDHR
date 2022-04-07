@@ -6,9 +6,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class PDFService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
 
   generarPDFProductos() {
-    return this.http.post(`${environment.apiProducts}/crearPDF`,[]);
+    return this.http.post(`${environment.apiProducts}/crearPDF`, []);
   }
 }

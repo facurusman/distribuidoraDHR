@@ -54,4 +54,4 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
   providers: [ClientsService, UsersService, ProductsService, SalesService, AuthService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -26,12 +26,12 @@ export class LoginComponent implements OnInit {
 
   isLoading = false;
   durationInSeconds = 5;
-  error : boolean = false
+  error: boolean = false
 
   matcher = new MyErrorStateMatcher();
-  constructor(private router: Router, private authService : AuthService, private _snackBar: MatSnackBar) {}
+  constructor(private router: Router, private authService: AuthService, private _snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;

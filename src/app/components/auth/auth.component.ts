@@ -33,11 +33,11 @@ export class AuthComponent implements OnInit {
   private authStatusListener = new Subject<boolean>();
 
   matcher = new MyErrorStateMatcher();
-  constructor(private router: Router, private authService : AuthService) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.autoAuthUser();
-   }
+  }
   getToken() {
     return this.token;
   }
@@ -58,10 +58,9 @@ export class AuthComponent implements OnInit {
     return this.isAuthenticated;
   }
   onLogin(form: NgForm) {
-    console.log("99999999")
-    if(this.isAuthenticated){
+    if (this.isAuthenticated) {
       this.error = false;
-    }else{
+    } else {
       this.error = true;
     }
     if (form.invalid) {

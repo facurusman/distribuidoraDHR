@@ -11,11 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class CoreComponent implements OnInit {
   @Output() sidenavClose = new EventEmitter();
   @Output() public sidenavToggle = new EventEmitter();
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
   @ViewChild("sidenav")
   sidenav?: MatSidenav;
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
@@ -25,7 +25,7 @@ export class CoreComponent implements OnInit {
     this.sidenavClose.emit();
   }
 
-  goToHomePage(){
+  goToHomePage() {
     this.sidenav?.toggle();
     this.router.navigateByUrl('/dhr/home');
   }

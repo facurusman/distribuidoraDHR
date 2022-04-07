@@ -10,39 +10,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ProductsService } from '../../services/products.service';
 import { ClientsService } from '../../services/clients.service';
 import { ActivatedRoute } from '@angular/router';
-
-export interface SaleData {
-  id: number;
-  idCliente: number;
-  fecha: string;
-  total: string;
-}
-
-
-export interface PeriodicElement {
-  id: number;
-  descripcion: string;
-  precio_base:string;
-  precio: string;
-}
-
-
-export interface ProductElement {
-  id: number;
-  descripcion: string;
-  precio_base:string;
-  precio: string;
-}
-
-export interface ClienteElement {
-  detalle: string;
-  direccion: string;
-  email: string;
-  id: number;
-  nombre: string;
-  telefono: string;
-  zona: string;
-}
+import { SaleData } from 'src/app/models/SaleData';
+import { ProductData } from 'src/app/models/ProductData';
+import { ClienteData } from 'src/app/models/ClientData';
 
 
 
@@ -68,20 +38,20 @@ export class SalesComponent implements AfterViewInit {
   dataSource: MatTableDataSource<SaleData>;
   selection = new SelectionModel<SaleData>(true, []);
   displayedColumnsV: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
-  dataSourceV: MatTableDataSource<ProductElement>;
-  productosEnCarrito: ProductElement[] = [];
+  dataSourceV: MatTableDataSource<ProductData>;
+  productosEnCarrito: ProductData[] = [];
   displayedColumnsP: string[] = ['id', 'descripcion', 'precio', 'agregar'];
-  dataSourceP:MatTableDataSource<ProductElement>;
+  dataSourceP: MatTableDataSource<ProductData>;
   idCliente: any
   fecha: any
-  total : any
+  total: any
   client: any;
-  clientList: ClienteElement[] = []
+  clientList: ClienteData[] = []
   selected = 'option2';
-  id : number = 0
+  id: number = 0
 
-  fecha_inicial:any
-  fecha_final:any
+  fecha_inicial: any
+  fecha_final: any
 
 
   matcher = new MyErrorStateMatcher();
@@ -93,7 +63,7 @@ export class SalesComponent implements AfterViewInit {
   constructor(
     private readonly saleService: SalesService,
     private readonly productService: ProductsService,
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private readonly clientService: ClientsService) {
     this.id = this.route.snapshot.params['id'];
     // Assign the data to the data source for the table to render
@@ -116,15 +86,15 @@ export class SalesComponent implements AfterViewInit {
         this.dataSource.data = sale
       })
     } else {
-      this.saleService.getSales().subscribe( (response) => {
+      this.saleService.getSales().subscribe((response) => {
         const sale = response as SaleData[]
         this.dataSource.data = sale
       });
     }
   }
 
-  updateTableFilter(){
-    this.saleService.filterSale(this.fecha_inicial, this.fecha_final).subscribe( (response) => {
+  updateTableFilter() {
+    this.saleService.filterSale(this.fecha_inicial, this.fecha_final).subscribe((response) => {
       const sale = response as SaleData[]
       this.dataSource.data = sale
     });
@@ -152,16 +122,16 @@ export class SalesComponent implements AfterViewInit {
   }
 
 
-  allProductsClient(id:number) {
+  allProductsClient(id: number) {
     this.productService.getProductsByCliente(id).subscribe((response) => {
-      const user = response as ProductElement[]
-      this.dataSourceP = new MatTableDataSource<ProductElement>(user);
+      const user = response as ProductData[]
+      this.dataSourceP = new MatTableDataSource<ProductData>(user);
     })
   }
 
   allClients() {
     this.clientService.getClients().subscribe((response: any) => {
-      const clientes = response as ClienteElement[];
+      const clientes = response as ClienteData[];
       clientes.forEach(element => {
         this.clientList.push(element)
       });
@@ -169,29 +139,29 @@ export class SalesComponent implements AfterViewInit {
   }
 
 
-  agregarElemento(id:number, precio:string, precio_base:string, descripcion: string){
+  agregarElemento(id: number, precio: string, precio_base: string, descripcion: string) {
     this.productosEnCarrito.push({ id: id, precio: precio, precio_base: precio_base, descripcion: descripcion })
-    this.dataSourceV = new MatTableDataSource<ProductElement>(this.productosEnCarrito);
-    if(precio){
+    this.dataSourceV = new MatTableDataSource<ProductData>(this.productosEnCarrito);
+    if (precio) {
       this.total_final += +precio;
-    }else{
+    } else {
       this.total_final += +precio_base;
     }
 
   }
 
-  eliminarElemento(producto: ProductElement){
+  eliminarElemento(producto: ProductData) {
     this.productosEnCarrito = this.productosEnCarrito.filter(p => p.id != producto.id)
-    this.dataSourceV = new MatTableDataSource<ProductElement>(this.productosEnCarrito);
-    if(producto.precio){
+    this.dataSourceV = new MatTableDataSource<ProductData>(this.productosEnCarrito);
+    if (producto.precio) {
       this.total_final -= +producto.precio;
-    }else{
+    } else {
       this.total_final -= +producto.precio_base;
     }
 
   }
 
-  clickEnSelector(idCliente: number){
+  clickEnSelector(idCliente: number) {
     this.allProductsClient(idCliente)
   }
 
@@ -199,10 +169,10 @@ export class SalesComponent implements AfterViewInit {
     const sale = new Sale({
       idCliente: this.idCliente,
       fecha: this.fecha,
-      total : this.total
+      total: this.total
     });
     this.saleService.postSale(sale).subscribe((response) => {
-      console.log(response);
+
     });
   }
 

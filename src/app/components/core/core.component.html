@@ -1,11 +1,11 @@
 <mat-toolbar class="mat-elevation-z8">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()" (click)="onToggleSidenav()">
-      <mat-icon *ngIf="!sidenav.opened">
-          menu
-      </mat-icon>
-      <mat-icon *ngIf="sidenav.opened">
-        close
-      </mat-icon>
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
   </button>
   DyG combos
 </mat-toolbar>
@@ -13,7 +13,7 @@
   <mat-sidenav #sidenav class="mat-elevation-z8" mode="over">
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button"(click)="goToHomePage()">
+    <button mat-button class="menu-button" (click)="goToHomePage()">
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
@@ -39,5 +39,3 @@
   </mat-sidenav>
   <router-outlet></router-outlet>
 </mat-sidenav-container>
-
-

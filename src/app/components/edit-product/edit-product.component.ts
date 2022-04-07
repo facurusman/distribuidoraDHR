@@ -13,26 +13,24 @@ export class EditProductComponent implements OnInit {
   descripcion: string = "";
   precio_base: number = 0;
 
-  creado : boolean
-  constructor(private readonly productService :ProductsService, private readonly router : Router, private route:ActivatedRoute) { }
+  creado: boolean
+  constructor(private readonly productService: ProductsService, private readonly router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.productService.getProduct(this.id).subscribe( (response: any) => {
-      console.log(response);
-
+    this.productService.getProduct(this.id).subscribe((response: any) => {
       this.descripcion = response[0].descripcion;
       this.precio_base = response[0].precio_base;
       //otrod
       this.creado = false
-     })
+    })
   }
-  onEdit(){
+  onEdit() {
     const product = new Product({
-      descripcion : this.descripcion,
-      precio_base : this.precio_base,
+      descripcion: this.descripcion,
+      precio_base: this.precio_base,
     });
-    this.productService.editProduct(this.id, product ).subscribe((response) => {
+    this.productService.editProduct(this.id, product).subscribe((response) => {
       return response
     });
     this.creado = true

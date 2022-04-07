@@ -4,7 +4,7 @@ import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { Subject } from "rxjs";
 import { Router } from '@angular/router';
-import { AuthData } from '../components/auth/auth-data.model';
+import { AuthData } from '../models/AuthData';
 
 
 
@@ -17,7 +17,7 @@ export class AuthService {
   private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   getToken() {
     return this.token;
@@ -32,16 +32,12 @@ export class AuthService {
   }
 
   postLogin(email: string, password: string) {
-    console.log("44444444")
     const authData: AuthData = { email: email, password: password };
     this.http.post<{ token: string; expiresIn: number }>(`${environment.apiUsers}/login`, authData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
-        console.log("5555555")
-        
         if (token) {
-          console.log("666666666")
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
           this.isAuthenticated = true;
@@ -50,9 +46,8 @@ export class AuthService {
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           this.saveAuthData(token, expirationDate);
           this.router.navigateByUrl('/dhr/home');
-        }else{
+        } else {
           this.authStatusListener.next(false);
-          console.log("77777777")
         }
       });
   }

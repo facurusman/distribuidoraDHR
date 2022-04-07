@@ -2,27 +2,16 @@ import { ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, Component, ViewChild, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
+import { ClienteData } from 'src/app/models/ClientData';
+import { DialogData } from 'src/app/models/DialogData';
 import { ClientsService } from '../../services/clients.service';
 
-export interface UserData {
-  id: number;
-  nombre : string;
-  telefono : string;
-  zona : string;
-  direccion : string;
-  email : string;
-  detalle : string;
-}
-
-export interface DialogData {
-  delete : boolean
-}
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,38 +29,33 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./clients.component.scss'],
 })
 
-export class ClientsComponent implements AfterViewInit{
+export class ClientsComponent implements AfterViewInit {
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator)
+
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   displayedColumns: string[] = ['id', 'nombre', 'telefono', 'zona', 'direccion', 'email', 'detalle', 'editar', 'eliminar', 'ventas', 'productos'];
-  dataSource: MatTableDataSource<UserData>;
-
+  dataSource: MatTableDataSource<ClienteData>;
   matcher = new MyErrorStateMatcher();
-  @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-
-  nombre : string = ''
-  telefono : string = ''
-  zona : string = ''
-  direccion : string = ''
-  email : string = ''
-  detalle : string = ''
-
+  nombre: string = ''
+  telefono: string = ''
+  zona: string = ''
+  direccion: string = ''
+  email: string = ''
+  detalle: string = ''
   delete !: boolean
-  creado : boolean
+  creado: boolean
 
-  constructor(private readonly clientService :ClientsService, private dialog: MatDialog, private readonly router : Router, private route:ActivatedRoute) {
+  constructor(private readonly clientService: ClientsService, private dialog: MatDialog, private readonly router: Router, private route: ActivatedRoute) {
     this.dataSource = new MatTableDataSource();
     this.getUsers();
     this.creado = false
   }
 
-  getUsers (){
-     this.clientService.getClients().subscribe( (response) => {
-      console.log(response);
-      const user = response as UserData[]
-      console.log(user)
+  getUsers() {
+    this.clientService.getClients().subscribe((response) => {
+      const user = response as ClienteData[]
       this.dataSource.data = user
     });
   }
@@ -91,32 +75,30 @@ export class ClientsComponent implements AfterViewInit{
   }
 
 
-  goToSalesByClientPage(id : number){
+  goToSalesByClientPage(id: number) {
     this.router.navigateByUrl(`/dhr/sales/${id}`)
   }
-  goToProductsforClientPage(id:number){
+  goToProductsforClientPage(id: number) {
     this.router.navigateByUrl(`/dhr/productsClient/${id}`);
   }
-  goToEditPage(id:number){
+  goToEditPage(id: number) {
     this.router.navigateByUrl(`/dhr/edit/client/${id}`);
   }
   allClients() {
-    this.clientService.getClients().subscribe( (response) => {
-     console.log(response)
+    this.clientService.getClients().subscribe((response) => {
     })
   }
 
   onSend() {
     const client = new Client({
-      nombre : this.nombre,
-      telefono : this.telefono,
-      email : this.email,
-      zona : this.zona,
-      direccion : this.direccion,
-      detalle : this.detalle
+      nombre: this.nombre,
+      telefono: this.telefono,
+      email: this.email,
+      zona: this.zona,
+      direccion: this.direccion,
+      detalle: this.detalle
     });
-    this.clientService.postClient(client).subscribe( (response) => {
-     console.log(response)
+    this.clientService.postClient(client).subscribe((response) => {
     })
     this.creado = true
     setTimeout(() => {
@@ -125,16 +107,15 @@ export class ClientsComponent implements AfterViewInit{
 
   }
 
-  openDialog(id:number): void{
+  openDialog(id: number): void {
     const dialogRef = this.dialog.open(EliminarDialogo, {
       width: '250px',
-      data: {delete : this.delete},
+      data: { delete: this.delete },
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.clientService.deleteClient(id).subscribe( (response) => {
-          console.log(response)
+        this.clientService.deleteClient(id).subscribe((response) => {
         })
       }
     })
@@ -146,11 +127,11 @@ export class ClientsComponent implements AfterViewInit{
   templateUrl: 'eliminar-dialog.html',
   styleUrls: ['eliminar-dialog.scss'],
 })
-export class EliminarDialogo implements OnInit{
+export class EliminarDialogo implements OnInit {
 
   id: number = 0;
 
-  constructor(public dialogRef: MatDialogRef<ClientsComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private clientService: ClientsService, private readonly router : Router,  private route:ActivatedRoute ) {}
+  constructor(public dialogRef: MatDialogRef<ClientsComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private clientService: ClientsService, private readonly router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -159,8 +140,8 @@ export class EliminarDialogo implements OnInit{
     this.dialogRef.close();
   }
 
-  onDelete(){
-    this.clientService.deleteClient(this.id).subscribe( (response) => {
+  onDelete() {
+    this.clientService.deleteClient(this.id).subscribe((response) => {
       this.onNoClick()
     })
     setTimeout(() => {

@@ -5,6 +5,7 @@
   background-color: #002b5c;
   height: 100%;
 }
+
 .login {
   display: flex;
   flex-direction: column;
@@ -19,18 +20,18 @@
   border-radius: 4%;
 }
 
-.login img{
+.login img {
   width: 50%;
   height: 15%;
   display: block;
   margin: auto;
 }
 
-.login mat-form-field{
+.login mat-form-field {
   margin-bottom: 15px;
 }
 
-.login button{
+.login button {
   display: block;
   text-align: center;
   margin: auto;
@@ -39,7 +40,8 @@
 .example-full-width {
   width: 80%;
 }
-.message_create{
+
+.message_create {
   text-align: center;
   color: #E43B03;
   margin-bottom: 23px;

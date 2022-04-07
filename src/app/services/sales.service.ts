@@ -17,11 +17,10 @@ export class SalesService {
   }
 
   postSale(sale: Sale) {
-    console.log(sale);
     return this.http.post(`${environment.apiSales}/crear`, sale);
   }
 
-  filterSale(fecha_inicial: Date, fecha_final: Date){
-    return this.http.post(`${environment.apiSales}/`, {fecha_inicial, fecha_final});
+  filterSale(fecha_inicial: Date, fecha_final: Date) {
+    return this.http.post(`${environment.apiSales}/`, { fecha_inicial, fecha_final });
   }
 }

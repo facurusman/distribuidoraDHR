@@ -1,4 +1,3 @@
-
 <div class="tabla-completa">
 
   <mat-form-field appearance="standard" class="filter-class">
@@ -9,17 +8,16 @@
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 
-          <!-- Checkbox Column -->
-          <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-            </th>
-            <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
-              (change)="$event ? marcar($event, row) : null"
-              [checked]="row.selected">
-            </mat-checkbox>
-          </td>
-        </ng-container>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? marcar($event, row) : null"
+            [checked]="row.selected">
+          </mat-checkbox>
+        </td>
+      </ng-container>
 
 
       <!-- ID CLIENT Column -->
@@ -28,32 +26,31 @@
         <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
       </ng-container>
 
-      
+
       <!-- ID PRODUCT Column -->
       <ng-container matColumnDef="precio_base">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
-        <td mat-cell *matCellDef="let row"> 
-          <input type="text" [(ngModel)]="row.precio_mostrar" 
-                [readonly]="!row.selected"
-                [name]="row.id"></td>
+        <td mat-cell *matCellDef="let row">
+          <input type="text" [(ngModel)]="row.precio_mostrar" [readonly]="!row.selected" [name]="row.id">
+        </td>
       </ng-container>
 
-     
+
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-  </table>
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
 
-  <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
 
 
-</div>
-<button mat-raised-button color="primary" (click)="editarProductos()">Guardar</button>
+  </div>
+  <button mat-raised-button color="primary" (click)="editarProductos()">Guardar</button>
 
 </div>

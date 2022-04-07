@@ -41,7 +41,7 @@ mat-sidenav-container {
   font-size: 1rem;
 
   mat-icon {
-      margin-right: 8px;
+    margin-right: 8px;
   }
 }
 
@@ -49,7 +49,7 @@ mat-sidenav-container {
   margin-top: 16px;
   width: 150px;
   height: 125px;
-  object-fit:fill;
+  object-fit: fill;
   border-radius: 10px;
 }
 
@@ -78,8 +78,9 @@ mat-divider {
   margin-bottom: 8px;
   // border: 2px solid #000;
 }
-.container{
-  display:flex;
+
+.container {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -89,7 +90,7 @@ mat-divider {
   padding: 1em 0;
 }
 
-.example-card a{
+.example-card a {
   color: #fff;
   text-decoration: none;
 }
@@ -97,11 +98,11 @@ mat-divider {
 
 
 
-#table{
-  width: max-content ;
+#table {
+  width: max-content;
 }
 
-.container_create{
+.container_create {
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -109,6 +110,6 @@ mat-divider {
   align-items: center;
 }
 
-.container_create mat-form-field{
-  height:100px;
+.container_create mat-form-field {
+  height: 100px;
 }

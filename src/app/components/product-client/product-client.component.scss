@@ -1,49 +1,57 @@
 table {
   width: 100%;
 }
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
 }
 
-td, th {
+td,
+th {
   width: 25%;
 }
+
 .filter-class {
   background-color: #fafafa;
 }
-.label-search{
+
+.label-search {
   margin-left: 15px;
 }
-.input-search{
+
+.input-search {
   margin-left: 15px;
 }
+
 .tabla-completa {
   background-color: #b8b5b447;
   padding: 10px 30px 30px 30px;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
+
 .mat-tab-labels {
   background-color: red;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100vh;
   flex-wrap: wrap;
 }
-.container button{
+
+.container button {
   background-color: #002b5c;
   border-radius: 17px;
   width: 70%;
   align-self: center;
-  height : 42px;
+  height: 42px;
 }
 
-.container mat-form-field{
+.container mat-form-field {
   width: 70%;
   color: #000;
   align-self: center;
@@ -53,41 +61,47 @@ td, th {
 }
 
 
-.titleclass{
+.titleclass {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-.phone_number{
+
+.phone_number {
   padding: 10px;
 }
+
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
   color: #070ab0 !important;
 }
+
 ::ng-deep.mat-form-field-underline {
   /*change color of underline*/
-  background-color: #070ab0  !important;
+  background-color: #070ab0 !important;
 }
+
 ::ng-deep.mat-form-field-ripple {
   /*change color of underline when focused*/
-  background-color: #070ab0  !important;;
+  background-color: #070ab0 !important;
+  ;
 }
 
 
 
-input [type='number']{
+input [type='number'] {
   -moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
+input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
-.tabla-completa button{
+
+.tabla-completa button {
   color: #fafafa;
   margin: 25px auto;
 }
 
-.busqueda{
+.busqueda {
   display: flex;
   width: 20%;
   gap: 0.75em;
@@ -98,8 +112,8 @@ input::-webkit-inner-spin-button{
   margin-bottom: 20px;
 }
 
-.busqueda h1{
-  font-size:larger;
+.busqueda h1 {
+  font-size: larger;
   text-align: center;
   color: #000;
   text-decoration: none;
@@ -107,4 +121,3 @@ input::-webkit-inner-spin-button{
 
 
 }
-

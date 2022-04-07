@@ -1,13 +1,15 @@
-.all-dialog{
+.all-dialog {
   font-family: sans-serif;
   height: 75px;
 }
-.actions{
+
+.actions {
   display: flex;
   gap: 1rem;
   flex-direction: column;
 }
-.delete{
+
+.delete {
   display: flex;
   justify-content: center;
   border-radius: 10px;
