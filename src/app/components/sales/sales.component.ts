@@ -54,10 +54,6 @@ export class SalesComponent implements AfterViewInit {
   fecha_final: any
 
 
-  matcher = new MyErrorStateMatcher();
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   total_final: number = 0;
   constructor(
@@ -74,6 +70,11 @@ export class SalesComponent implements AfterViewInit {
 
   }
 
+
+  matcher = new MyErrorStateMatcher();
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -94,6 +95,8 @@ export class SalesComponent implements AfterViewInit {
   }
 
   updateTableFilter() {
+    //this.fecha_inicial = this.fecha_inicial.split("-").reverse().join("-");
+    //this.fecha_final = this.fecha_final.split("-").reverse().join("-");
     this.saleService.filterSale(this.fecha_inicial, this.fecha_final).subscribe((response) => {
       const sale = response as SaleData[]
       this.dataSource.data = sale
@@ -151,25 +154,26 @@ export class SalesComponent implements AfterViewInit {
   }
 
   eliminarElemento(producto: ProductData) {
-    this.productosEnCarrito = this.productosEnCarrito.filter(p => p.id != producto.id)
-    this.dataSourceV = new MatTableDataSource<ProductData>(this.productosEnCarrito);
-    if (producto.precio) {
-      this.total_final -= +producto.precio;
-    } else {
-      this.total_final -= +producto.precio_base;
-    }
+    // this.productosEnCarrito = this.productosEnCarrito.filter(p => p.id != producto.id)
+    // this.dataSourceV = new MatTableDataSource<ProductData>(this.productosEnCarrito);
+    // if (producto.precio) {
+    //   this.total_final -= +producto.precio;
+    // } else {
+    //   this.total_final -= +producto.precio_base;
+    // }
 
   }
 
   clickEnSelector(idCliente: number) {
     this.allProductsClient(idCliente)
+    this.idCliente = idCliente
   }
 
   onCreateSale() {
     const sale = new Sale({
       idCliente: this.idCliente,
       fecha: this.fecha,
-      total: this.total
+      total: this.total_final
     });
     console.log(sale.fecha)
     this.saleService.postSale(sale).subscribe((response) => {
