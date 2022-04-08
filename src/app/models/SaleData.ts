@@ -1,6 +1,6 @@
 export interface SaleData {
   id: number;
   idCliente: number;
-  fecha: string;
+  fecha: Date;
   total: string;
 }

@@ -51,7 +51,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     SharedModule,
   ],
   exports: [RouterModule],
-  providers: [ClientsService, UsersService, ProductsService, SalesService, AuthService],
+  providers: [ClientsService, UsersService, ProductsService, SalesService, AuthService, ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

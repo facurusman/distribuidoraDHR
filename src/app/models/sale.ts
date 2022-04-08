@@ -1,6 +1,6 @@
 export class Sale {
   readonly idCliente: number;
-  readonly fecha: string;
+  readonly fecha: Date;
   readonly total: string;
 
   constructor({
@@ -9,7 +9,7 @@ export class Sale {
     total
   }: {
     idCliente: number;
-    fecha: string;
+    fecha: Date;
     total: string
   }) {
     this.idCliente = idCliente;

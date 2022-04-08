@@ -43,7 +43,7 @@ export class SalesComponent implements AfterViewInit {
   displayedColumnsP: string[] = ['id', 'descripcion', 'precio', 'agregar'];
   dataSourceP: MatTableDataSource<ProductData>;
   idCliente: any
-  fecha: any
+  fecha: Date = new Date()
   total: any
   client: any;
   clientList: ClienteData[] = []
@@ -171,7 +171,10 @@ export class SalesComponent implements AfterViewInit {
       fecha: this.fecha,
       total: this.total
     });
+    console.log(sale.fecha)
     this.saleService.postSale(sale).subscribe((response) => {
+      console.log(response);
+      console.log("cree una venta");
 
     });
   }
