@@ -156,14 +156,15 @@ export class SalesComponent implements AfterViewInit {
   }
 
   eliminarElemento(producto: ProductData) {
-    // this.productosEnCarrito = this.productosEnCarrito.filter(p => p.id != producto.id)
-    // this.dataSourceV = new MatTableDataSource<ProductData>(this.productosEnCarrito);
-    // if (producto.precio) {
-    //   this.total_final -= +producto.precio;
-    // } else {
-    //   this.total_final -= +producto.precio_base;
-    // }
-
+    const indice = this.productosEnCarrito.findIndex(p => p.id == producto.id)
+    this.productosEnCarrito.splice(indice, 1)
+    this.productosEnCarrito = [...this.productosEnCarrito]
+    this.dataSourceV = new MatTableDataSource<ProductData>(this.productosEnCarrito);
+    if (producto.precio) {
+      this.total_final -= +producto.precio;
+    } else {
+      this.total_final -= +producto.precio_base;
+    }
   }
 
   clickEnSelector(idCliente: number) {
