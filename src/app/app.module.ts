@@ -24,6 +24,7 @@ import { AuthService } from './services/auth.service';
 import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { ProductClientComponent } from './components/product-client/product-client.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { PDFService } from './services/pdf.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     SharedModule,
   ],
   exports: [RouterModule],
-  providers: [ClientsService, UsersService, ProductsService, SalesService, AuthService, ],
+  providers: [ClientsService, UsersService, ProductsService, SalesService, AuthService, PDFService ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

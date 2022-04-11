@@ -36,6 +36,6 @@ export class EditProductComponent implements OnInit {
     this.creado = true
     setTimeout(() => {
       this.router.navigateByUrl('/dhr/products')
-    }, 500);
+    }, 750);
   }
 }
