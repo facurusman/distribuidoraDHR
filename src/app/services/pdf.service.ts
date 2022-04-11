@@ -14,4 +14,7 @@ export class PDFService {
   generarPDFVentas() {
     return this.http.post(`${environment.apiSales}/crearPDF`, []);
   }
+  generarPDFClientes() {
+    return this.http.post(`${environment.apiClients}/crearPDF`, []);
+  }
 }

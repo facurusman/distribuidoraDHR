@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
 import { ClienteData } from 'src/app/models/ClientData';
 import { DialogData } from 'src/app/models/DialogData';
+import { PDFService } from 'src/app/services/pdf.service';
 import { ClientsService } from '../../services/clients.service';
 
 
@@ -47,7 +48,7 @@ export class ClientsComponent implements AfterViewInit {
   delete !: boolean
   creado: boolean
 
-  constructor(private readonly clientService: ClientsService, private dialog: MatDialog, private readonly router: Router, private route: ActivatedRoute) {
+  constructor(private readonly clientService: ClientsService, private dialog: MatDialog, private readonly router: Router, private route: ActivatedRoute, private pdfService : PDFService) {
     this.dataSource = new MatTableDataSource();
     this.getUsers();
     this.creado = false
@@ -105,6 +106,16 @@ export class ClientsComponent implements AfterViewInit {
       location.reload()
     }, 500);
 
+  }
+
+  generarPDF() {
+    this.pdfService.generarPDFClientes().subscribe((response: any) => {
+      const source = `data:application/pdf;base64,${response.finalString}`;
+      const link = document.createElement("a");
+      link.href = source;
+      link.download = `clientes.pdf`;
+      link.click();
+    });;
   }
 
   openDialog(id: number): void {
