@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SaleData } from 'src/app/models/SaleData';
 import { ProductData } from 'src/app/models/ProductData';
 import { ClienteData } from 'src/app/models/ClientData';
+import { PDFService } from 'src/app/services/pdf.service';
 
 
 
@@ -60,6 +61,7 @@ export class SalesComponent implements AfterViewInit {
     private readonly saleService: SalesService,
     private readonly productService: ProductsService,
     private route: ActivatedRoute,
+     private pdfService: PDFService,
     private readonly clientService: ClientsService) {
     this.id = this.route.snapshot.params['id'];
     // Assign the data to the data source for the table to render
@@ -181,6 +183,16 @@ export class SalesComponent implements AfterViewInit {
       console.log("cree una venta");
 
     });
+  }
+
+  generarPDF() {
+      this.pdfService.generarPDFVentas().subscribe((response: any) => {
+      const source = `data:application/pdf;base64,${response.finalString}`;
+      const link = document.createElement("a");
+      link.href = source;
+      link.download = `ventas.pdf`;
+      link.click();
+    });;
   }
 
 }

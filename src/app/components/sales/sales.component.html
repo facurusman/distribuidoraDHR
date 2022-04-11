@@ -20,7 +20,7 @@
       <div class="exports">
         <button mat-button>Exportar Clientes</button>
         <button mat-button>Exportar Productos</button>
-        <button mat-button>PDF</button>
+        <button mat-button (click)="generarPDF()">PDF</button>
       </div>
       <mat-form-field appearance="standard" class="filter-class">
         <mat-label class="label-search">Busqueda</mat-label>
