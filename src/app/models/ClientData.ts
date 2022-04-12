@@ -1,4 +1,4 @@
-export interface ClienteData {
+export interface ClientData {
   id: number;
   nombre: string;
   telefono: string;

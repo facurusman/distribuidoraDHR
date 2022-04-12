@@ -27,7 +27,7 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input class="input-search">
       </mat-form-field>
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table mat-table [dataSource]="dataSourceVentas" matSort>
 
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select">
@@ -65,8 +65,8 @@
             <td mat-cell *matCellDef="let element"> {{element.total}} </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsVentas"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsVentas;"></tr>
 
           <!-- Row shown when there is no matching data. -->
           <tr class="mat-row" *matNoDataRow>
@@ -100,7 +100,7 @@
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input class="input-search">
           </mat-form-field>
 
-          <table mat-table [dataSource]="dataSourceP" class="mat-elevation-z8" matSort>
+          <table mat-table [dataSource]="dataSourceProductos" class="mat-elevation-z8" matSort>
 
             <!-- Position Column -->
             <ng-container matColumnDef="id">
@@ -131,8 +131,8 @@
             </ng-container>
 
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumnsP"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumnsP"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsProductos"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsProductos"></tr>
 
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
@@ -147,7 +147,7 @@
       </div>
       <div style="padding: 1rem;">
         <div class="container-child">
-          <table mat-table [dataSource]="dataSourceV" class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSourceCarrito" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -179,8 +179,8 @@
             </ng-container>
 
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumnsV"></tr>
-            <tr mat-row *matRowDef="let element; columns: displayedColumnsV;"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCarrito"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumnsCarrito;"></tr>
           </table>
 
           <p class="total">El total es de ${{total_final}}</p>

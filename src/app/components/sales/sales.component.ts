@@ -12,7 +12,7 @@ import { ClientsService } from '../../services/clients.service';
 import { ActivatedRoute } from '@angular/router';
 import { SaleData } from 'src/app/models/SaleData';
 import { ProductData } from 'src/app/models/ProductData';
-import { ClienteData } from 'src/app/models/ClientData';
+import { ClientData } from 'src/app/models/ClientData';
 import { PDFService } from 'src/app/services/pdf.service';
 
 
@@ -35,19 +35,19 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class SalesComponent implements AfterViewInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  displayedColumns: string[] = ['id', 'idCliente', 'fecha', 'total'];
-  dataSource: MatTableDataSource<SaleData>;
+  displayedColumnsVentas: string[] = ['id', 'idCliente', 'fecha', 'total'];
+  dataSourceVentas: MatTableDataSource<SaleData>;
   selection = new SelectionModel<SaleData>(true, []);
-  displayedColumnsV: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
-  dataSourceV: MatTableDataSource<ProductData>;
+  displayedColumnsCarrito: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
+  dataSourceCarrito: MatTableDataSource<ProductData>;
   productosEnCarrito: ProductData[] = [];
-  displayedColumnsP: string[] = ['id', 'descripcion', 'precio', 'agregar'];
-  dataSourceP: MatTableDataSource<ProductData>;
+  displayedColumnsProductos: string[] = ['id', 'descripcion', 'precio', 'agregar'];
+  dataSourceProductos: MatTableDataSource<ProductData>;
   idCliente: any
   fecha: Date = new Date()
   total: any
   client: any;
-  clientList: ClienteData[] = []
+  clientList: ClientData[] = []
   selected = 'option2';
   id: number = 0
 
@@ -65,7 +65,7 @@ export class SalesComponent implements AfterViewInit {
     private readonly clientService: ClientsService) {
     this.id = this.route.snapshot.params['id'];
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource();
+    this.dataSourceVentas = new MatTableDataSource();
     this.getSales()
     this.allClients()
 
@@ -78,20 +78,22 @@ export class SalesComponent implements AfterViewInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSourceVentas.paginator = this.paginator;
+    this.dataSourceVentas.sort = this.sort;
+    this.dataSourceProductos.paginator = this.paginator;
+    this.dataSourceProductos.sort = this.sort;
   }
 
   getSales() {
     if (this.id) {
       this.saleService.getSalesByClient(this.id).subscribe((response) => {
         const sale = response as SaleData[]
-        this.dataSource.data = sale
+        this.dataSourceVentas.data = sale
       })
     } else {
       this.saleService.getSales().subscribe((response) => {
         const sale = response as SaleData[]
-        this.dataSource.data = sale
+        this.dataSourceVentas.data = sale
       });
     }
   }
@@ -101,28 +103,28 @@ export class SalesComponent implements AfterViewInit {
     //this.fecha_final = this.fecha_final.split("-").reverse().join("-");
     this.saleService.filterSale(this.fecha_inicial, this.fecha_final).subscribe((response) => {
       const sale = response as SaleData[]
-      this.dataSource.data = sale
+      this.dataSourceVentas.data = sale
     });
   }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.dataSourceVentas.data.length;
     return numSelected === numRows;
   }
 
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+      this.dataSourceVentas.data.forEach(row => this.selection.select(row));
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourceVentas.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.dataSourceVentas.paginator) {
+      this.dataSourceVentas.paginator.firstPage();
     }
   }
 
@@ -130,13 +132,13 @@ export class SalesComponent implements AfterViewInit {
   allProductsClient(id: number) {
     this.productService.getProductsByCliente(id).subscribe((response) => {
       const user = response as ProductData[]
-      this.dataSourceP = new MatTableDataSource<ProductData>(user);
+      this.dataSourceProductos = new MatTableDataSource<ProductData>(user);
     })
   }
 
   allClients() {
     this.clientService.getClients().subscribe((response: any) => {
-      const clientes = response as ClienteData[];
+      const clientes = response as ClientData[];
       clientes.forEach(element => {
         this.clientList.push(element)
       });
@@ -146,7 +148,7 @@ export class SalesComponent implements AfterViewInit {
 
   agregarElemento(id: number, precio: string, precio_base: string, descripcion: string) {
     this.productosEnCarrito.push({ id: id, precio: precio, precio_base: precio_base, descripcion: descripcion })
-    this.dataSourceV = new MatTableDataSource<ProductData>(this.productosEnCarrito);
+    this.dataSourceCarrito = new MatTableDataSource<ProductData>(this.productosEnCarrito);
     if (precio) {
       this.total_final += +precio;
     } else {
@@ -159,7 +161,7 @@ export class SalesComponent implements AfterViewInit {
     const indice = this.productosEnCarrito.findIndex(p => p.id == producto.id)
     this.productosEnCarrito.splice(indice, 1)
     this.productosEnCarrito = [...this.productosEnCarrito]
-    this.dataSourceV = new MatTableDataSource<ProductData>(this.productosEnCarrito);
+    this.dataSourceCarrito = new MatTableDataSource<ProductData>(this.productosEnCarrito);
     if (producto.precio) {
       this.total_final -= +producto.precio;
     } else {

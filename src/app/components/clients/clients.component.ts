@@ -8,7 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
-import { ClienteData } from 'src/app/models/ClientData';
+import { ClientData } from 'src/app/models/ClientData';
 import { DialogData } from 'src/app/models/DialogData';
 import { PDFService } from 'src/app/services/pdf.service';
 import { ClientsService } from '../../services/clients.service';
@@ -31,14 +31,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class ClientsComponent implements AfterViewInit {
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator)
 
+  creado: boolean
+  constructor(private readonly clientService: ClientsService, private dialog: MatDialog, private readonly router: Router, private route: ActivatedRoute, private pdfService : PDFService) {
+    this.dataSource = new MatTableDataSource();
+    this.getClientes();
+    this.creado = false
+    console.log(this.getClientes());
+  }
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  displayedColumns: string[] = ['id', 'nombre', 'telefono', 'zona', 'direccion', 'email', 'detalle', 'editar', 'eliminar', 'ventas', 'productos'];
-  dataSource: MatTableDataSource<ClienteData>;
+
+  displayedColumnsClientes: string[] = ['id', 'nombre', 'telefono', 'zona', 'direccion', 'email', 'detalle', 'editar', 'eliminar', 'ventas', 'productos'];
+  dataSource = new MatTableDataSource<ClientData>();
   matcher = new MyErrorStateMatcher();
-  paginator!: MatPaginator;
+
   nombre: string = ''
   telefono: string = ''
   zona: string = ''
@@ -46,17 +52,16 @@ export class ClientsComponent implements AfterViewInit {
   email: string = ''
   detalle: string = ''
   delete !: boolean
-  creado: boolean
 
-  constructor(private readonly clientService: ClientsService, private dialog: MatDialog, private readonly router: Router, private route: ActivatedRoute, private pdfService : PDFService) {
-    this.dataSource = new MatTableDataSource();
-    this.getUsers();
-    this.creado = false
-  }
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  getUsers() {
+  getClientes() {
     this.clientService.getClients().subscribe((response) => {
-      const user = response as ClienteData[]
+      const user = response as ClientData[]
+      console.log(user);
+
       this.dataSource.data = user
     });
   }
