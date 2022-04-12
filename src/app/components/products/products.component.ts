@@ -10,6 +10,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ProductData } from 'src/app/models/ProductData';
 import { DialogData } from 'src/app/models/DialogData';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { ProductUpPriceData } from 'src/app/models/ProductUpPriceData';
 
 
 /**
@@ -23,24 +25,28 @@ import { DialogData } from 'src/app/models/DialogData';
 
 export class ProductsComponent implements AfterViewInit {
   creado: boolean;
+  displayedColumns: string[] = ['select', 'id', 'descripcion', 'precio_base', 'editar', 'eliminar'];
+  dataSource = new MatTableDataSource<ProductUpPriceData>();
+  selection = new SelectionModel<ProductUpPriceData>(true, []);
+  productosSeleccionados: ProductUpPriceData[] = [];
 
-  constructor(private readonly productService: ProductsService, private dialog: MatDialog, private pdfService: PDFService, private readonly router: Router) {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private readonly productService: ProductsService, private dialog: MatDialog, private pdfService: PDFService, private readonly router: Router, private readonly route: ActivatedRoute) {
     this.dataSource = new MatTableDataSource();
     this.allProducts();
     this.creado = false
   }
-  displayedColumns: string[] = ['select', 'id', 'descripcion', 'precio_base', 'editar', 'eliminar'];
-  dataSource = new MatTableDataSource<ProductData>();
-  selection = new SelectionModel<ProductData>(true, []);
+
 
   descripcion: string = '';
-  precio_base: number ;
+  precio_base: number = 0;
+  valor: number = 0
 
   delete !: boolean
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -49,13 +55,13 @@ export class ProductsComponent implements AfterViewInit {
 
   allProducts() {
     this.productService.getProducts().subscribe((response) => {
-      const user = response as ProductData[]
-      this.dataSource.data = user
+      const products = response as ProductUpPriceData[]
+      this.dataSource.data = products
     })
   }
 
   goToEditPage(id: number) {
-    this.router.navigateByUrl(`/dyg/edit/product/${id}`);
+    this.router.navigateByUrl(`/dhr/edit/product/${id}`);
   }
 
   generarPDF() {
@@ -80,6 +86,7 @@ export class ProductsComponent implements AfterViewInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
+
   }
 
   applyFilter(event: Event) {
@@ -90,8 +97,20 @@ export class ProductsComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  marcar(ob: MatCheckboxChange, row: ProductUpPriceData) {
+    if (ob.checked) {
+      this.productosSeleccionados.push(row);
+      row.selected = true;
+    } else {
+      this.productosSeleccionados = this.productosSeleccionados.filter(p => p.id != row.id)
+      row.selected = false;
+    }
+  }
 
   aumentar() {
+    console.log(this.productosSeleccionados);
+    this.productService.aumentarElPrecio(this.valor,this.productosSeleccionados).subscribe((response) => {
+    });
   }
 
   onCreateProduct() {
@@ -117,9 +136,7 @@ export class ProductsComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.productService.deleteProduct(id).subscribe((response) => {
-          setTimeout(() => {
-            location.reload()
-          }, 250);
+
         })
       }
     })

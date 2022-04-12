@@ -5,7 +5,7 @@
         <h1>Aumentar los precios</h1>
         <mat-form-field class="example-full-width">
           <mat-label>Aumentar de precio todos los productos</mat-label>
-          <input matInput placeholder="Ex. +8">
+          <input matInput placeholder="Ex. +8" [(ngModel)]="valor">
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="aumentar()">Aumentar</button>
       </div>
@@ -22,13 +22,10 @@
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-              [indeterminate]="selection.hasValue() && !isAllSelected()">
-            </mat-checkbox>
           </th>
           <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? marcar($event, row) : null"
+              [checked]="row.selected">
             </mat-checkbox>
           </td>
         </ng-container>
@@ -88,12 +85,12 @@
         <img src="../../../assets/images/logo-dygcombos.png" alt="" />
         <mat-form-field>
           <mat-label class="title">Descripcion</mat-label>
-          <input matInput name="descripcion" [(ngModel)]="descripcion" minlength="1" placeholder="Ej. Pan" required/>
+          <input matInput name="descripcion" [(ngModel)]="descripcion" minlength="1" />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label class="title">Precio</mat-label>
-          <input matInput name="precio_base" [(ngModel)]="precio_base" minlength="1" placeholder="Ej. 100" required/>
+          <input matInput name="precio_base" [(ngModel)]="precio_base" minlength="1" />
         </mat-form-field>
 
         <button mat-raised-button color="warn" (click)="onCreateProduct()">Crear Producto</button>

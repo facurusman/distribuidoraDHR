@@ -42,4 +42,7 @@ export class ProductsService {
   editarProductoPorCliente(idCliente: string, productos: ProductClientData[]) {
     return this.http.post(`${environment.apiProducts}/editarPrecioPorCliente`, { idCliente, productos });
   }
+  aumentarElPrecio(valor : number, productos: ProductClientData[]) {
+    return this.http.put(`${environment.apiProducts}/aumentarPrecios`, {valor, productos });
+  }
 }
