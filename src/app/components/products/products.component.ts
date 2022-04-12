@@ -34,7 +34,7 @@ export class ProductsComponent implements AfterViewInit {
   selection = new SelectionModel<ProductData>(true, []);
 
   descripcion: string = '';
-  precio_base: number = 0;
+  precio_base: number ;
 
   delete !: boolean
 
@@ -55,7 +55,7 @@ export class ProductsComponent implements AfterViewInit {
   }
 
   goToEditPage(id: number) {
-    this.router.navigateByUrl(`/dhr/edit/product/${id}`);
+    this.router.navigateByUrl(`/dyg/edit/product/${id}`);
   }
 
   generarPDF() {
@@ -117,7 +117,9 @@ export class ProductsComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.productService.deleteProduct(id).subscribe((response) => {
-
+          setTimeout(() => {
+            location.reload()
+          }, 250);
         })
       }
     })

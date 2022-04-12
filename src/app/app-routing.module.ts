@@ -15,7 +15,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 const routes: Routes = [
   { path: '', component: AuthComponent },
   {
-    path: 'dhr',
+    path: 'dyg',
     component: CoreComponent, canActivate: [AuthGuard],
     children: [
       { path: 'home', component: HomeComponentComponent, canActivate: [AuthGuard] },

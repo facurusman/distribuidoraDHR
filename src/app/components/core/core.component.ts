@@ -27,22 +27,22 @@ export class CoreComponent implements OnInit {
 
   goToHomePage() {
     this.sidenav?.toggle();
-    this.router.navigateByUrl('/dhr/home');
+    this.router.navigateByUrl('/dyg/home');
   }
 
   goToClientsPage() {
     this.sidenav?.toggle();
-    this.router.navigateByUrl('/dhr/clients');
+    this.router.navigateByUrl('/dyg/clients');
   }
 
   goToProductsPage() {
     this.sidenav?.toggle();
-    this.router.navigateByUrl('/dhr/products');
+    this.router.navigateByUrl('/dyg/products');
   }
 
   goToSalesPage() {
     this.sidenav?.toggle();
-    this.router.navigateByUrl('/dhr/sales');
+    this.router.navigateByUrl('/dyg/sales');
   }
 
   logout() {

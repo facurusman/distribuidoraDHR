@@ -48,7 +48,7 @@ export class EditClientComponent implements OnInit {
     });
     this.creado = true
     setTimeout(() => {
-      this.router.navigateByUrl('/dhr/clients')
+      this.router.navigateByUrl('/dyg/clients')
     }, 500);
   }
 }

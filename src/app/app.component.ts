@@ -9,7 +9,7 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Distribuidora DHR';
+  title = 'DyG Combos';
   constructor(
     private authService: AuthService
   ) { }

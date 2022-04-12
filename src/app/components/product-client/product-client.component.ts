@@ -50,7 +50,7 @@ export class ProductClientComponent implements AfterViewInit {
   }
 
   goToClientPage() {
-    this.router.navigateByUrl('/dhr/clients');
+    this.router.navigateByUrl('/dyg/clients');
   }
 
   ngAfterViewInit() {
@@ -94,6 +94,9 @@ export class ProductClientComponent implements AfterViewInit {
 
   editarProductos() {
     this.productService.editarProductoPorCliente(this.idcliente, this.productosSeleccionados).subscribe((response) => {
+      setTimeout(() => {
+        this.router.navigateByUrl('/dyg/clients');
+      },250);
     });
   }
 }

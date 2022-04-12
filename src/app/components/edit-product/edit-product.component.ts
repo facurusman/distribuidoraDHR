@@ -35,7 +35,7 @@ export class EditProductComponent implements OnInit {
     });
     this.creado = true
     setTimeout(() => {
-      this.router.navigateByUrl('/dhr/products')
+      this.router.navigateByUrl('/dyg/products')
     }, 750);
   }
 }

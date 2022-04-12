@@ -88,12 +88,12 @@
         <img src="../../../assets/images/logo-dygcombos.png" alt="" />
         <mat-form-field>
           <mat-label class="title">Descripcion</mat-label>
-          <input matInput name="descripcion" [(ngModel)]="descripcion" minlength="1" />
+          <input matInput name="descripcion" [(ngModel)]="descripcion" minlength="1" placeholder="Ej. Pan" required/>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label class="title">Precio</mat-label>
-          <input matInput name="precio_base" [(ngModel)]="precio_base" minlength="1" />
+          <input matInput name="precio_base" [(ngModel)]="precio_base" minlength="1" placeholder="Ej. 100" required/>
         </mat-form-field>
 
         <button mat-raised-button color="warn" (click)="onCreateProduct()">Crear Producto</button>

@@ -37,7 +37,6 @@ export class ClientsComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource();
     this.getClientes();
     this.creado = false
-    console.log(this.getClientes());
   }
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
@@ -60,8 +59,6 @@ export class ClientsComponent implements AfterViewInit {
   getClientes() {
     this.clientService.getClients().subscribe((response) => {
       const user = response as ClientData[]
-      console.log(user);
-
       this.dataSource.data = user
     });
   }
@@ -82,13 +79,13 @@ export class ClientsComponent implements AfterViewInit {
 
 
   goToSalesByClientPage(id: number) {
-    this.router.navigateByUrl(`/dhr/sales/${id}`)
+    this.router.navigateByUrl(`/dyg/sales/${id}`)
   }
   goToProductsforClientPage(id: number) {
-    this.router.navigateByUrl(`/dhr/productsClient/${id}`);
+    this.router.navigateByUrl(`/dyg/productsClient/${id}`);
   }
   goToEditPage(id: number) {
-    this.router.navigateByUrl(`/dhr/edit/client/${id}`);
+    this.router.navigateByUrl(`/dyg/edit/client/${id}`);
   }
   allClients() {
     this.clientService.getClients().subscribe((response) => {

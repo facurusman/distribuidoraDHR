@@ -24,7 +24,7 @@
       </div>
       <mat-form-field appearance="standard" class="filter-class">
         <mat-label class="label-search">Busqueda</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input class="input-search">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ej. ID Cliente" #input class="input-search">
       </mat-form-field>
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSourceVentas" matSort>
@@ -44,24 +44,24 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
           </ng-container>
 
           <!-- Position Column -->
           <ng-container matColumnDef="idCliente">
-            <th mat-header-cell *matHeaderCellDef> ID-C </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID-C </th>
             <td mat-cell *matCellDef="let element"> {{element.idCliente}} </td>
           </ng-container>
 
           <!-- Name Column -->
           <ng-container matColumnDef="fecha">
-            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
             <td mat-cell *matCellDef="let element"> {{element.fecha | date : 'yyyy-MM-dd'}} </td>
           </ng-container>
 
           <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef> Total </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
             <td mat-cell *matCellDef="let element"> {{element.total}} </td>
           </ng-container>
 
@@ -81,8 +81,8 @@
 
   </mat-tab>
 
-  <mat-tab label="Crear Venta">
-    <div class="container-venta">
+  <mat-tab label="Crear Venta" class="body">
+    <div class="container-venta" style="background-color: #002b5c;">
       <div class="container-tabla1" style="padding: 1rem;">
         <div class="desplegable">
           <mat-form-field appearance="fill">
@@ -97,7 +97,7 @@
         <div class="tabla-completa-venta">
           <mat-form-field appearance="standard" class="filter-class">
             <mat-label class="label-search">Busqueda</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input class="input-search">
+            <input matInput (keyup)="applyFilter($event)" placeholder='Ej. Nombre del producto' #input class="input-search">
           </mat-form-field>
 
           <table mat-table [dataSource]="dataSourceProductos" class="mat-elevation-z8" matSort>

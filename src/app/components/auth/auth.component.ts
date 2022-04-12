@@ -51,7 +51,7 @@ export class AuthComponent implements OnInit {
   }
 
   goToHomePage() {
-    this.router.navigateByUrl('/dhr/home');
+    this.router.navigateByUrl('/dyg/home');
   }
 
   getIsAuth() {

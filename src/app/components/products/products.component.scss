@@ -1,5 +1,6 @@
 table {
   width: 100%;
+  overflow: auto;
 }
 
 .mat-form-field {
@@ -9,7 +10,11 @@ table {
 
 td,
 th {
-  width: 25%;
+  width: 16.66%;
+}
+
+.mat-elevation-z8{
+  overflow: auto;
 }
 
 .filter-class {
@@ -172,5 +177,19 @@ input::-webkit-inner-spin-button {
     border-radius: 15px;
     padding: 20px;
     margin: auto;
+  }
+
+  table {
+    width: 100%;
+    overflow:scroll;
+  }
+
+  td,
+  th {
+    width: 35%;
+  }
+
+  .mat-elevation-z8{
+    overflow: auto;
   }
 }

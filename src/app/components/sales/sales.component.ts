@@ -36,13 +36,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class SalesComponent implements AfterViewInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   displayedColumnsVentas: string[] = ['id', 'idCliente', 'fecha', 'total'];
-  dataSourceVentas: MatTableDataSource<SaleData>;
+  dataSourceVentas = new MatTableDataSource<SaleData>();
   selection = new SelectionModel<SaleData>(true, []);
   displayedColumnsCarrito: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
-  dataSourceCarrito: MatTableDataSource<ProductData>;
+  dataSourceCarrito = new MatTableDataSource<ProductData>();
   productosEnCarrito: ProductData[] = [];
   displayedColumnsProductos: string[] = ['id', 'descripcion', 'precio', 'agregar'];
-  dataSourceProductos: MatTableDataSource<ProductData>;
+  dataSourceProductos = new MatTableDataSource<ProductData>();
   idCliente: any
   fecha: Date = new Date()
   total: any
@@ -53,8 +53,6 @@ export class SalesComponent implements AfterViewInit {
 
   fecha_inicial: any
   fecha_final: any
-
-
 
   total_final: number = 0;
   constructor(
@@ -74,14 +72,15 @@ export class SalesComponent implements AfterViewInit {
 
 
   matcher = new MyErrorStateMatcher();
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginatorTablaProductos!: MatPaginator;
+  @ViewChild(MatSort) sortTablaProductos!: MatSort;
+  @ViewChild(MatPaginator) paginatorTablaVentas!: MatPaginator;
+  @ViewChild(MatSort) sortTablaVentas!: MatSort;
   ngAfterViewInit() {
-    this.dataSourceVentas.paginator = this.paginator;
-    this.dataSourceVentas.sort = this.sort;
-    this.dataSourceProductos.paginator = this.paginator;
-    this.dataSourceProductos.sort = this.sort;
+    this.dataSourceVentas.paginator = this.paginatorTablaVentas;
+    this.dataSourceVentas.sort = this.sortTablaVentas;
+    this.dataSourceProductos.paginator = this.paginatorTablaProductos;
+    this.dataSourceProductos.sort = this.sortTablaProductos;
   }
 
   getSales() {
