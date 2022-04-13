@@ -26,6 +26,7 @@ import { ProductClientComponent } from './components/product-client/product-clie
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { PDFService } from './services/pdf.service';
 import { DatePipe } from '@angular/common';
+import { ProductSalesComponent } from './components/product-sales/product-sales.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DatePipe } from '@angular/common';
     ProductClientComponent,
     EditProductComponent,
     EliminarDialogo,
-    EliminarDialogoProducts
+    EliminarDialogoProducts,
+    ProductSalesComponent
   ],
   imports: [
     NgChartsModule,

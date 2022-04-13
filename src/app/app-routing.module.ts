@@ -12,6 +12,7 @@ import { AuthGuard } from './components/auth/login/auth.guard';
 import { ProductClientComponent } from './components/product-client/product-client.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { ProductSalesComponent } from './components/product-sales/product-sales.component';
 const routes: Routes = [
   { path: '', component: AuthComponent },
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'edit/product/:id', component: EditProductComponent, canActivate: [AuthGuard] },
       { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
       { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
+      { path: 'sales', component: ProductSalesComponent, canActivate: [AuthGuard] },
       { path: 'sales/:id', component: SalesComponent, canActivate: [AuthGuard] },
     ],
   }
