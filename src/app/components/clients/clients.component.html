@@ -47,12 +47,7 @@
             <td mat-cell *matCellDef="let row">{{ row.email }}</td>
           </ng-container>
 
-          <!-- Detail Column -->
-          <ng-container matColumnDef="detalle">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalle</th>
-            <td mat-cell *matCellDef="let row">{{ row.detalle }}</td>
-          </ng-container>
-
+          <!-- Edit Column -->
           <ng-container matColumnDef="editar">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
             <td mat-cell *matCellDef="let row">

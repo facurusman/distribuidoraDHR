@@ -186,6 +186,9 @@ export class SalesComponent implements AfterViewInit {
       // en el backend recibe eso y los guarda todos en en la tabla productos_por_venta
 
     });
+    setTimeout(() => {
+      location.reload()
+    }, 100);
   }
 
   generarPDF() {

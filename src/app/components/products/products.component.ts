@@ -136,7 +136,9 @@ export class ProductsComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.productService.deleteProduct(id).subscribe((response) => {
-
+          setTimeout(() => {
+            location.reload()
+          }, 100);
         })
       }
     })

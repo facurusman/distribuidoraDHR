@@ -40,7 +40,7 @@ export class ClientsComponent implements AfterViewInit {
   }
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  displayedColumnsClientes: string[] = ['id', 'nombre', 'telefono', 'zona', 'direccion', 'email', 'detalle', 'editar', 'eliminar', 'ventas', 'productos'];
+  displayedColumnsClientes: string[] = ['id', 'nombre', 'telefono', 'zona', 'direccion', 'email', 'editar', 'eliminar', 'ventas', 'productos'];
   dataSource = new MatTableDataSource<ClientData>();
   matcher = new MyErrorStateMatcher();
 
@@ -129,6 +129,9 @@ export class ClientsComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.clientService.deleteClient(id).subscribe((response) => {
+          setTimeout(() => {
+            location.reload()
+          }, 100);
         })
       }
     })
