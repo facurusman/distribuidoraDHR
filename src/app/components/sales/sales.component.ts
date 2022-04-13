@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -33,16 +33,22 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./sales.component.scss'],
 })
 
-export class SalesComponent implements AfterViewInit {
+export class SalesComponent implements OnInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  displayedColumnsVentas: string[] = ['id', 'idCliente', 'fecha', 'total'];
+
   dataSourceVentas = new MatTableDataSource<SaleData>();
+  displayedColumnsVentas: string[] = ['id', 'idCliente', 'fecha', 'total'];
+  @ViewChild('TableVentasSort', {static: true}) tableVentasSort: MatSort;
+  @ViewChild('TableVentasPaginator', {static: true}) tableVentasPaginator: MatPaginator;
   selection = new SelectionModel<SaleData>(true, []);
+  displayedColumnsProductos: string[] = ['id', 'descripcion', 'precio', 'agregar'];
+  dataSourceProductos = new MatTableDataSource<ProductData>();
+  @ViewChild('TableProductosPaginator', {static: true}) tableProductosPaginator: MatPaginator;
+  @ViewChild('TableProductosSort', {static: true}) tableProductosSort: MatSort;
   displayedColumnsCarrito: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
   dataSourceCarrito = new MatTableDataSource<ProductData>();
   productosEnCarrito: ProductData[] = [];
-  displayedColumnsProductos: string[] = ['id', 'descripcion', 'precio', 'agregar'];
-  dataSourceProductos = new MatTableDataSource<ProductData>();
+
   idCliente: any
   fecha: Date = new Date()
   total: any
@@ -72,15 +78,11 @@ export class SalesComponent implements AfterViewInit {
 
 
   matcher = new MyErrorStateMatcher();
-  @ViewChild(MatPaginator) paginatorTablaProductos!: MatPaginator;
-  @ViewChild(MatSort) sortTablaProductos!: MatSort;
-  @ViewChild(MatPaginator) paginatorTablaVentas!: MatPaginator;
-  @ViewChild(MatSort) sortTablaVentas!: MatSort;
-  ngAfterViewInit() {
-    this.dataSourceVentas.paginator = this.paginatorTablaVentas;
-    this.dataSourceVentas.sort = this.sortTablaVentas;
-    this.dataSourceProductos.paginator = this.paginatorTablaProductos;
-    this.dataSourceProductos.sort = this.sortTablaProductos;
+  ngOnInit() {
+    this.dataSourceVentas.paginator = this.tableVentasPaginator;
+    this.dataSourceVentas.sort = this.tableVentasSort;
+    this.dataSourceProductos.paginator = this.tableProductosPaginator;
+    this.dataSourceProductos.sort = this.tableProductosSort;
   }
 
   getSales() {
@@ -118,7 +120,16 @@ export class SalesComponent implements AfterViewInit {
       this.dataSourceVentas.data.forEach(row => this.selection.select(row));
   }
 
-  applyFilter(event: Event) {
+  applyFilterVentas(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceVentas.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourceVentas.paginator) {
+      this.dataSourceVentas.paginator.firstPage();
+    }
+  }
+
+  applyFilterProductos(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceVentas.filter = filterValue.trim().toLowerCase();
 

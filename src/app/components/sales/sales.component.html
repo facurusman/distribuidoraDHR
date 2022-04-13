@@ -24,10 +24,10 @@
       </div>
       <mat-form-field appearance="standard" class="filter-class">
         <mat-label class="label-search">Busqueda</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ej. ID Cliente" #input class="input-search">
+        <input matInput (keyup)="applyFilterVentas($event)" placeholder="Ej. ID Cliente" #input class="input-search">
       </mat-form-field>
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSourceVentas" matSort>
+        <table mat-table [dataSource]="dataSourceVentas" matSort #TableVentasSort="matSort">
 
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select">
@@ -74,7 +74,7 @@
           </tr>
         </table>
 
-        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Seleccione pagina"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Seleccione pagina"  #TableVentasPaginator="matPaginator"></mat-paginator>
       </div>
 
     </div>
@@ -97,10 +97,10 @@
         <div class="tabla-completa-venta">
           <mat-form-field appearance="standard" class="filter-class">
             <mat-label class="label-search">Busqueda</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder='Ej. Nombre del producto' #input class="input-search">
+            <input matInput (keyup)="applyFilterProductos($event)" placeholder='Ej. Nombre del producto' #input class="input-search">
           </mat-form-field>
 
-          <table mat-table [dataSource]="dataSourceProductos" class="mat-elevation-z8" matSort>
+          <table mat-table [dataSource]="dataSourceProductos" class="mat-elevation-z8" matSort #TableProductosSort="matSort">
 
             <!-- Position Column -->
             <ng-container matColumnDef="id">
@@ -140,7 +140,7 @@
         </tr>
           </table>
 
-          <mat-paginator [pageSizeOptions]="[10, 25,50, 100]" aria-label="Seleccione pagina"></mat-paginator>
+          <mat-paginator [pageSizeOptions]="[10, 25,50, 100]" aria-label="Seleccione pagina"  #TableProductosPaginator="matPaginator"></mat-paginator>
 
 
         </div>
