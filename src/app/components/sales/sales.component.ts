@@ -179,10 +179,11 @@ export class SalesComponent implements AfterViewInit {
       fecha: this.fecha,
       total: this.total_final
     });
-    console.log(sale.fecha)
-    this.saleService.postSale(sale).subscribe((response) => {
-      console.log(response);
-      console.log("cree una venta");
+    this.saleService.postSale(sale).subscribe((response:any) => {
+      let idVentaNueva = response.venta.insertId;
+      console.log('La nueva venta insertada es:', idVentaNueva )
+      //ACa se deberia mandar al backend los productos ne carrito y el nuevo id.
+      // en el backend recibe eso y los guarda todos en en la tabla productos_por_venta
 
     });
   }

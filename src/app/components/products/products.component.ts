@@ -61,7 +61,7 @@ export class ProductsComponent implements AfterViewInit {
   }
 
   goToEditPage(id: number) {
-    this.router.navigateByUrl(`/dhr/edit/product/${id}`);
+    this.router.navigateByUrl(`/dyg/edit/product/${id}`);
   }
 
   generarPDF() {
