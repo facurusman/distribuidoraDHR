@@ -71,6 +71,8 @@ export class ProductSalesComponent implements OnInit {
     this.productService.getProductsByCliente(id).subscribe((response) => {
       const user = response as ProductData[]
       this.dataSourceProductos = new MatTableDataSource<ProductData>(user);
+      this.dataSourceProductos.paginator = this.tableProductosPaginator;
+      this.dataSourceProductos.sort = this.tableProductosSort;
     })
   }
 
