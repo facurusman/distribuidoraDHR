@@ -9,7 +9,7 @@ import { SalesService } from '../../services/sales.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ProductsService } from '../../services/products.service';
 import { ClientsService } from '../../services/clients.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SaleData } from 'src/app/models/SaleData';
 import { ProductData } from 'src/app/models/ProductData';
 import { ClientData } from 'src/app/models/ClientData';
@@ -50,7 +50,8 @@ export class SalesComponent implements OnInit {
     private readonly saleService: SalesService,
     private readonly productService: ProductsService,
     private route: ActivatedRoute,
-     private pdfService: PDFService,
+    private router: Router,
+    private pdfService: PDFService,
     private readonly clientService: ClientsService) {
     this.id = this.route.snapshot.params['id'];
     // Assign the data to the data source for the table to render
@@ -117,6 +118,10 @@ export class SalesComponent implements OnInit {
       link.download = `ventas.pdf`;
       link.click();
     });;
+  }
+
+  gotoCreateSale() {
+    this.router.navigateByUrl('/sales/crear');
   }
 
 }
