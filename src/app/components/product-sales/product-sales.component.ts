@@ -127,9 +127,9 @@ export class ProductSalesComponent implements OnInit {
       // en el backend recibe eso y los guarda todos en en la tabla productos_por_venta
 
     });
-    //setTimeout(() => {
-    //  location.reload()
-    //}, 100);
+    setTimeout(() => {
+      location.reload()
+    }, 100);
   }
 
 }
