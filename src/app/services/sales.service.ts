@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Sale } from '../models/sale';
+import { ProductData } from 'src/app/models/ProductData';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class SalesService {
     return this.http.get(`${environment.apiSales}/${id}`)
   }
 
-  postSale(sale: Sale) {
-    return this.http.post(`${environment.apiSales}/crear`, sale);
+  postSale(sale: Sale, productos : ProductData[]) {
+    return this.http.post(`${environment.apiSales}/crear`, {sale,productos});
   }
 
   filterSale(fecha_inicial: Date, fecha_final: Date) {

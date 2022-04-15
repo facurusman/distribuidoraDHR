@@ -120,16 +120,16 @@ export class ProductSalesComponent implements OnInit {
       fecha: this.fecha,
       total: this.total_final
     });
-    this.saleService.postSale(sale).subscribe((response:any) => {
-      let idVentaNueva = response.venta.insertId;
-      console.log('La nueva venta insertada es:', idVentaNueva )
+    this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response:any) => {
+      // let idVentaNueva = response.venta.insertId;
+      //console.log('La nueva venta insertada es:', idVentaNueva )
       //ACa se deberia mandar al backend los productos ne carrito y el nuevo id.
       // en el backend recibe eso y los guarda todos en en la tabla productos_por_venta
 
     });
-    setTimeout(() => {
-      location.reload()
-    }, 100);
+    //setTimeout(() => {
+    //  location.reload()
+    //}, 100);
   }
 
 }
