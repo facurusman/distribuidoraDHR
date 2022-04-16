@@ -13,38 +13,38 @@
           <!-- ID Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.id?row.id: "-" }}</td>
           </ng-container>
 
           <!-- Name Column -->
           <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-            <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.nombre?row.nombre: "-" }}</td>
           </ng-container>
 
           <!-- Cell phone Column -->
           <ng-container matColumnDef="telefono">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
-            <td mat-cell *matCellDef="let row">{{ row.telefono }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.telefono?row.telefono: "-" }}</td>
           </ng-container>
 
 
           <!-- Zone Column -->
           <ng-container matColumnDef="zona">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Zona</th>
-            <td mat-cell *matCellDef="let row">{{ row.zona }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.zona?row.zona:"-" }}</td>
           </ng-container>
 
           <!-- Dress Column -->
           <ng-container matColumnDef="direccion">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Direccion</th>
-            <td mat-cell *matCellDef="let row">{{ row.direccion }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.direccion?row.direccion:"-" }}</td>
           </ng-container>
 
           <!-- Email Column -->
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-            <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.email?row.email:"-" }}</td>
           </ng-container>
 
           <!-- Edit Column -->
