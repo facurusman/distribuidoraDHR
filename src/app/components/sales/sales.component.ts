@@ -37,7 +37,7 @@ export class SalesComponent implements OnInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   selection = new SelectionModel<SaleData>(true, []);
   dataSourceVentas = new MatTableDataSource<SaleData>();
-  displayedColumnsVentas: string[] = ['id', 'idCliente', 'fecha', 'total'];
+  displayedColumnsVentas: string[] = ['select','id', 'idCliente', 'fecha', 'total'];
   @ViewChild('TableVentasSort', {static: true}) tableVentasSort: MatSort;
   @ViewChild('TableVentasPaginator', {static: true}) tableVentasPaginator: MatPaginator;
 
