@@ -18,8 +18,8 @@
         <button mat-raised-button color="primary" (click)="updateTableFilter()">Buscar</button>
       </div>
       <div class="exports">
-        <button mat-button>Exportar Clientes</button>
-        <button mat-button>Exportar Productos</button>
+        <button mat-button (click)="generarPDFClients()">Exportar Clientes</button>
+        <button mat-button (click)="generarPDFProducts()">Exportar Productos</button>
         <button mat-button (click)="generarPDF()">PDF</button>
       </div>
       <mat-form-field appearance="standard" class="filter-class">

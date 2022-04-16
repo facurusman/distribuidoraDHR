@@ -101,6 +101,9 @@ export class SalesComponent implements OnInit {
       this.dataSourceVentas.data.forEach(row => this.selection.select(row));
   }
 
+  clickEnSelector() {
+    //hacer la funcion como en prodcut sales
+  }
   applyFilterVentas(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceVentas.filter = filterValue.trim().toLowerCase();
@@ -117,9 +120,28 @@ export class SalesComponent implements OnInit {
       link.href = source;
       link.download = `ventas.pdf`;
       link.click();
-    });;
+    });
   }
 
+  generarPDFClients() {
+      this.pdfService.generarPDFVentaClient().subscribe((response: any) => {
+      const source = `data:application/pdf;base64,${response.finalString}`;
+      const link = document.createElement("a");
+      link.href = source;
+      link.download = `ventaCliente.pdf`;
+      link.click();
+    });
+  }
+
+  generarPDFProducts() {
+      this.pdfService.generarPDFVentaProduct().subscribe((response: any) => {
+      const source = `data:application/pdf;base64,${response.finalString}`;
+      const link = document.createElement("a");
+      link.href = source;
+      link.download = `ventaProducto.pdf`;
+      link.click();
+    });
+  }
   gotoCreateSale() {
     this.router.navigateByUrl('/sales/crear');
   }
