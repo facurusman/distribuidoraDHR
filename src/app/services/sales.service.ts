@@ -22,7 +22,7 @@ export class SalesService {
   filterSale(fecha_inicial: Date, fecha_final: Date) {
     return this.http.post(`${environment.apiSales}/`, { fecha_inicial, fecha_final });
   }
-  getProperties(id:number) {
-    return this.http.get(`${environment.apiSales}/propiedades/${id}`);
+  getPropertiesClient(idCliente:any, idVenta: any) {
+    return this.http.post(`${environment.apiSales}/propiedades`, {idCliente, idVenta});
   }
 }

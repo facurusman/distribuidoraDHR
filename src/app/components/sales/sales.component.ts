@@ -37,7 +37,7 @@ export class SalesComponent implements OnInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   selection = new SelectionModel<SaleData>(true, []);
   dataSourceVentas = new MatTableDataSource<SaleData>();
-  displayedColumnsVentas: string[] = ['select','id', 'idCliente', 'fecha', 'total'];
+  displayedColumnsVentas: string[] = ['select','id', 'idCliente', 'fecha', 'total', 'exports'];
   @ViewChild('TableVentasSort', {static: true}) tableVentasSort: MatSort;
   @ViewChild('TableVentasPaginator', {static: true}) tableVentasPaginator: MatPaginator;
 
@@ -141,6 +141,18 @@ export class SalesComponent implements OnInit {
       link.download = `ventaProducto.pdf`;
       link.click();
     });
+  }
+
+  exportarPDFUnaSolaVenta(idCliente : number, idVenta: number){
+    console.log(idCliente, idVenta);
+
+    this.saleService.getPropertiesClient(idCliente, idVenta).subscribe( (response:any) => {
+      const source = `data:application/pdf;base64,${response.finalString}`;
+      const link = document.createElement("a");
+      link.href = source;
+      link.download = `venta.pdf`;
+      link.click();
+    })
   }
   gotoCreateSale() {
     this.router.navigateByUrl('/sales/crear');
