@@ -14,6 +14,8 @@ import { SaleData } from 'src/app/models/SaleData';
 import { ProductData } from 'src/app/models/ProductData';
 import { ClientData } from 'src/app/models/ClientData';
 import { PDFService } from 'src/app/services/pdf.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { SaleProductData } from 'src/app/models/SaleProductData';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -38,6 +40,8 @@ export class SalesComponent implements OnInit {
   fecha_inicial: any
   fecha_final: any
   id: number = 0
+  ventasSeleccionadas: SaleProductData[] = [];
+  idCliente: number;
   constructor(
     private readonly saleService: SalesService,
     private readonly productService: ProductsService,
@@ -68,6 +72,12 @@ export class SalesComponent implements OnInit {
       });
     }
   }
+  allSalesClient(id : number) {
+      this.saleService.getSalesByClient(id).subscribe((response) => {
+        const sales = response as ProductData[]
+        console.log(sales);
+    })
+  }
   updateTableFilter() {
     //this.fecha_inicial = this.fecha_inicial.split("-").reverse().join("-");
     //this.fecha_final = this.fecha_final.split("-").reverse().join("-");
@@ -86,14 +96,24 @@ export class SalesComponent implements OnInit {
       this.selection.clear() :
       this.dataSourceVentas.data.forEach(row => this.selection.select(row));
   }
-  clickEnSelector() {
-    //hacer la funcion como en prodcut sales
+  clickEnSelector(idCliente: number) {
+    this.allSalesClient(idCliente)
+    this.idCliente = idCliente
   }
   applyFilterVentas(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceVentas.filter = filterValue.trim().toLowerCase();
     if (this.dataSourceVentas.paginator) {
       this.dataSourceVentas.paginator.firstPage();
+    }
+  }
+  marcar(ob: MatCheckboxChange, row:SaleProductData) {
+    if (ob.checked) {
+      this.ventasSeleccionadas.push(row);
+      row.selected = true;
+    } else {
+      this.ventasSeleccionadas = this.ventasSeleccionadas.filter(p => p.id != row.id)
+      row.selected = false;
     }
   }
   generarPDF() {
@@ -115,7 +135,8 @@ export class SalesComponent implements OnInit {
     });
   }
   generarPDFProducts() {
-      this.pdfService.generarPDFVentaProduct().subscribe((response: any) => {
+    console.log(this.ventasSeleccionadas);
+      this.pdfService.generarPDFVentaProduct(this.ventasSeleccionadas).subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
       const link = document.createElement("a");
       link.href = source;

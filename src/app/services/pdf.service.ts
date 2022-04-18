@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { SaleProductData } from '../models/SaleProductData';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,8 @@ export class PDFService {
   generarPDFVentaClient() {
     return this.http.post(`${environment.apiClients}/crearPDF/exportarClientes`, []);
   }
-  generarPDFVentaProduct() {
-    return this.http.post(`${environment.apiClients}/crearPDF`, []);
+  generarPDFVentaProduct(sales: SaleProductData[]) {
+    console.log(sales);
+    return this.http.post(`${environment.apiSales}/crearPDF/exportarProductos`, { sales });
   }
 }
