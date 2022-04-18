@@ -29,13 +29,14 @@ export class AuthComponent implements OnInit {
   private isAuthenticated = false;
   private token: any;
   private tokenTimer: any;
-  error: boolean = false
+  error: boolean = true
   private authStatusListener = new Subject<boolean>();
 
   matcher = new MyErrorStateMatcher();
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.error = false
     this.autoAuthUser();
   }
   getToken() {
@@ -55,18 +56,12 @@ export class AuthComponent implements OnInit {
   }
 
   getIsAuth() {
-    return this.isAuthenticated;
-  }
-  onLogin(form: NgForm) {
     if (this.isAuthenticated) {
-      this.error = false;
-    } else {
-      this.error = true;
+      this.error = false
+    }else{
+      this.error = true
     }
-    if (form.invalid) {
-      return;
-    }
-    this.authService.postLogin(form.value.email, form.value.password);
+    return this.isAuthenticated;
   }
 
   autoAuthUser() {
@@ -79,6 +74,7 @@ export class AuthComponent implements OnInit {
     if (expiresIn > 0) {
       this.token = authInformation.token;
       this.isAuthenticated = true;
+      this.error = false
       this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);
     }
@@ -119,6 +115,16 @@ export class AuthComponent implements OnInit {
       token: token,
       expirationDate: new Date(expirationDate)
     }
+  }
+
+  onLogin(form: NgForm) {
+    this.authService.postLogin(form.value.email, form.value.password)
+    if (this.isAuthenticated) {
+      this.error = false;
+    } else {
+      this.error = true;
+    }
+
   }
 }
 
