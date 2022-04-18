@@ -14,16 +14,12 @@ import { SaleData } from 'src/app/models/SaleData';
 import { ProductData } from 'src/app/models/ProductData';
 import { ClientData } from 'src/app/models/ClientData';
 import { PDFService } from 'src/app/services/pdf.service';
-
-
-
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -32,7 +28,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.scss'],
 })
-
 export class SalesComponent implements OnInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   selection = new SelectionModel<SaleData>(true, []);
@@ -40,12 +35,9 @@ export class SalesComponent implements OnInit {
   displayedColumnsVentas: string[] = ['select','id', 'idCliente', 'fecha', 'total', 'exports'];
   @ViewChild('TableVentasSort', {static: true}) tableVentasSort: MatSort;
   @ViewChild('TableVentasPaginator', {static: true}) tableVentasPaginator: MatPaginator;
-
-
   fecha_inicial: any
   fecha_final: any
   id: number = 0
-
   constructor(
     private readonly saleService: SalesService,
     private readonly productService: ProductsService,
@@ -58,14 +50,11 @@ export class SalesComponent implements OnInit {
     this.dataSourceVentas = new MatTableDataSource();
     this.getSales()
   }
-
-
   matcher = new MyErrorStateMatcher();
   ngOnInit() {
     this.dataSourceVentas.paginator = this.tableVentasPaginator;
     this.dataSourceVentas.sort = this.tableVentasSort;
   }
-
   getSales() {
     if (this.id) {
       this.saleService.getSalesByClient(this.id).subscribe((response) => {
@@ -79,7 +68,6 @@ export class SalesComponent implements OnInit {
       });
     }
   }
-
   updateTableFilter() {
     //this.fecha_inicial = this.fecha_inicial.split("-").reverse().join("-");
     //this.fecha_final = this.fecha_final.split("-").reverse().join("-");
@@ -88,31 +76,26 @@ export class SalesComponent implements OnInit {
       this.dataSourceVentas.data = sale
     });
   }
-
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSourceVentas.data.length;
     return numSelected === numRows;
   }
-
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSourceVentas.data.forEach(row => this.selection.select(row));
   }
-
   clickEnSelector() {
     //hacer la funcion como en prodcut sales
   }
   applyFilterVentas(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceVentas.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSourceVentas.paginator) {
       this.dataSourceVentas.paginator.firstPage();
     }
   }
-
   generarPDF() {
       this.pdfService.generarPDFVentas().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
@@ -122,7 +105,6 @@ export class SalesComponent implements OnInit {
       link.click();
     });
   }
-
   generarPDFClients() {
       this.pdfService.generarPDFVentaClient().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
@@ -132,7 +114,6 @@ export class SalesComponent implements OnInit {
       link.click();
     });
   }
-
   generarPDFProducts() {
       this.pdfService.generarPDFVentaProduct().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
@@ -157,5 +138,4 @@ export class SalesComponent implements OnInit {
   gotoCreateSale() {
     this.router.navigateByUrl('/sales/crear');
   }
-
 }
