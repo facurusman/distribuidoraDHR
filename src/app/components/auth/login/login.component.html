@@ -5,14 +5,17 @@
     <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
         <input matInput name="email" ngModel type="email" placeholder="E-Mail" #emailInput="ngModel" required email>
-        <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+        <mat-error *ngIf="emailInput.invalid">Por favor ingrese un email valido</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel"
+        <input type="password" name="password" ngModel matInput placeholder="Contraseña" #passwordInput="ngModel"
           required>
-        <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+        <mat-error *ngIf="passwordInput.invalid">Por favor ingrese una contraseña valida</mat-error>
       </mat-form-field>
-      <div *ngIf="error">
+      <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="alert">
+        <div class="message_create">Inicio de sesion incorrecto</div>
+      </div>
+      <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert">
         <div class="message_create">Inicio de sesion incorrecto</div>
       </div>
       <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Login</button>

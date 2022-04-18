@@ -127,9 +127,15 @@ export class ProductSalesComponent implements OnInit {
       // en el backend recibe eso y los guarda todos en en la tabla productos_por_venta
 
     });
-    setTimeout(() => {
-      location.reload()
-    }, 100);
+    console.log(this.idCliente, this.fecha, this.total_final, this.productosEnCarrito);
+    this.saleService.getProperties(this.idCliente).subscribe((response:any) => {
+      console.log(response);
+
+    })
+
+    // setTimeout(() => {
+    //   location.reload()
+    // }, 100);
   }
 
 }

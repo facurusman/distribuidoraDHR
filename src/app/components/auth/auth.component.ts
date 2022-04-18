@@ -119,10 +119,10 @@ export class AuthComponent implements OnInit {
 
   onLogin(form: NgForm) {
     this.authService.postLogin(form.value.email, form.value.password)
-    if (this.isAuthenticated) {
-      this.error = false;
-    } else {
+    if (this.isAuthenticated == false || this.error == true) {
       this.error = true;
+    } else {
+      this.error = false;
     }
 
   }
