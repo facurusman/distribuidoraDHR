@@ -42,7 +42,7 @@ export class ProductsComponent implements AfterViewInit {
 
   descripcion: string = '';
   precio_base: number = 0;
-  valor: number = 0
+  valor: number
 
   delete !: boolean
 
@@ -111,6 +111,9 @@ export class ProductsComponent implements AfterViewInit {
     console.log(this.productosSeleccionados);
     this.productService.aumentarElPrecio(this.valor,this.productosSeleccionados).subscribe((response) => {
     });
+    setTimeout(() => {
+      location.reload()
+    }, 100);
   }
 
   onCreateProduct() {
