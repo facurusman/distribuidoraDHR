@@ -119,6 +119,7 @@ export class SalesComponent implements OnInit {
   generarPDF() {
       this.pdfService.generarPDFVentas().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
+      console.log(response)
       const link = document.createElement("a");
       link.href = source;
       link.download = `ventas.pdf`;

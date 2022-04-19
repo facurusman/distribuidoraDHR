@@ -12,6 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
+    "allowSyntheticDefaultImports": true,
     "strictPropertyInitialization": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
