@@ -147,13 +147,12 @@ export class SalesComponent implements OnInit {
   }
 
   exportarPDFUnaSolaVenta(idCliente : number, idVenta: number){
-    console.log(idCliente, idVenta);
-
+  
     this.saleService.getPropertiesClient(idCliente, idVenta).subscribe( (response:any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
       const link = document.createElement("a");
       link.href = source;
-      link.download = `venta.pdf`;
+      link.download = `ventaProducto.pdf`;
       link.click();
     })
   }
