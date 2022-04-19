@@ -64,11 +64,13 @@ export class SalesComponent implements OnInit {
       this.saleService.getSalesByClient(this.id).subscribe((response) => {
         const sale = response as SaleData[]
         this.dataSourceVentas.data = sale
+        
       })
     } else {
       this.saleService.getSales().subscribe((response) => {
         const sale = response as SaleData[]
         this.dataSourceVentas.data = sale
+        console.log(sale)
       });
     }
   }
@@ -116,6 +118,7 @@ export class SalesComponent implements OnInit {
       row.selected = false;
     }
   }
+  
   generarPDF() {
       this.pdfService.generarPDFVentas().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
@@ -126,6 +129,7 @@ export class SalesComponent implements OnInit {
       link.click();
     });
   }
+
   generarPDFClients() {
       this.pdfService.generarPDFVentaClient().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
@@ -156,6 +160,7 @@ export class SalesComponent implements OnInit {
       link.click();
     })
   }
+
   gotoCreateSale() {
     this.router.navigateByUrl('/sales/crear');
   }

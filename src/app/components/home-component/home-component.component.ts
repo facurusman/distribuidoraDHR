@@ -26,6 +26,7 @@ export class HomeComponentComponent implements OnInit {
     this.router.navigateByUrl('/ventas');
   }
 
+  /* Empieza barchar */
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -47,7 +48,6 @@ export class HomeComponentComponent implements OnInit {
 
 
   };
-
 
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [
@@ -84,5 +84,6 @@ export class HomeComponentComponent implements OnInit {
 
     this.chart?.update();
   }
+  /* Termina barchar */
 
 }

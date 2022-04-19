@@ -25,7 +25,7 @@ import { ProductUpPriceData } from 'src/app/models/ProductUpPriceData';
 
 export class ProductsComponent implements AfterViewInit {
   creado: boolean;
-  displayedColumns: string[] = ['select', 'id', 'descripcion', 'precio_base', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['select', 'descripcion', 'precio_base', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<ProductUpPriceData>();
   selection = new SelectionModel<ProductUpPriceData>(true, []);
   productosSeleccionados: ProductUpPriceData[] = [];

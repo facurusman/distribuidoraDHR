@@ -1,14 +1,13 @@
 <div class="grid2x2">
-  <div class="box box1">
-    <div>
-      <div style="width: 70%;">
-        <div style="display: block;">
-          <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-            [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+  <div class="box box1"><div>
+    <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+            [type]="barChartType" (chartHover)="chartHovered($event)" >
           </canvas>
-        </div>
-        <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
-      </div>
-    </div>
-  </div>
+  </div></div>
+  <div class="box box2"><div>
+    <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+    [type]="barChartType" (chartHover)="chartHovered($event)" >
+  </canvas>
+  </div></div>
+  
 </div>
