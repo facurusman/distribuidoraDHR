@@ -28,6 +28,7 @@ export class AuthComponent implements OnInit {
   isLoading = false;
   private isAuthenticated = false;
   private token: any;
+  private rol: any;
   private tokenTimer: any;
   error: boolean = true
   private authStatusListener = new Subject<boolean>();
@@ -41,6 +42,9 @@ export class AuthComponent implements OnInit {
   }
   getToken() {
     return this.token;
+  }
+  getRol() {
+    return this.rol;
   }
 
   getAuthStatusListener() {
@@ -73,6 +77,7 @@ export class AuthComponent implements OnInit {
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
     if (expiresIn > 0) {
       this.token = authInformation.token;
+      this.rol = authInformation.rol
       this.isAuthenticated = true;
       this.error = false
       this.setAuthTimer(expiresIn / 1000);
@@ -82,6 +87,7 @@ export class AuthComponent implements OnInit {
 
   logout() {
     this.token = null;
+    this.rol = null
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     clearTimeout(this.tokenTimer);
@@ -95,25 +101,29 @@ export class AuthComponent implements OnInit {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date) {
+  private saveAuthData(token: string, expirationDate: Date, rol : string) {
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
+    localStorage.setItem("rol", rol);
   }
 
   private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
+    localStorage.removeItem("rol");
   }
 
   private getAuthData() {
     const token = localStorage.getItem("token");
     const expirationDate = localStorage.getItem("expiration");
-    if (!token || !expirationDate) {
+    const rol = localStorage.getItem("rol");
+    if (!token || !expirationDate|| !rol ) {
       return;
     }
     return {
       token: token,
-      expirationDate: new Date(expirationDate)
+      expirationDate: new Date(expirationDate),
+      rol : rol
     }
   }
 

@@ -13,12 +13,14 @@ import { ProductClientComponent } from './components/product-client/product-clie
 import { AuthComponent } from './components/auth/auth.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { ProductSalesComponent } from './components/product-sales/product-sales.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 const routes: Routes = [
   { path: '', component: AuthComponent },
   {
     path: 'dyg',
     component: CoreComponent, canActivate: [AuthGuard],
     children: [
+      { path: 'estadisticas', component: StatisticsComponent, canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponentComponent, canActivate: [AuthGuard] },
       { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard] },
       { path: 'productsClient/:id', component: ProductClientComponent, canActivate: [AuthGuard] },
