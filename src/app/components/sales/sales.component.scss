@@ -1,30 +1,38 @@
 table {
   width: 100%;
 }
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
 }
+
 td,
 th {
   width: 16.66%;
 }
+
 .filter-class {
   background-color: #FAFAFA;
 }
+
 .label-search {
   margin-left: 15px;
 }
+
 .input-search {
   margin-left: 15px;
 }
+
 .tabla-completa {
   background-color: #b8b5b447;
   padding: 10px 30px 30px 30px
 }
+
 .mat-tab-labels {
   background-color: red;
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -33,6 +41,7 @@ th {
   flex-wrap: wrap;
   background-color: #002B5C;
 }
+
 .container button {
   background-color: #002B5C;
   color: #fff;
@@ -41,11 +50,13 @@ th {
   align-self: center;
   height: 42px;
 }
+
 .container-tabla1 {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
+
 .container-venta {
   display: flex;
   flex-flow: row-wrap;
@@ -55,24 +66,30 @@ th {
   align-items: flex-start;
   background-color: #002B5C;
 }
+
 .tabla-completa-venta {
   width: 100%;
 }
+
 .desplegable {
   width: 100%;
 }
+
 .desplegable mat-form-field {
   width: 100%;
   color: #000;
   justify-content: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .titleclass {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .phone_number {
   padding: 10px;
 }
+
 .container-child {
   background-color: #fff;
   border-radius: 15px;
@@ -80,41 +97,51 @@ th {
   width: 500px;
   max-width: 100%;
 }
+
 .total {
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 20px 0px;
 }
+
 .desplegable {
   background-color: #FAFAFA;
 }
+
 mat-icon {
   text-align: center;
 }
+
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
   color: #070ab0 !important;
 }
+
 ::ng-deep.mat-form-field-underline {
   /*change color of underline*/
   background-color: #070ab0 !important;
 }
+
 ::ng-deep.mat-form-field-ripple {
   /*change color of underline when focused*/
   background-color: #070ab0 !important;
   ;
 }
+
 input [type='number'] {
   -moz-appearance: textfield;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
 .exports {
   display: flex;
   justify-content: flex-end;
 }
+
 .exports button {
   border-radius: 10px;
   background-color: #002b5c;
@@ -123,43 +150,61 @@ input::-webkit-inner-spin-button {
   justify-content: center;
   margin: 25px 10px;
 }
+
 .busqueda {
   display: flex;
   width: 20%;
   gap: 0.75em;
-  flex-direction: column;
   justify-content: center;
   align-self: center;
   margin: auto;
   margin-bottom: 20px;
 }
-.busqueda h1 {
-  font-size: larger;
+
+.button-search {
+  display: flex;
+  justify-content: center;
+}
+
+.button-search button {
+  display: flex;
+  width: 20%;
+}
+
+.tabla-completa h1 {
+  font-size: 25px;
+  flex-direction: column;
   text-align: center;
   color: #000;
+  margin: 10px 0;
   text-decoration: none;
 }
+
 @media (min-width: 600px) and (max-width:1000px) {
-  .busqueda h1 {
+  .tabla-completa h1 {
     padding: 5px;
     text-align: center;
   }
+
   .busqueda {
     width: 50vw;
     margin: auto;
     justify-content: flex-start;
   }
 }
+
 @media (max-width:600px) {
   .exports {
     display: flex;
     flex-direction: column;
   }
-  .busqueda h1 {
+
+  .tabla-completa h1 {
     padding: 5px;
     text-align: center;
   }
-  .busqueda{
+
+  .busqueda {
     width: 50vw;
     margin: auto;
     justify-content: flex-start;

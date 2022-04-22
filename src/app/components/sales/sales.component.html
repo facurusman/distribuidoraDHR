@@ -1,8 +1,8 @@
 <mat-tab-group class="tab-group">
   <mat-tab label="Mostrar Ventas">
     <div class="tabla-completa">
+      <h1>Filtrar por Fecha</h1>
       <div class="busqueda">
-        <h1>Filtrar por Fecha</h1>
         <mat-form-field appearance="fill">
           <mat-label>Elegi una fecha inicial</mat-label>
           <input matInput [matDatepicker]="picker" [(ngModel)]="fecha_inicial">
@@ -15,7 +15,9 @@
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="updateTableFilter()">Buscar</button>
+      </div>
+      <div class="button-search">
+        <button mat-raised-button color="primary" (click)="updateTableFilter()" class="button-search">Buscar</button>
       </div>
       <div class="exports">
         <button mat-button (click)="generarPDFClients()">Exportar Clientes</button>
@@ -38,7 +40,7 @@
               </mat-checkbox>
             </td>
           </ng-container>
-      
+
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
             <td mat-cell *matCellDef="let element"> {{element.id?element.id:"-"}} </td>
@@ -61,7 +63,8 @@
           <ng-container matColumnDef="exports">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Exportar </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-raised-button color="primary" (click)="exportarPDFUnaSolaVenta(element.idCliente, element.id)">Exportar a PDF</button>
+              <button mat-raised-button color="primary"
+                (click)="exportarPDFUnaSolaVenta(element.idCliente, element.id)">Exportar a PDF</button>
             </td>
           </ng-container>
 
