@@ -77,15 +77,22 @@ export class SalesComponent implements OnInit {
   allSalesClient(id : number) {
       this.saleService.getSalesByClient(id).subscribe((response) => {
         const sales = response as ProductData[]
-        console.log(sales);
     })
   }
   updateTableFilter() {
-    //this.fecha_inicial = this.fecha_inicial.split("-").reverse().join("-");
-    //this.fecha_final = this.fecha_final.split("-").reverse().join("-");
     this.saleService.filterSale(this.fecha_inicial, this.fecha_final).subscribe((response) => {
-      const sale = response as SaleData[]
-      this.dataSourceVentas.data = sale
+      const sales = response as SaleProductData[]
+      let idSeleccionados: any = [];
+      this.ventasSeleccionadas.forEach(vs => {
+        idSeleccionados.push(vs.id)
+      })
+      sales.forEach(s => {
+        if(idSeleccionados.includes(s.id)){
+          s.selected = true
+        }
+      })
+      console.log(sales)
+      this.dataSourceVentas.data = sales
     });
   }
   isAllSelected() {
@@ -113,9 +120,11 @@ export class SalesComponent implements OnInit {
     if (ob.checked) {
       this.ventasSeleccionadas.push(row);
       row.selected = true;
+      console.log(this.ventasSeleccionadas)
     } else {
       this.ventasSeleccionadas = this.ventasSeleccionadas.filter(p => p.id != row.id)
       row.selected = false;
+      console.log(this.ventasSeleccionadas)
     }
   }
   
