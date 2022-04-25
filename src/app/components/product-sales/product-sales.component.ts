@@ -12,6 +12,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { SalesService } from 'src/app/services/sales.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Sale } from 'src/app/models/sale';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class ProductSalesComponent implements OnInit {
   selected = 'option2';
   id: number = 0
   total_final: number = 0;
+  idVenta:number
 
   constructor(
     private readonly saleService: SalesService,
@@ -127,15 +129,28 @@ export class ProductSalesComponent implements OnInit {
       // en el backend recibe eso y los guarda todos en en la tabla productos_por_venta
 
     });
+    this.saleService.getSalesByClient(this.idCliente).subscribe((response:any) => {
+      this.idVenta = response[0].id
+      console.log(this.idVenta);
+
+    });
     console.log(this.idCliente, this.fecha, this.total_final, this.productosEnCarrito);
     // this.saleService.getProperties(this.idCliente).subscribe((response:any) => {
     //   console.log(response);
 
     // })
 
-    // setTimeout(() => {
-    //   location.reload()
-    // }, 100);
+    this.saleService.getPropertiesClient(this.idCliente, this.idVenta).subscribe( (response:any) => {
+      const source = `data:application/pdf;base64,${response.finalString}`;
+      const link = document.createElement("a");
+      link.href = source;
+      link.download = `ventaProducto.pdf`;
+      link.click();
+    })
+
+    setTimeout(() => {
+      location.reload()
+    }, 1000001);
   }
 
 }
