@@ -22,17 +22,18 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ProductSalesComponent implements OnInit {
 
-  displayedColumnsProductos: string[] = ['id', 'descripcion', 'precio', 'agregar'];
+  displayedColumnsProductos: string[] = ['id', 'descripcion','cantidad', 'precio', 'agregar'];
   dataSourceProductos = new MatTableDataSource<ProductData>();
   @ViewChild('TableProductosPaginator', {static: true}) tableProductosPaginator: MatPaginator;
   @ViewChild('TableProductosSort', {static: true}) tableProductosSort: MatSort;
-  displayedColumnsCarrito: string[] = ['idProducto', 'descripcion', 'precio', 'eliminar'];
+  displayedColumnsCarrito: string[] = ['idProducto', 'descripcion','cantidad', 'precio', 'eliminar'];
   dataSourceCarrito = new MatTableDataSource<ProductData>();
   productosEnCarrito: ProductData[] = [];
 
 
   idCliente: any
   fecha: Date = new Date()
+  cantidad : any
   total: any
   client: any;
   clientList: ClientData[] = []
@@ -88,8 +89,8 @@ export class ProductSalesComponent implements OnInit {
   }
 
 
-  agregarElemento(id: number, precio: string, precio_base: string, descripcion: string) {
-    this.productosEnCarrito.push({ id: id, precio: precio, precio_base: precio_base, descripcion: descripcion })
+  agregarElemento(id: number, cantidad : number,precio: string, precio_base: string, descripcion: string) {
+    this.productosEnCarrito.push({ id: id, precio: precio, precio_base: precio_base, cantidad : cantidad,descripcion: descripcion })
     this.dataSourceCarrito = new MatTableDataSource<ProductData>(this.productosEnCarrito);
     if (precio) {
       this.total_final += +precio;
@@ -105,6 +106,7 @@ export class ProductSalesComponent implements OnInit {
     this.productosEnCarrito = [...this.productosEnCarrito]
     this.dataSourceCarrito = new MatTableDataSource<ProductData>(this.productosEnCarrito);
     if (producto.precio) {
+
       this.total_final -= +producto.precio;
     } else {
       this.total_final -= +producto.precio_base;
