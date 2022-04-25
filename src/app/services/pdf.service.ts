@@ -18,8 +18,8 @@ export class PDFService {
   generarPDFClientes() {
     return this.http.post(`${environment.apiClients}/crearPDF`, []);
   }
-  generarPDFVentaClient() {
-    return this.http.post(`${environment.apiClients}/crearPDF/exportarClientes`, []);
+  generarPDFVentaClient(sales: SaleProductData[]) {
+    return this.http.post(`${environment.apiSales}/crearPDF/exportarClientes`, {sales});
   }
   generarPDFVentaProduct(sales: SaleProductData[]) {
     console.log(sales);

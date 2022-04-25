@@ -64,7 +64,7 @@ export class SalesComponent implements OnInit {
       this.saleService.getSalesByClient(this.id).subscribe((response) => {
         const sale = response as SaleData[]
         this.dataSourceVentas.data = sale
-        
+
       })
     } else {
       this.saleService.getSales().subscribe((response) => {
@@ -127,7 +127,7 @@ export class SalesComponent implements OnInit {
       console.log(this.ventasSeleccionadas)
     }
   }
-  
+
   generarPDF() {
       this.pdfService.generarPDFVentas().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
@@ -140,7 +140,7 @@ export class SalesComponent implements OnInit {
   }
 
   generarPDFClients() {
-      this.pdfService.generarPDFVentaClient().subscribe((response: any) => {
+      this.pdfService.generarPDFVentaClient(this.ventasSeleccionadas).subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
       const link = document.createElement("a");
       link.href = source;
@@ -160,7 +160,7 @@ export class SalesComponent implements OnInit {
   }
 
   exportarPDFUnaSolaVenta(idCliente : number, idVenta: number){
-  
+
     this.saleService.getPropertiesClient(idCliente, idVenta).subscribe( (response:any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
       const link = document.createElement("a");
