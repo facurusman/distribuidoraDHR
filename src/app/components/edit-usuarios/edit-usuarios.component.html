@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="container-child">
+    <img src="../../../assets/images/logo-dygcombos.png" alt="" />
+    <mat-form-field>
+      <mat-label class="title">Email</mat-label>
+      <input matInput type="string" name="descripcion" [(ngModel)]="email" minlength="5" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Rol</mat-label>
+      <input matInput type="number" name="precio" [(ngModel)]="rol" />
+    </mat-form-field>
+
+    <button mat-button color="withe" (click)="onEdit()">Editar Usuario</button>
+    <ng-template [ngIf]="creado">
+
+      <div class="message_create">Usuario editado con exito</div>
+
+    </ng-template>
+  </div>
+</div>

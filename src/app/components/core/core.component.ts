@@ -49,6 +49,11 @@ export class CoreComponent implements OnInit {
     this.router.navigateByUrl('/dyg/sales');
   }
 
+  goToUsersPage() {
+    this.sidenav?.toggle();
+    this.router.navigateByUrl('/dyg/usuarios');
+  }
+
   logout() {
     this.authService.logout();
   }

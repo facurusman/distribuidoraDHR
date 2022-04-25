@@ -1,0 +1,93 @@
+<mat-tab-group class="tab-group">
+  <mat-tab label="Mostrar Usuarios">
+    <div class="tabla-completa">
+      <div class="exports">
+        <button mat-button (click)="generarPDF()">PDF</button>
+      </div>
+      <mat-form-field appearance="standard" class="filter-class">
+        <mat-label class="label-search">Busqueda</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ej. dygcombos@gmail.com" #input class="input-search">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email?element.email:"-"}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="rol" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+          <td mat-cell *matCellDef="let element">{{element.rol==1?"Administrador":"Normal"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef>Editar</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button (click)="goToEditPage(row.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="eliminar">
+          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button (click)="openDialog(row.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No encontramos ningun producto "{{ input.value }}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Seleccione pagina"></mat-paginator>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Crear Usuarios">
+    <div class="container">
+      <div class="container-child">
+        <img src="../../../assets/images/logo-dygcombos.png" alt="" />
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+            placeholder="Ex. pat@example.com" [(ngModel)]="email" />
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Por favor ingrese una direccion de email valida
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label class="title">Contraseña</mat-label>
+          <input matInput name="precio_base" [(ngModel)]="password" minlength="1" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label class="title">Rol</mat-label>
+          <input matInput name="precio_base" [(ngModel)]="rol" minlength="1" />
+        </mat-form-field>
+
+        <button mat-raised-button color="warn" (click)="onCreateUser()">Crear Usuario</button>
+        <ng-template [ngIf]="creado">
+
+          <div class="message_create">Usuario creado con exito</div>
+
+        </ng-template>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   goToHomePage() {
-    this.router.navigateByUrl('/dyg/home');
+    this.router.navigateByUrl('/dyg/sales');
   }
 
   getIsAuth() {

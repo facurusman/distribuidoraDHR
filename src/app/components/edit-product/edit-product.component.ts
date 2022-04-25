@@ -10,8 +10,8 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class EditProductComponent implements OnInit {
   id: number = 0;
-  descripcion: string = "";
-  precio_base: number = 0;
+  descripcion: string;
+  precio_base: number;
 
   creado: boolean
   constructor(private readonly productService: ProductsService, private readonly router: Router, private route: ActivatedRoute) { }
