@@ -89,13 +89,14 @@ export class ProductSalesComponent implements OnInit {
   }
 
 
-  agregarElemento(id: number, cantidad : number,precio: string, precio_base: string, descripcion: string) {
-    this.productosEnCarrito.push({ id: id, precio: precio, precio_base: precio_base, cantidad : cantidad,descripcion: descripcion })
+  agregarElemento(producto: ProductData) {
+    console.log(producto)
+    this.productosEnCarrito.push({ id: producto.id, precio: producto.precio, precio_base: producto.precio_base, cantidad : producto.cantidad,descripcion: producto.descripcion })
     this.dataSourceCarrito = new MatTableDataSource<ProductData>(this.productosEnCarrito);
-    if (precio) {
-      this.total_final += +precio;
+    if (producto.precio) {
+      this.total_final += +producto.precio;
     } else {
-      this.total_final += +precio_base;
+      this.total_final += +producto.precio_base;
     }
 
   }
