@@ -4,4 +4,5 @@ export interface ProductData {
   cantidad: number;
   precio_base: string;
   precio: string;
+  total: number;
 }
