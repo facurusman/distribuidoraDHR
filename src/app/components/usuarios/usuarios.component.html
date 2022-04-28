@@ -1,9 +1,7 @@
 <mat-tab-group class="tab-group">
   <mat-tab label="Mostrar Usuarios">
     <div class="tabla-completa">
-      <div class="exports">
-        <button mat-button (click)="generarPDF()">PDF</button>
-      </div>
+      
       <mat-form-field appearance="standard" class="filter-class">
         <mat-label class="label-search">Busqueda</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ej. dygcombos@gmail.com" #input class="input-search">
