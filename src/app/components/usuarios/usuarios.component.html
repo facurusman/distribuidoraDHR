@@ -71,12 +71,19 @@
 
         <mat-form-field>
           <mat-label class="title">Contraseña</mat-label>
-          <input matInput name="precio_base" [(ngModel)]="password" minlength="1" />
+          <input type="password" matInput name="precio_base" [(ngModel)]="password" minlength="1" />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label class="title">Rol</mat-label>
-          <input matInput name="precio_base" [(ngModel)]="rol" minlength="1" />
+          <mat-select [(ngModel)]="rol">
+            <mat-option [value]="1">
+              Administrador
+            </mat-option>
+            <mat-option [value]="2">
+              Normal
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <button mat-raised-button color="warn" (click)="onCreateUser()">Crear Usuario</button>

@@ -70,7 +70,6 @@ export class SalesComponent implements OnInit {
       this.saleService.getSales().subscribe((response) => {
         const sale = response as SaleData[]
         this.dataSourceVentas.data = sale
-        console.log(sale)
       });
     }
   }
@@ -91,7 +90,6 @@ export class SalesComponent implements OnInit {
           s.selected = true
         }
       })
-      console.log(sales)
       this.dataSourceVentas.data = sales
     });
   }
@@ -120,18 +118,15 @@ export class SalesComponent implements OnInit {
     if (ob.checked) {
       this.ventasSeleccionadas.push(row);
       row.selected = true;
-      console.log(this.ventasSeleccionadas)
     } else {
       this.ventasSeleccionadas = this.ventasSeleccionadas.filter(p => p.id != row.id)
       row.selected = false;
-      console.log(this.ventasSeleccionadas)
     }
   }
 
   generarPDF() {
       this.pdfService.generarPDFVentas().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
-      console.log(response)
       const link = document.createElement("a");
       link.href = source;
       link.download = `ventas.pdf`;
@@ -149,7 +144,6 @@ export class SalesComponent implements OnInit {
     });
   }
   generarPDFProducts() {
-    console.log(this.ventasSeleccionadas);
       this.pdfService.generarPDFVentaProduct(this.ventasSeleccionadas).subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
       const link = document.createElement("a");

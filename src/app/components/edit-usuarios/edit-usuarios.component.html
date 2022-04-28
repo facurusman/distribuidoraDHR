@@ -7,8 +7,23 @@
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label class="title">Password</mat-label>
+      <input type="password" matInput name="precio_base" [(ngModel)]="password" minlength="1" />
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Rol</mat-label>
-      <input matInput type="number" name="precio" [(ngModel)]="rol" />
+
+      <mat-select [(ngModel)]="rol">
+        <mat-option [value]="1">
+          Administrador
+        </mat-option>
+        <mat-option [value]="2">
+          Normal
+        </mat-option>
+      </mat-select>
+
+
     </mat-form-field>
 
     <button mat-button color="withe" (click)="onEdit()">Editar Usuario</button>

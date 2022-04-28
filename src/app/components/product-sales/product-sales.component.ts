@@ -97,7 +97,6 @@ export class ProductSalesComponent implements OnInit {
   }
 
   agregarElemento(producto: ProductData) {
-    console.log(producto);
     if (producto.cantidad) {
       if (producto.precio) {
         this.total_final += +producto.precio * producto.cantidad;
@@ -163,23 +162,9 @@ export class ProductSalesComponent implements OnInit {
       total: this.total_final
     });
     this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
-      // let idVentaNueva = response.venta.insertId;
-      //console.log('La nueva venta insertada es:', idVentaNueva )
-      //ACa se deberia mandar al backend los productos ne carrito y el nuevo id.
-      // en el backend recibe eso y los guarda todos en en la tabla productos_por_venta
-    });
-    this.saleService.getSalesByClient(this.idCliente).subscribe((response: any) => {
-      this.idVenta = response[0].id;
-      console.log(this.idVenta);
-    });
-    console.log(this.idCliente, this.fecha, this.total_final, this.productosEnCarrito);
-    // this.saleService.getProperties(this.idCliente).subscribe((response:any) => {
-    //   console.log(response);
-
-    // })
-
-    this.saleService
-      .getPropertiesClient(this.idCliente, this.idVenta)
+      let idVentaNueva = response.idVentaCreada;
+      this.saleService
+      .getPropertiesClient(this.idCliente, idVentaNueva)
       .subscribe((response: any) => {
         const source = `data:application/pdf;base64,${response.finalString}`;
         const link = document.createElement('a');
@@ -187,9 +172,6 @@ export class ProductSalesComponent implements OnInit {
         link.download = `ventaProducto.pdf`;
         link.click();
       });
-
-    setTimeout(() => {
-      location.reload();
-    }, 1000001);
+    });
   }
 }

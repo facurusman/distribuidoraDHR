@@ -22,7 +22,6 @@ export class PDFService {
     return this.http.post(`${environment.apiSales}/crearPDF/exportarClientes`, {sales});
   }
   generarPDFVentaProduct(sales: SaleProductData[]) {
-    console.log(sales);
     return this.http.post(`${environment.apiSales}/crearPDF/exportarProductos`, { sales });
   }
 }

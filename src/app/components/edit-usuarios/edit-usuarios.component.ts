@@ -13,6 +13,7 @@ export class EditUsuariosComponent implements OnInit {
   id: number = 0;
   email: string;
   rol: number;
+  password: string;
 
   creado: boolean
   constructor(private readonly userService: UsersService, private readonly router: Router, private route: ActivatedRoute) { }
@@ -22,12 +23,13 @@ export class EditUsuariosComponent implements OnInit {
     this.userService.getUser(this.id).subscribe((response: any) => {
       this.email = response[0].email;
       this.rol = response[0].rol;
+      this.password = "";
       //otrod
       this.creado = false
     })
   }
   onEdit() {
-    this.userService.editUser(this.id, this.email, this.rol).subscribe((response) => {
+    this.userService.editUser(this.id, this.email, this.password, this.rol).subscribe((response) => {
       return response
     });
     this.creado = true

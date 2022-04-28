@@ -151,6 +151,12 @@ input::-webkit-inner-spin-button {
   margin: 25px 10px;
 }
 
+
+.inputDate{
+  width: 200px; 
+  padding: 10px;
+}
+
 .busqueda {
   display: flex;
   width: 20%;
@@ -159,6 +165,7 @@ input::-webkit-inner-spin-button {
   align-self: center;
   margin: auto;
   margin-bottom: 20px;
+  flex-direction: column;
 }
 
 .button-search {

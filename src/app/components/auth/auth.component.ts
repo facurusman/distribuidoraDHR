@@ -18,13 +18,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './login/login.component.html',
   styleUrls: ['./login/login.component.scss']
 })
+
 export class AuthComponent implements OnInit {
-
-
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-
   public showPassword: boolean = false;
-
   isLoading = false;
   private isAuthenticated = false;
   private token: any;
@@ -32,7 +29,6 @@ export class AuthComponent implements OnInit {
   private tokenTimer: any;
   error: boolean = true
   private authStatusListener = new Subject<boolean>();
-
   matcher = new MyErrorStateMatcher();
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -40,9 +36,11 @@ export class AuthComponent implements OnInit {
     this.error = false
     this.autoAuthUser();
   }
+
   getToken() {
     return this.token;
   }
+
   getRol() {
     return this.rol;
   }
@@ -62,7 +60,7 @@ export class AuthComponent implements OnInit {
   getIsAuth() {
     if (this.isAuthenticated) {
       this.error = false
-    }else{
+    } else {
       this.error = true
     }
     return this.isAuthenticated;
@@ -101,7 +99,7 @@ export class AuthComponent implements OnInit {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, rol : string) {
+  private saveAuthData(token: string, expirationDate: Date, rol: string) {
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
     localStorage.setItem("rol", rol);
@@ -117,13 +115,13 @@ export class AuthComponent implements OnInit {
     const token = localStorage.getItem("token");
     const expirationDate = localStorage.getItem("expiration");
     const rol = localStorage.getItem("rol");
-    if (!token || !expirationDate|| !rol ) {
+    if (!token || !expirationDate || !rol) {
       return;
     }
     return {
       token: token,
       expirationDate: new Date(expirationDate),
-      rol : rol
+      rol: rol
     }
   }
 
@@ -134,7 +132,6 @@ export class AuthComponent implements OnInit {
     } else {
       this.error = false;
     }
-
   }
 }
 

@@ -101,7 +101,7 @@ export class ProductsComponent implements AfterViewInit {
     if (ob.checked) {
       this.productosSeleccionados.push(row);
       row.selected = true;
-      console.log(this.productosSeleccionados)
+
     } else {
       this.productosSeleccionados = this.productosSeleccionados.filter(p => p.id != row.id)
       row.selected = false;
@@ -109,7 +109,6 @@ export class ProductsComponent implements AfterViewInit {
   }
 
   aumentar() {
-    console.log(this.productosSeleccionados);
     this.productService.aumentarElPrecio(this.valor,this.productosSeleccionados).subscribe((response) => {
     });
     setTimeout(() => {

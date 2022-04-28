@@ -1,4 +1,3 @@
-import { ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, Component, ViewChild, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -21,9 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
+
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
@@ -31,13 +28,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class ClientsComponent implements AfterViewInit {
-
   creado: boolean
-  constructor(private readonly clientService: ClientsService, private dialog: MatDialog, private readonly router: Router, private route: ActivatedRoute, private pdfService : PDFService) {
+  constructor(private readonly clientService: ClientsService, private dialog: MatDialog, private readonly router: Router, private route: ActivatedRoute, private pdfService: PDFService) {
     this.dataSource = new MatTableDataSource();
     this.getClientes();
     this.creado = false
   }
+  
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   displayedColumnsClientes: string[] = ['id', 'nombre', 'telefono', 'zona', 'direccion', 'email', 'editar', 'eliminar', 'ventas', 'productos'];

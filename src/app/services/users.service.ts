@@ -34,8 +34,8 @@ export class UsersService implements OnDestroy {
     return this.http.post(`${environment.apiUsers}/signup`, {user});
   }
 
-  editUser(id: any, email:string, rol:number) {
-    return this.http.put(`${environment.apiUsers}/${id}`, {email,rol})
+  editUser(id: any, email:string, password: string, rol:number) {
+    return this.http.put(`${environment.apiUsers}/${id}`, {email,password,rol})
   }
 
   deleteUser(id: number) {

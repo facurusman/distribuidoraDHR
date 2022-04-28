@@ -18,13 +18,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
-
-
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-
   public showPassword: boolean = false;
-
   isLoading = false;
   private isAuthenticated = false;
   private token: any;
@@ -39,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.error = false
     this.autoAuthUser();
   }
+
   getToken() {
     return this.token;
   }
@@ -58,7 +56,7 @@ export class LoginComponent implements OnInit {
   getIsAuth() {
     if (this.isAuthenticated) {
       this.error = false
-    }else{
+    } else {
       this.error = true
     }
     return this.isAuthenticated;
@@ -124,7 +122,6 @@ export class LoginComponent implements OnInit {
     } else {
       this.error = false;
     }
-
   }
 }
 
