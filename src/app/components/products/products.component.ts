@@ -40,8 +40,8 @@ export class ProductsComponent implements AfterViewInit {
   }
 
 
-  descripcion: string = '';
-  precio_base: number = 0;
+  descripcion: string;
+  precio_base: number;
   valor: number
 
   delete !: boolean

@@ -171,6 +171,9 @@ export class ProductSalesComponent implements OnInit {
         link.href = source;
         link.download = `ventaProducto.pdf`;
         link.click();
+        setTimeout(() => {
+          location.reload()
+        }, 100);
       });
     });
   }

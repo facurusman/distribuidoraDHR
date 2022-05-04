@@ -94,10 +94,10 @@ export class ProductClientComponent implements AfterViewInit {
 
   editarProductos() {
     this.productService.editarProductoPorCliente(this.idcliente, this.productosSeleccionados).subscribe((response) => {
-      setTimeout(() => {
-        this.router.navigateByUrl('/dyg/clients');
-      },250);
     });
+    setTimeout(() => {
+    this.router.navigateByUrl('/dyg/clients');
+    },250);
   }
 }
 
