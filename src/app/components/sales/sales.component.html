@@ -62,7 +62,7 @@
           </ng-container>
 
           <ng-container matColumnDef="exports">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Exportar </th>
+            <th mat-header-cell *matHeaderCellDef> Exportar </th>
             <td mat-cell *matCellDef="let element">
               <button mat-raised-button color="primary"
                 (click)="exportarPDFUnaSolaVenta(element.idCliente, element.id)">PDF</button>
