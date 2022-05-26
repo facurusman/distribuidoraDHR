@@ -51,7 +51,11 @@ export class AuthService {
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           const rol = response.rol
           this.saveAuthData(token, expirationDate, rol);
-          this.router.navigateByUrl('/dyg/home');
+          if (rol == '1') {
+            this.router.navigateByUrl('/dyg/home');
+          }else{
+            this.router.navigateByUrl('/dyg/clients')
+          }
         } else {
           this.authStatusListener.next(false);
         }

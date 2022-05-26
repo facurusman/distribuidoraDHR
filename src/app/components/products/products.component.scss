@@ -134,6 +134,12 @@ input::-webkit-inner-spin-button {
   justify-content: center;
 }
 
+.busqueda_padre{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .busqueda {
   display: flex;
   width: 20%;

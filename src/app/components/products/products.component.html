@@ -1,13 +1,23 @@
 <mat-tab-group class="tab-group">
   <mat-tab label="Mostrar Productos">
     <div class="tabla-completa">
-      <div class="busqueda">
-        <h1>Aumentar los precios</h1>
-        <mat-form-field class="example-full-width">
-          <mat-label>Aumentar de precio todos los productos</mat-label>
-          <input matInput placeholder="Ej: 8" [(ngModel)]="valor">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="aumentar()">Aumentar</button>
+      <div class="busqueda_padre">
+        <div class="busqueda">
+          <h1>Aumentar los precios (%)</h1>
+          <mat-form-field class="example-full-width">
+            <mat-label>Aumentar porcentualmente</mat-label>
+            <input matInput placeholder="Ej: 8" [(ngModel)]="valor">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="aumentarPorcentualmente()">Aumentar</button>
+        </div>
+        <div class="busqueda">
+          <h1>Aumentar los precios ($)</h1>
+          <mat-form-field class="example-full-width">
+            <mat-label>Aumentar por valor</mat-label>
+            <input matInput placeholder="Ej: 10" [(ngModel)]="valorNum">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="aumentarPorValor()">Aumentar</button>
+        </div>
       </div>
       <div class="exports">
         <button mat-button (click)="generarPDF()">PDF</button>

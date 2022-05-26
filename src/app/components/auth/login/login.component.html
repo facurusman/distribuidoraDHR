@@ -4,8 +4,8 @@
     <h1 class="h3 mb-3 fw-normal">Login</h1>
     <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
-        <input matInput name="email" ngModel type="email" placeholder="E-Mail" #emailInput="ngModel" required email>
-        <mat-error *ngIf="emailInput.invalid">Por favor ingrese un email valido</mat-error>
+        <input matInput name="email" ngModel type="text" placeholder="Usuario" #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.invalid">Por favor ingrese un nombre de usuario valido</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input type="password" name="password" ngModel matInput placeholder="Contraseña" #passwordInput="ngModel"

@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from '../../services/products.service';
@@ -23,9 +23,9 @@ import { ProductUpPriceData } from 'src/app/models/ProductUpPriceData';
   styleUrls: ['./products.component.scss'],
 })
 
-export class ProductsComponent implements AfterViewInit {
+export class ProductsComponent implements AfterViewInit, OnInit {
   creado: boolean;
-  displayedColumns: string[] = ['select', 'descripcion', 'precio_base', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['select', 'descripcion', 'precio_base', 'eliminar'];
   dataSource = new MatTableDataSource<ProductUpPriceData>();
   selection = new SelectionModel<ProductUpPriceData>(true, []);
   productosSeleccionados: ProductUpPriceData[] = [];
@@ -39,14 +39,20 @@ export class ProductsComponent implements AfterViewInit {
     this.creado = false
   }
 
-
   descripcion: string;
   precio_base: number;
-  valor: number
-
+  valor: number;
+  valorNum: number;
   delete !: boolean
 
-
+  ngOnInit(): void {
+    let rol = localStorage.getItem("rol");
+    if (rol === '1') {
+      this.displayedColumns = ['select', 'descripcion', 'precio_base', 'editar', 'eliminar'];
+    }else{
+      this.displayedColumns = ['select', 'descripcion', 'precio_base', 'eliminar'];
+    }
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -108,8 +114,16 @@ export class ProductsComponent implements AfterViewInit {
     }
   }
 
-  aumentar() {
-    this.productService.aumentarElPrecio(this.valor,this.productosSeleccionados).subscribe((response) => {
+  aumentarPorcentualmente() {
+    this.productService.aumentarPorcentaje(this.valor,this.productosSeleccionados).subscribe((response) => {
+    });
+    setTimeout(() => {
+      location.reload()
+    }, 100);
+  }
+
+  aumentarPorValor() {
+    this.productService.aumentarPorNumero(this.valorNum,this.productosSeleccionados).subscribe((response) => {
     });
     setTimeout(() => {
       location.reload()
