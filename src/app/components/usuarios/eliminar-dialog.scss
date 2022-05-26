@@ -1,11 +1,12 @@
 .all-dialog {
   font-family: sans-serif;
-  height: 75px;
+  height: 80px;
 }
 
 .actions {
   display: flex;
   gap: 1rem;
+  margin: auto;
   flex-direction: column;
 }
 
@@ -16,7 +17,7 @@
   background-color: #D32F2F;
   font-family: sans-serif;
   color: #fafafa;
-  padding: 10px;
+  width: 200px;
 }
 
 .cancelar {
@@ -26,5 +27,5 @@
   font-family: sans-serif;
   background-color: #002b5c;
   color: #fafafa;
-  padding: 10px;
+  width: 200px;
 }

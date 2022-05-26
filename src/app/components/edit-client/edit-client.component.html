@@ -2,21 +2,21 @@
   <div class="container-child">
     <mat-form-field>
       <mat-label class="title">Nombre</mat-label>
-      <input matInput name="name" [(ngModel)]="nombre" minlength="5" />
+      <input matInput name="name" [(ngModel)]="nombre"/>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput type="string" placeholder="Teléfono" class="phone_number" [(ngModel)]="telefono" minlength="8" />
+      <input matInput type="string" placeholder="Teléfono" class="phone_number" [(ngModel)]="telefono"/>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Zona</mat-label>
-      <input matInput name="zone" [(ngModel)]="zona" minlength="5" />
+      <input matInput name="zone" [(ngModel)]="zona"/>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label class="title">Dirección</mat-label>
-      <input matInput name="adress" [(ngModel)]="direccion" minlength="5" />
+      <input matInput name="adress" [(ngModel)]="direccion"/>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
@@ -26,14 +26,14 @@
 
   <mat-form-field>
     <mat-label class="title">Detalle</mat-label>
-    <input matInput name="detail" [(ngModel)]="detalle" minlength="5" />
+    <input matInput name="detail" [(ngModel)]="detalle"/>
   </mat-form-field>
 
   <button mat-raised-button color="warn" (click)="onEdit()">Editar Cliente</button>
 
   <ng-template [ngIf]="creado">
 
-    <div class="message_create">Cliente creado con exito</div>
+    <div class="message_create">Cliente actualizado con exito</div>
 
   </ng-template>
 </div>

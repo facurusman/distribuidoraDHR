@@ -1,7 +1,7 @@
 <mat-tab-group class="tab-group">
   <mat-tab label="Mostrar Ventas">
     <div class="tabla-completa">
-      
+
       <div class="exports">
 
         <mat-form-field appearance="fill" class="inputDate">
@@ -62,7 +62,7 @@
           </ng-container>
 
           <ng-container matColumnDef="exports">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Exportar </th>
+            <th mat-header-cell *matHeaderCellDef> Exportar </th>
             <td mat-cell *matCellDef="let element">
               <button mat-raised-button color="primary"
                 (click)="exportarPDFUnaSolaVenta(element.idCliente, element.id)">PDF</button>
@@ -76,7 +76,7 @@
             <td class="mat-cell" colspan="4">No encontramos ninguna venta "{{input.value}}"</td>
           </tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Seleccione pagina"
+        <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Mostrar por pagina"
           #TableVentasPaginator="matPaginator"></mat-paginator>
       </div>
     </div>
