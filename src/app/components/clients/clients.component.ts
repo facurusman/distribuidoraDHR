@@ -48,7 +48,6 @@ export class ClientsComponent implements AfterViewInit {
   email: string = ''
   detalle: string = ''
   delete !: boolean
-
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

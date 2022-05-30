@@ -118,7 +118,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumnsCarrito"></tr>
         <tr mat-row *matRowDef="let element; columns: displayedColumnsCarrito;"></tr>
       </table>
-
+      <p class="total">Deuda $<input matInput placeholder="Ej. 100" [(ngModel)]="deuda" type="number"></p>
       <p class="total">El total es de $<input matInput placeholder="Ej. 100" [(ngModel)]="total_final"></p>
       <button mat-raised-button color="primary" (click)="onCreateSale()">Confirmar</button>
     </div>

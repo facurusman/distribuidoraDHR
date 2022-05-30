@@ -51,6 +51,7 @@ export class ProductSalesComponent implements OnInit {
   selected = 'option2';
   id: number = 0;
   total_final: number = 0;
+  deuda: number = 0;
   idVenta: number;
 
   constructor(
@@ -158,6 +159,7 @@ export class ProductSalesComponent implements OnInit {
   onCreateSale() {
     const sale = new Sale({
       idCliente: this.idCliente,
+      deuda: this.deuda,
       fecha: this.fecha,
       total: this.total_final
     });

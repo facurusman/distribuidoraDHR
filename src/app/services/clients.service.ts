@@ -17,6 +17,10 @@ export class ClientsService {
     return this.http.get(`${environment.apiClients}/${id}`);
   }
 
+  getDeuda(id: number) {
+    return this.http.get(`${environment.apiClients}/deuda/${id}`);
+  }
+
   postClient(client: Client) {
     return this.http.post(`${environment.apiClients}/crear`, client);
   }
