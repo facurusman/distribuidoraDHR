@@ -1,8 +1,8 @@
 <mat-tab-group class="tab-group">
   <mat-tab label="Mostrar Productos">
     <div class="tabla-completa">
-      <div class="busqueda_padre">
-        <div class="busqueda">
+      <div class="busqueda_padre" *ngIf="rol == 1">
+        <div class="busqueda" >
           <h1>Aumentar los precios (%)</h1>
           <mat-form-field class="example-full-width">
             <mat-label>Aumentar porcentualmente</mat-label>

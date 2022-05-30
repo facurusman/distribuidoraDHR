@@ -44,10 +44,11 @@ export class ProductsComponent implements AfterViewInit, OnInit {
   valor: number;
   valorNum: number;
   delete !: boolean
+  rol: any
 
   ngOnInit(): void {
-    let rol = localStorage.getItem("rol");
-    if (rol === '1') {
+    this.rol = localStorage.getItem("rol");
+    if (this.rol === '1') {
       this.displayedColumns = ['select', 'descripcion', 'precio_base', 'editar', 'eliminar'];
     }else{
       this.displayedColumns = ['select', 'descripcion', 'precio_base', 'eliminar'];
