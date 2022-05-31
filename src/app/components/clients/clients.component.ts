@@ -112,7 +112,7 @@ export class ClientsComponent implements AfterViewInit {
       const link = document.createElement("a");
       link.href = source;
       link.download = `clientes.pdf`;
-      link.click();
+      link.click();    
     });;
   }
 
