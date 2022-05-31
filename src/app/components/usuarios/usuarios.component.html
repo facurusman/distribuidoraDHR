@@ -58,15 +58,9 @@
         <img src="../../../assets/images/logo-dygcombos.png" alt="" />
 
         <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-            placeholder="Ex. pat@example.com" [(ngModel)]="email" />
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Por favor ingrese una direccion de email valida
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email es <strong>obligatorio</strong>
-          </mat-error>
+          <mat-label>Username</mat-label>
+          <input type="text" matInput
+            placeholder="cristian" [(ngModel)]="email" />
         </mat-form-field>
 
         <mat-form-field>
