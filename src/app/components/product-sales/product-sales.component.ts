@@ -14,6 +14,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Sale } from 'src/app/models/sale';
 import { MatIconModule } from '@angular/material/icon';
 import { prepareSyntheticPropertyName } from '@angular/compiler/src/render3/util';
+import { FormControl } from '@angular/forms';
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-product-sales',
@@ -21,6 +23,9 @@ import { prepareSyntheticPropertyName } from '@angular/compiler/src/render3/util
   styleUrls: ['./product-sales.component.scss']
 })
 export class ProductSalesComponent implements OnInit {
+  myControl = new FormControl();
+  options: ClientData[] = [];
+  filteredOptions: Observable<ClientData[]>;
   displayedColumnsProductos: string[] = [
     'id',
     'descripcion',
@@ -68,6 +73,21 @@ export class ProductSalesComponent implements OnInit {
   ngOnInit(): void {
     this.dataSourceProductos.paginator = this.tableProductosPaginator;
     this.dataSourceProductos.sort = this.tableProductosSort;
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => (typeof value === 'string' ? value : value.name)),
+      map(name => (name ? this._filter(name) : this.options.slice())),
+    );
+  }
+
+  displayFn(user: ClientData): string {
+    return user && user.nombre ? user.nombre : '';
+  }
+
+  private _filter(name: string): ClientData[] {
+    const filterValue = name.toLowerCase();
+
+    return this.options.filter(option => option.nombre.toLowerCase().includes(filterValue));
   }
 
   applyFilterProductos(event: Event) {
@@ -93,6 +113,7 @@ export class ProductSalesComponent implements OnInit {
       const clientes = response as ClientData[];
       clientes.forEach(element => {
         this.clientList.push(element);
+        this.options.push(element)
       });
     });
   }

@@ -1,125 +1,147 @@
-
-<div class="container-venta" style="background-color: #002b5c;">
-  <div class="container-tabla1" style="padding: 1rem;">
+<div class="container-venta" style="background-color: #002b5c">
+  <div class="container-tabla1" style="padding: 1rem">
     <div class="desplegable">
-      <mat-form-field appearance="fill">
-        <mat-label>Clientes</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let client of clientList" (click)="clickEnSelector(client.id)">
-            {{client.nombre}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <form class="example-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Clientes</mat-label>
+          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" placeholder="Escriba el nombre de un cliente">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="clickEnSelector(option.id)">
+              {{option.nombre}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
     </div>
     <div class="tabla-completa-venta">
       <mat-form-field appearance="standard" class="filter-class">
         <mat-label class="label-search">Busqueda</mat-label>
-        <input matInput (keyup)="applyFilterProductos($event)" placeholder='Ej. Nombre del producto' #input class="input-search">
+        <input
+          matInput
+          (keyup)="applyFilterProductos($event)"
+          placeholder="Ej. Nombre del producto"
+          #input
+          class="input-search"
+        />
       </mat-form-field>
 
-      <table mat-table [dataSource]="dataSourceProductos" class="mat-elevation-z8" matSort #TableProductosSort="matSort">
-
+      <table
+        mat-table
+        [dataSource]="dataSourceProductos"
+        class="mat-elevation-z8"
+        matSort
+        #TableProductosSort="matSort"
+      >
         <!-- Position Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-          <td mat-cell *matCellDef="let element"> {{element.id?element.id:"-"}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id ? element.id : '-' }}</td>
         </ng-container>
 
         <!-- Position Column -->
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
-          <td mat-cell *matCellDef="let element"> {{element.descripcion?element.descripcion:"-"}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.descripcion ? element.descripcion : '-' }}
+          </td>
         </ng-container>
 
         <!-- Position Column -->
         <ng-container matColumnDef="cantidad">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
           <td mat-cell *matCellDef="let element">
-            <input matInput placeholder="Ej: 8" type="text" [(ngModel)]="element.cantidad">
+            <input matInput placeholder="Ej: 8" type="text" [(ngModel)]="element.cantidad" />
           </td>
         </ng-container>
         <!-- Name Column -->
         <ng-container matColumnDef="precio">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
-          <td mat-cell *matCellDef="let element"> {{element.precio ? element.precio : element.precio_base}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.precio ? element.precio : element.precio_base }}
+          </td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="agregar">
-          <th mat-header-cell *matHeaderCellDef> Agregar </th>
+          <th mat-header-cell *matHeaderCellDef>Agregar</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon class="button_add"
-              (click)="agregarElemento(element)">
-              add_circle</mat-icon>
+            <mat-icon class="button_add" (click)="agregarElemento(element)"> add_circle</mat-icon>
           </td>
         </ng-container>
 
-
         <tr mat-header-row *matHeaderRowDef="displayedColumnsProductos"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumnsProductos"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsProductos"></tr>
 
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No encontramos productos "{{ input.value }}"</td>
-    </tr>
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No encontramos productos "{{ input.value }}"</td>
+        </tr>
       </table>
 
-      <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Mostrar por pagina"  #TableProductosPaginator="matPaginator"></mat-paginator>
-
-
+      <mat-paginator
+        [pageSizeOptions]="[25, 50, 75, 100]"
+        aria-label="Mostrar por pagina"
+        #TableProductosPaginator="matPaginator"
+      ></mat-paginator>
     </div>
   </div>
-  <div style="padding: 1rem;">
+  <div style="padding: 1rem">
     <div class="container-child">
       <table mat-table [dataSource]="dataSourceCarrito" class="mat-elevation-z8">
-
         <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Position Column -->
         <ng-container matColumnDef="idProducto">
-          <th mat-header-cell *matHeaderCellDef> ID-P </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          <th mat-header-cell *matHeaderCellDef>ID-P</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
-          <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+          <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="cantidad">
-          <th mat-header-cell *matHeaderCellDef> Cantidad </th>
-          <td mat-cell *matCellDef="let element"> {{element.cantidad ? element.cantidad :'1'}} </td>
+          <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.cantidad ? element.cantidad : '1' }}
+          </td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="precio">
-          <th mat-header-cell *matHeaderCellDef> Precio </th>
-          <td mat-cell *matCellDef="let element"> {{element.precio ? element.precio : element.precio_base}} </td>
+          <th mat-header-cell *matHeaderCellDef>Precio</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.precio ? element.precio : element.precio_base }}
+          </td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="total">
-          <th mat-header-cell *matHeaderCellDef> Total </th>
-          <td mat-cell *matCellDef="let element"> {{element.total ? element.total : "-"}} </td>
+          <th mat-header-cell *matHeaderCellDef>Total</th>
+          <td mat-cell *matCellDef="let element">{{ element.total ? element.total : '-' }}</td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="eliminar">
-          <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
           <td mat-cell *matCellDef="let element">
             <mat-icon class="button_add" (click)="eliminarElemento(element)">cancel</mat-icon>
           </td>
         </ng-container>
 
-
         <tr mat-header-row *matHeaderRowDef="displayedColumnsCarrito"></tr>
-        <tr mat-row *matRowDef="let element; columns: displayedColumnsCarrito;"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumnsCarrito"></tr>
       </table>
-      <p class="total">Deuda $<input matInput placeholder="Ej. 100" [(ngModel)]="deuda" type="number"></p>
-      <p class="total">El total es de $<input matInput placeholder="Ej. 100" [(ngModel)]="total_final"></p>
+      <p class="total">
+        Deuda $<input matInput placeholder="Ej. 100" [(ngModel)]="deuda" type="number" />
+      </p>
+      <p class="total">
+        El total es de $<input matInput placeholder="Ej. 100" [(ngModel)]="total_final" />
+      </p>
       <button mat-raised-button color="primary" (click)="onCreateSale()">Confirmar</button>
     </div>
   </div>

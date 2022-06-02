@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  apiUsers: 'https://dyg-backend.herokuapp.com/api/user',
-  apiClients: 'https://dyg-backend.herokuapp.com/api/client',
-  apiProducts: 'https://dyg-backend.herokuapp.com/api/product',
-  apiProductsByCliente: 'https://dyg-backend.herokuapp.com/api/product/byClient',
-  apiSales: 'https://dyg-backend.herokuapp.com/api/sale'
+  apiUsers: 'http://localhost:3000/api/user',
+  apiClients: 'http://localhost:3000/api/client',
+  apiProducts: 'http://localhost:3000/api/product',
+  apiProductsByCliente: 'http://localhost:3000/api/product/byClient',
+  apiSales: 'http://localhost:3000/api/sale'
 };
