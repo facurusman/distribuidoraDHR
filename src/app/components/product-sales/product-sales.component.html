@@ -57,10 +57,10 @@
         <ng-container matColumnDef="precio">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.precio ? element.precio : element.precio_base }}
+            <input matInput placeholder="Ej: 8" type="text" [(ngModel)]="element.precio" *ngIf="element.precio">
+            <input matInput placeholder="Ej: 8" type="text" [(ngModel)]="element.precio_base" *ngIf="!element.precio">
           </td>
         </ng-container>
-
         <!-- Name Column -->
         <ng-container matColumnDef="agregar">
           <th mat-header-cell *matHeaderCellDef>Agregar</th>

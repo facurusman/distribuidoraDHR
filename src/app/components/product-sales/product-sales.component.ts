@@ -49,7 +49,6 @@ export class ProductSalesComponent implements OnInit {
 
   idCliente: any;
   fecha: Date = new Date();
-  cantidad: any;
   total: number = 0;
   client: any;
   clientList: ClientData[] = [];
