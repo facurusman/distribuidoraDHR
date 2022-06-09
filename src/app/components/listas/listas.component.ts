@@ -18,13 +18,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-
 @Component({
-  selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+  selector: 'app-listas',
+  templateUrl: './listas.component.html',
+  styleUrls: ['./listas.component.scss']
 })
-export class ClientsComponent implements AfterViewInit {
+export class ListasComponent {
   creado: boolean;
   constructor(
     private readonly clientService: ClientsService,
@@ -40,7 +39,7 @@ export class ClientsComponent implements AfterViewInit {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  displayedColumnsClientes: string[] = [
+  displayedColumnsListas: string[] = [
     'id',
     'nombre',
     'telefono',
@@ -129,7 +128,7 @@ export class ClientsComponent implements AfterViewInit {
   }
 
   openDialog(id: number): void {
-    const dialogRef = this.dialog.open(EliminarDialogo, {
+    const dialogRef = this.dialog.open(EliminarDialogoListas, {
       width: '250px',
       data: { delete: this.delete }
     });
@@ -146,15 +145,15 @@ export class ClientsComponent implements AfterViewInit {
   }
 }
 @Component({
-  selector: 'eliminar-dialog',
-  templateUrl: './eliminar-dialog.html',
-  styleUrls: ['./eliminar-dialog.scss']
+  selector: 'eliminar-dialog-lista',
+  templateUrl: './eliminar-dialog-lista.html',
+  styleUrls: ['./eliminar-dialog-lista.scss']
 })
-export class EliminarDialogo implements OnInit {
+export class EliminarDialogoListas implements OnInit {
   id: number = 0;
 
   constructor(
-    public dialogRef: MatDialogRef<ClientsComponent>,
+    public dialogRef: MatDialogRef<ListasComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private clientService: ClientsService,
     private readonly router: Router,

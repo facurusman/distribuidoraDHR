@@ -6,24 +6,24 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-core',
   templateUrl: './core.component.html',
-  styleUrls: ['./core.component.scss'],
+  styleUrls: ['./core.component.scss']
 })
 export class CoreComponent implements OnInit {
   @Output() sidenavClose = new EventEmitter();
   @Output() public sidenavToggle = new EventEmitter();
-  rol :any = localStorage.getItem('rol')
-  constructor(private router: Router, private authService: AuthService) { }
+  rol: any = localStorage.getItem('rol');
+  constructor(private router: Router, private authService: AuthService) {}
 
-  @ViewChild("sidenav")
+  @ViewChild('sidenav')
   sidenav?: MatSidenav;
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
-  }
+  };
 
   public onSidenavClose = () => {
     this.sidenavClose.emit();
-  }
+  };
 
   goToStatisticsPage() {
     this.sidenav?.toggle();
@@ -52,6 +52,10 @@ export class CoreComponent implements OnInit {
   goToUsersPage() {
     this.sidenav?.toggle();
     this.router.navigateByUrl('/dyg/usuarios');
+  }
+  goToListPage() {
+    this.sidenav?.toggle();
+    this.router.navigateByUrl('/dyg/listas');
   }
 
   logout() {

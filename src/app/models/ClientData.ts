@@ -6,5 +6,6 @@ export interface ClientData {
   direccion: string;
   email: string;
   detalle: string;
+  lista: number;
 }
 

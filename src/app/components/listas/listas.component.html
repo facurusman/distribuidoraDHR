@@ -1,5 +1,5 @@
 <mat-tab-group class="tab-group">
-  <mat-tab label="Mostrar Clientes">
+  <mat-tab label="Mostrar Listas">
     <div class="tabla-completa">
       <div class="exports">
         <button mat-button (click)="generarPDF()">PDF</button>
@@ -89,12 +89,12 @@
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsListas"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsListas"></tr>
 
           <!-- Row shown when there is no matching data. -->
           <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No encontramos ningun cliente{{ input.value }}"</td>
+            <td class="mat-cell" colspan="4">No encontramos ninguna lista{{ input.value }}"</td>
           </tr>
         </table>
 
@@ -106,74 +106,25 @@
     </div>
   </mat-tab>
 
-  <mat-tab label="Crear Cliente">
+  <mat-tab label="Crear Lista">
     <div class="container">
       <div class="container-child">
         <img src="../../../assets/images/logo-dygcombos.png" alt="" />
         <mat-form-field>
-          <mat-label class="title">Nombre</mat-label>
-          <input matInput name="name" [(ngModel)]="nombre" />
-        </mat-form-field>
-
-        <mat-form-field>
           <input
             matInput
-            type="number"
-            placeholder="Teléfono"
-            class="phone_number"
+            type="text"
+            placeholder="Porcentaje"
+            class="porcentaje"
             [(ngModel)]="telefono"
-          />
+            />
+            <!-- hay que cmabiar el ng model por porcentaje -->
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Zona</mat-label>
-          <input matInput name="zone" [(ngModel)]="zona" />
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label class="title">Dirección</mat-label>
-          <input matInput name="adress" [(ngModel)]="direccion" />
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            [formControl]="emailFormControl"
-            [errorStateMatcher]="matcher"
-            placeholder="Ex. pat@example.com"
-            [(ngModel)]="email"
-          />
-          <mat-error
-            *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"
-          >
-            Por favor ingrese una direccion de email valida
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label class="title">Detalle</mat-label>
-          <input matInput name="detail" [(ngModel)]="detalle" />
-        </mat-form-field>
-
-
-        <mat-form-field>
-          <mat-label class="title">Lista</mat-label>
-          <mat-select [(ngModel)]="lista">
-            <mat-option [value]="0"> Normal </mat-option>
-            <mat-option [value]="5"> 5% </mat-option>
-            <mat-option [value]="10"> 10% </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <button mat-raised-button color="warn" (click)="onSend()">Agregar Cliente</button>
+        <button mat-raised-button color="warn" (click)="onSend()">Agregar lista</button>
 
         <ng-template [ngIf]="creado">
-          <div class="message_create">Cliente creado con exito</div>
+          <div class="message_create">Lista creada con exito</div>
         </ng-template>
       </div>
     </div>

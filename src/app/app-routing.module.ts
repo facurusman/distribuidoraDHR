@@ -15,11 +15,13 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { ProductSalesComponent } from './components/product-sales/product-sales.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.component';
+import { ListasComponent } from './components/listas/listas.component';
 const routes: Routes = [
   { path: '', component: AuthComponent },
   {
     path: 'dyg',
-    component: CoreComponent, canActivate: [AuthGuard],
+    component: CoreComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'home', component: HomeComponentComponent, canActivate: [AuthGuard] },
       { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard] },
@@ -31,12 +33,12 @@ const routes: Routes = [
       { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
       { path: 'sales/:id', component: SalesComponent, canActivate: [AuthGuard] },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
-    ],
+      { path: 'listas', component: ListasComponent, canActivate: [AuthGuard] }
+    ]
   }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
-
+export class AppRoutingModule {}

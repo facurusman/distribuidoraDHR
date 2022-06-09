@@ -2,39 +2,51 @@
   <div class="container-child">
     <mat-form-field>
       <mat-label class="title">Nombre</mat-label>
-      <input matInput name="name" [(ngModel)]="nombre"/>
+      <input matInput name="name" [(ngModel)]="nombre" />
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput type="string" placeholder="Teléfono" class="phone_number" [(ngModel)]="telefono"/>
+      <input
+        matInput
+        type="string"
+        placeholder="Teléfono"
+        class="phone_number"
+        [(ngModel)]="telefono"
+      />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Zona</mat-label>
-      <input matInput name="zone" [(ngModel)]="zona"/>
+      <input matInput name="zone" [(ngModel)]="zona" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label class="title">Dirección</mat-label>
-      <input matInput name="adress" [(ngModel)]="direccion"/>
-  </mat-form-field>
+      <input matInput name="adress" [(ngModel)]="direccion" />
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Email</mat-label>
-    <input type="string" matInput placeholder="dygcombos@gmail.com" [(ngModel)]="email" />
-  </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="string" matInput placeholder="dygcombos@gmail.com" [(ngModel)]="email" />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label class="title">Detalle</mat-label>
-    <input matInput name="detail" [(ngModel)]="detalle"/>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label class="title">Detalle</mat-label>
+      <input matInput name="detail" [(ngModel)]="detalle" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="title">Lista</mat-label>
+      <mat-select [(ngModel)]="lista">
+        <mat-option [value]="0"> Normal </mat-option>
+        <mat-option [value]="5"> 5% </mat-option>
+        <mat-option [value]="10"> 10% </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <button mat-raised-button color="warn" (click)="onEdit()">Editar Cliente</button>
+    <button mat-raised-button color="warn" (click)="onEdit()">Editar Cliente</button>
 
-  <ng-template [ngIf]="creado">
-
-    <div class="message_create">Cliente actualizado con exito</div>
-
-  </ng-template>
-</div>
+    <ng-template [ngIf]="creado">
+      <div class="message_create">Cliente actualizado con exito</div>
+    </ng-template>
+  </div>
 </div>

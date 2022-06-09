@@ -5,6 +5,7 @@ export class Client {
   readonly zona: string;
   readonly direccion: string;
   readonly detalle: string;
+  readonly lista: number;
 
   constructor({
     nombre,
@@ -13,6 +14,7 @@ export class Client {
     zona,
     direccion,
     detalle,
+    lista
   }: {
     nombre: string;
     telefono: string;
@@ -20,6 +22,7 @@ export class Client {
     zona: string;
     direccion: string;
     detalle: string;
+    lista: number;
   }) {
     this.nombre = nombre;
     this.telefono = telefono;
@@ -27,5 +30,6 @@ export class Client {
     this.zona = zona;
     this.direccion = direccion;
     this.detalle = detalle;
+    this.lista = lista
   }
 }

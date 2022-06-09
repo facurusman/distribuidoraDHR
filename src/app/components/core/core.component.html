@@ -1,18 +1,20 @@
 <mat-toolbar class="mat-elevation-z8">
-  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()" (click)="onToggleSidenav()">
-    <mat-icon *ngIf="!sidenav.opened">
-      menu
-    </mat-icon>
-    <mat-icon *ngIf="sidenav.opened">
-      close
-    </mat-icon>
+  <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+    (click)="onToggleSidenav()"
+  >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
   <div class="dyg">
-    <p>
-      DyG combos
-    </p>
+    <p>DyG combos</p>
   </div>
-  <img src="https://dyg-frontend.herokuapp.com/assets/images/logo-dygcombos.png" class="image-dyg"/>
+  <img
+    src="https://dyg-frontend.herokuapp.com/assets/images/logo-dygcombos.png"
+    class="image-dyg"
+  />
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav class="mat-elevation-z8" mode="over">
@@ -37,6 +39,10 @@
     <button mat-button class="menu-button" (click)="goToUsersPage()" *ngIf="rol === '1'">
       <mat-icon>supervisor_account</mat-icon>
       <span>Usuarios</span>
+    </button>
+    <button mat-button class="menu-button" (click)="goToListPage()" *ngIf="rol === '1'">
+      <mat-icon>view_list</mat-icon>
+      <span>Listas</span>
     </button>
 
     <mat-divider></mat-divider>

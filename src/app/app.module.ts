@@ -8,7 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { EliminarDialogoProducts, ProductsComponent } from './components/products/products.component';
+import {
+  EliminarDialogoProducts,
+  ProductsComponent
+} from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { ClientsComponent, EliminarDialogo } from './components/clients/clients.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -27,8 +30,12 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { PDFService } from './services/pdf.service';
 import { DatePipe } from '@angular/common';
 import { ProductSalesComponent } from './components/product-sales/product-sales.component';
-import { EliminarDialogoUsuarios, UsuariosComponent } from './components/usuarios/usuarios.component';
+import {
+  EliminarDialogoUsuarios,
+  UsuariosComponent
+} from './components/usuarios/usuarios.component';
 import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.component';
+import { EliminarDialogoListas, ListasComponent } from './components/listas/listas.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +56,9 @@ import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.
     ProductSalesComponent,
     UsuariosComponent,
     EliminarDialogoUsuarios,
-    EditUsuariosComponent
+    EditUsuariosComponent,
+    ListasComponent,
+    EliminarDialogoListas
   ],
   imports: [
     NgChartsModule,
@@ -57,10 +66,18 @@ import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    SharedModule,
+    SharedModule
   ],
   exports: [RouterModule],
-  providers: [ClientsService, UsersService, ProductsService, SalesService, AuthService, PDFService,DatePipe ],
-  bootstrap: [AppComponent],
+  providers: [
+    ClientsService,
+    UsersService,
+    ProductsService,
+    SalesService,
+    AuthService,
+    PDFService,
+    DatePipe
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
