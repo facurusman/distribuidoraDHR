@@ -4,10 +4,10 @@ import { environment } from 'src/environments/environment';
 import { SaleProductData } from '../models/SaleProductData';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PDFService {
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
 
   generarPDFProductos() {
     return this.http.post(`${environment.apiProducts}/crearPDF`, []);
@@ -19,9 +19,12 @@ export class PDFService {
     return this.http.post(`${environment.apiClients}/crearPDF`, []);
   }
   generarPDFVentaClient(sales: SaleProductData[]) {
-    return this.http.post(`${environment.apiSales}/crearPDF/exportarClientes`, {sales});
+    return this.http.post(`${environment.apiSales}/crearPDF/exportarClientes`, { sales });
   }
   generarPDFVentaProduct(sales: SaleProductData[]) {
     return this.http.post(`${environment.apiSales}/crearPDF/exportarProductos`, { sales });
+  }
+  generarPDFListas() {
+    return this.http.post(`${environment.apiLists}/crearPDF`, []);
   }
 }

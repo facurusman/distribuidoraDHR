@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="container-child">
+    <img src="../../../assets/images/logo-dygcombos.png" alt="" />
+    <mat-form-field>
+      <mat-label class="title">Nombre</mat-label>
+      <input matInput name="name" [(ngModel)]="nombre" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="title">Porcentaje</mat-label>
+      <mat-select [(ngModel)]="porcentaje">
+        <mat-option [value]="0"> Normal </mat-option>
+        <mat-option [value]="5"> 5% </mat-option>
+        <mat-option [value]="10"> 10% </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="warn" (click)="onEdit()">Editar Lista</button>
+
+    <ng-template [ngIf]="creado">
+      <div class="message_create">Lista actualizada con exito</div>
+    </ng-template>
+  </div>
+</div>

@@ -16,6 +16,7 @@ import { ProductSalesComponent } from './components/product-sales/product-sales.
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.component';
 import { ListasComponent } from './components/listas/listas.component';
+import { EditListComponent } from './components/edit-list/edit-list.component';
 const routes: Routes = [
   { path: '', component: AuthComponent },
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
       { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
       { path: 'sales/:id', component: SalesComponent, canActivate: [AuthGuard] },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
-      { path: 'listas', component: ListasComponent, canActivate: [AuthGuard] }
+      { path: 'listas', component: ListasComponent, canActivate: [AuthGuard] },
+      { path: 'edit/list/:id', component: EditListComponent, canActivate: [AuthGuard] }
     ]
   }
 ];

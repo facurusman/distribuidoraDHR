@@ -36,6 +36,7 @@ import {
 } from './components/usuarios/usuarios.component';
 import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.component';
 import { EliminarDialogoListas, ListasComponent } from './components/listas/listas.component';
+import { EditListComponent } from './components/edit-list/edit-list.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { EliminarDialogoListas, ListasComponent } from './components/listas/list
     EliminarDialogoUsuarios,
     EditUsuariosComponent,
     ListasComponent,
-    EliminarDialogoListas
+    EliminarDialogoListas,
+    EditListComponent
   ],
   imports: [
     NgChartsModule,
