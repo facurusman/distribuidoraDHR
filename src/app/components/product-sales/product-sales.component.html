@@ -6,7 +6,7 @@
           <mat-label>Clientes</mat-label>
           <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" placeholder="Escriba el nombre de un cliente">
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="clickEnSelector(option.id)">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="clickEnSelector(option.id, option.lista)">
               {{option.nombre}}
             </mat-option>
           </mat-autocomplete>

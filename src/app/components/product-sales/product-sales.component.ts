@@ -57,6 +57,7 @@ export class ProductSalesComponent implements OnInit {
   total_final: number = 0;
   deuda: number = 0;
   idVenta: number;
+  porcentajeCliente: number
 
   constructor(
     private readonly saleService: SalesService,
@@ -101,6 +102,19 @@ export class ProductSalesComponent implements OnInit {
   allProductsClient(id: number) {
     this.productService.getProductsByCliente(id).subscribe(response => {
       const user = response as ProductData[];
+      user.forEach(element => {
+        if (element.precio) {
+          let descuento = (+element.precio * this.porcentajeCliente)/100
+          let descontado = +element.precio - descuento ;
+          element.precio = descontado
+
+        }else{
+          let descuento = (+element.precio_base * this.porcentajeCliente)/100
+          let descontado = +element.precio_base - descuento ;
+          element.precio_base = descontado
+        }
+      });
+
       this.dataSourceProductos = new MatTableDataSource<ProductData>(user);
       this.dataSourceProductos.paginator = this.tableProductosPaginator;
       this.dataSourceProductos.sort = this.tableProductosSort;
@@ -171,9 +185,10 @@ export class ProductSalesComponent implements OnInit {
     }
   }
 
-  clickEnSelector(idCliente: number) {
-    this.allProductsClient(idCliente);
+  clickEnSelector(idCliente: number, porcentaje: number) {
+    this.porcentajeCliente = porcentaje
     this.idCliente = idCliente;
+    this.allProductsClient(idCliente);
   }
 
   onCreateSale() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListsService } from 'src/app/services/lists.service';
 import { List } from '../../models/list';
+import { ListData } from 'src/app/models/ListData';
 
 @Component({
   selector: 'app-edit-list',
@@ -12,6 +13,7 @@ export class EditListComponent implements OnInit {
   id: number;
   nombre: string = '';
   porcentaje: number;
+  porcentajesList:any = [];
 
   creado: boolean;
   constructor(
@@ -28,7 +30,19 @@ export class EditListComponent implements OnInit {
       this.creado = false;
       //otros
     });
+    this.getLists();
   }
+
+  getLists() {
+    this.listaService.getLists().subscribe(response => {
+      const lista = response as ListData[]
+      lista.forEach(element => {
+        this.porcentajesList.push(element.porcentaje)
+      });
+    });
+  }
+
+
   onEdit() {
     const lista = new List({
       nombre: this.nombre,

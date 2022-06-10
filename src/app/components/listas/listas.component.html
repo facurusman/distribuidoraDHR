@@ -80,14 +80,10 @@
         </mat-form-field>
 
 
-    <mat-form-field>
-      <mat-label class="title">Porcentaje</mat-label>
-      <mat-select [(ngModel)]="porcentaje">
-        <mat-option [value]="0"> Normal </mat-option>
-        <mat-option [value]="5"> 5% </mat-option>
-        <mat-option [value]="10"> 10% </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+          <mat-label class="title">Porcentaje</mat-label>
+          <input matInput type="number" name="porcentaje" [(ngModel)]="porcentaje" />
+        </mat-form-field>
 
         <button mat-raised-button color="warn" (click)="onSend()">Agregar lista</button>
 

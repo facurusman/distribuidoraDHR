@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
 import { ClientData } from 'src/app/models/ClientData';
 import { DialogData } from 'src/app/models/DialogData';
+import { ListData } from 'src/app/models/ListData';
+import { ListsService } from 'src/app/services/lists.service';
 import { PDFService } from 'src/app/services/pdf.service';
 import { ClientsService } from '../../services/clients.service';
 
@@ -28,6 +30,7 @@ export class ClientsComponent implements AfterViewInit {
   creado: boolean;
   constructor(
     private readonly clientService: ClientsService,
+    private readonly listaService: ListsService,
     private dialog: MatDialog,
     private readonly router: Router,
     private route: ActivatedRoute,
@@ -35,6 +38,7 @@ export class ClientsComponent implements AfterViewInit {
   ) {
     this.dataSource = new MatTableDataSource();
     this.getClientes();
+    this.getLists();
     this.creado = false;
   }
 
@@ -63,6 +67,7 @@ export class ClientsComponent implements AfterViewInit {
   detalle: string = '';
   delete!: boolean;
   lista: number;
+  porcentajesList:any = [];
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -71,6 +76,15 @@ export class ClientsComponent implements AfterViewInit {
     this.clientService.getClients().subscribe(response => {
       const user = response as ClientData[];
       this.dataSource.data = user;
+    });
+  }
+
+  getLists() {
+    this.listaService.getLists().subscribe(response => {
+      const porcentaje = response as ListData[]
+      porcentaje.forEach(element => {
+        this.porcentajesList.push(element.porcentaje)
+      });
     });
   }
 

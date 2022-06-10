@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
+import { ListData } from 'src/app/models/ListData';
 import { ClientsService } from 'src/app/services/clients.service';
+import { ListsService } from 'src/app/services/lists.service';
 
 @Component({
   selector: 'app-edit',
@@ -17,13 +19,17 @@ export class EditClientComponent implements OnInit {
   detalle: string = '';
   id: number = 0;
   lista: number;
+  porcentajesList:any = [];
 
   creado: boolean;
   constructor(
     private readonly clientService: ClientsService,
+    private readonly listaService: ListsService,
     private readonly router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.getLists();
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -39,6 +45,16 @@ export class EditClientComponent implements OnInit {
       //otrod
     });
   }
+
+  getLists() {
+    this.listaService.getLists().subscribe(response => {
+      const porcentaje = response as ListData[]
+      porcentaje.forEach(element => {
+        this.porcentajesList.push(element.porcentaje)
+      });
+    });
+  }
+
   onEdit() {
     const client = new Client({
       nombre: this.nombre,

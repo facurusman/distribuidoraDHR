@@ -161,12 +161,10 @@
         </mat-form-field>
 
 
-        <mat-form-field>
-          <mat-label class="title">Lista</mat-label>
-          <mat-select [(ngModel)]="lista">
-            <mat-option [value]="0"> Normal </mat-option>
-            <mat-option [value]="5"> 5% </mat-option>
-            <mat-option [value]="10"> 10% </mat-option>
+        <mat-form-field >
+          <mat-label class="title">Porcentaje</mat-label>
+          <mat-select [(value)]="lista" >
+            <mat-option [value]="item" *ngFor="let item of porcentajesList"> {{item}} </mat-option>
           </mat-select>
         </mat-form-field>
 

@@ -25,6 +25,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class ListasComponent {
   creado: boolean;
+  porcentajesList:any = [];
   constructor(
     private readonly listService: ListsService,
     private dialog: MatDialog,
@@ -54,6 +55,10 @@ export class ListasComponent {
     this.listService.getLists().subscribe(response => {
       const lista = response as ListData[];
       this.dataSource.data = lista;
+      lista.forEach(element => {
+        this.porcentajesList.push(element.porcentaje)
+      });
+
     });
   }
 
