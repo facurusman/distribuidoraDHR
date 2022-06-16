@@ -14,13 +14,17 @@ import { AuthService } from "src/app/services/auth.service";
 })
 
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+    console.log("entroooooo")
+   }
   private isAuth: boolean = false
+
+  
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
-
+    console.log("entroooooo2222")
     const isAuth = this.authService.getIsAuth();
     if (!isAuth) {
       this.router.navigate(['']);
