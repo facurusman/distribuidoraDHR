@@ -12,12 +12,7 @@
           required>
         <mat-error *ngIf="passwordInput.invalid">Por favor ingrese una contraseña valida</mat-error>
       </mat-form-field>
-      <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="alert">
-        <div class="message_create">Inicio de sesion incorrecto</div>
-      </div>
-      <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert">
-        <div class="message_create">Inicio de sesion incorrecto</div>
-      </div>
+      
       <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Login</button>
     </form>
   </div>

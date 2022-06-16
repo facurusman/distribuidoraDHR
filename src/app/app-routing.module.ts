@@ -17,8 +17,9 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.component';
 import { ListasComponent } from './components/listas/listas.component';
 import { EditListComponent } from './components/edit-list/edit-list.component';
+import { IsAuthGuard } from './components/auth/login/isAuth.guard';
 const routes: Routes = [
-  { path: '', component: AuthComponent },
+  { path: '', component: AuthComponent, canActivate: [IsAuthGuard]},
   {
     path: 'dyg',
     component: CoreComponent,
