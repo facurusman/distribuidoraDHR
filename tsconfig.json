@@ -15,6 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "strictPropertyInitialization": false,
     "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
