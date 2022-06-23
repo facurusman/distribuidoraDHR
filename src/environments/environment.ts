@@ -10,9 +10,8 @@ export const environment = {
   apiProductsByCliente: 'https://dyg-backend.herokuapp.com/api/product/byClient',
   apiSales: 'https://dyg-backend.herokuapp.com/api/sale',
   apiLists: 'https://dyg-backend.herokuapp.com/api/list'
-
 };
-``;
+;
 
 /*
  * For easier debugging in development mode, you can import the following file
