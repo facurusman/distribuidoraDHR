@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
    }
   private isAuth: boolean = false
 
-  
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
