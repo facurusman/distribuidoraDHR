@@ -26,7 +26,8 @@ th {
 
 .tabla-completa {
   background-color: #b8b5b447;
-  padding: 10px 30px 30px 30px
+  padding: 10px 30px 30px 30px;
+  height: calc(100vh);
 }
 
 .mat-tab-labels {
@@ -65,6 +66,8 @@ th {
   gap: 1rem;
   align-items: flex-start;
   background-color: #002b5c;
+  //altura del fondo azul
+  height: calc(100vh);
 }
 
 .tabla-completa-venta {

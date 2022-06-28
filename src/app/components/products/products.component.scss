@@ -10,7 +10,7 @@ table {
 
 td,
 th {
-  width: 16.66%;
+  width: 20%;
 }
 
 .mat-elevation-z8{
@@ -159,6 +159,13 @@ input::-webkit-inner-spin-button {
   margin: 10px 0;
 }
 
+.check{
+  width: 15%;
+}
+
+.descripcion{
+  width: 40%;
+}
 
 @media (max-width:1000px) {
   .container-child {

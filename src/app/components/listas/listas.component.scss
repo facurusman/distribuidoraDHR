@@ -32,7 +32,8 @@ th {
 
 .tabla-completa {
   background-color: #b8b5b447;
-  padding: 10px 30px 30px 30px
+  padding: 10px 30px 30px 30px;
+  height: calc(100vh - 64px - 48px);
 }
 
 .mat-tab-labels {
