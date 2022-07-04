@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { environment } from 'src/environments/environment';
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthData } from '../models/AuthData';
-
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +12,11 @@ import { AuthData } from '../models/AuthData';
 export class AuthService {
   private isAuthenticated = false;
   private token: any;
-  private rol : any
+  private rol: any;
   private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   getToken() {
     return this.token;
@@ -26,7 +24,6 @@ export class AuthService {
   getRol() {
     return this.rol;
   }
-
 
   getIsAuth() {
     return this.isAuthenticated;
@@ -38,7 +35,11 @@ export class AuthService {
 
   postLogin(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http.post<{ token: string; expiresIn: number; rol:string }>(`${environment.apiUsers}/login`, authData)
+    this.http
+      .post<{ token: string; expiresIn: number; rol: string }>(
+        `${environment.apiUsers}/login`,
+        authData
+      )
       .subscribe(response => {
         const token = response.token;
         this.token = token;
@@ -49,12 +50,12 @@ export class AuthService {
           this.authStatusListener.next(true);
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-          const rol = response.rol
+          const rol = response.rol;
           this.saveAuthData(token, expirationDate, rol);
           if (rol == '1') {
             this.router.navigateByUrl('/dyg/home');
-          }else{
-            this.router.navigateByUrl('/dyg/clients')
+          } else {
+            this.router.navigateByUrl('/dyg/clients');
           }
         } else {
           this.authStatusListener.next(false);
@@ -71,7 +72,7 @@ export class AuthService {
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
     if (expiresIn > 0) {
       this.token = authInformation.token;
-      this.rol = authInformation.rol
+      this.rol = authInformation.rol;
       this.isAuthenticated = true;
       this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);
@@ -80,12 +81,12 @@ export class AuthService {
 
   logout() {
     this.token = null;
-    this.rol = null
+    this.rol = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate([""]);
+    this.router.navigate(['']);
   }
 
   private setAuthTimer(duration: number) {
@@ -94,29 +95,29 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, rol : string) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("expiration", expirationDate.toISOString());
-    localStorage.setItem("rol", rol);
+  private saveAuthData(token: string, expirationDate: Date, rol: string) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('expiration', expirationDate.toISOString());
+    localStorage.setItem('rol', rol);
   }
 
   private clearAuthData() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("expiration");
-    localStorage.removeItem("rol");
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+    localStorage.removeItem('rol');
   }
 
   private getAuthData() {
-    const token = localStorage.getItem("token");
-    const expirationDate = localStorage.getItem("expiration");
-    const rol = localStorage.getItem("rol");
+    const token = localStorage.getItem('token');
+    const expirationDate = localStorage.getItem('expiration');
+    const rol = localStorage.getItem('rol');
     if (!token || !expirationDate || !rol) {
       return;
     }
     return {
       token: token,
       expirationDate: new Date(expirationDate),
-      rol : rol
-    }
+      rol: rol
+    };
   }
 }

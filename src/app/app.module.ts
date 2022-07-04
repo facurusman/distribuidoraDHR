@@ -37,6 +37,7 @@ import {
 import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.component';
 import { EliminarDialogoListas, ListasComponent } from './components/listas/listas.component';
 import { EditListComponent } from './components/edit-list/edit-list.component';
+import { GraphicsService } from './services/graphics.service';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { EditListComponent } from './components/edit-list/edit-list.component';
     SalesService,
     AuthService,
     PDFService,
+    GraphicsService,
     DatePipe
   ],
   bootstrap: [AppComponent]

@@ -3,29 +3,35 @@ import { Router } from '@angular/router';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import { GraphicsService } from 'src/app/services/graphics.service';
+import { GraphicsData } from 'src/app/models/GraphicsData';
 
 @Component({
   selector: 'app-home-component',
   templateUrl: './home-component.component.html',
-  styleUrls: ['./home-component.component.scss'],
+  styleUrls: ['./home-component.component.scss']
 })
 export class HomeComponentComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  data: GraphicsData[];
+  zona: string[] = [];
+  cantidad: number[] = [];
+  constructor(private router: Router, private graficosService: GraphicsService) {}
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void { }
-
-  onClient() {
-    this.router.navigateByUrl('/clientes');
-  }
-  onProduct() {
-    this.router.navigateByUrl('/productos');
-  }
-  onSale() {
-    this.router.navigateByUrl('/ventas');
+  ngOnInit(): void {
+    this.getGraphics();
+    this.randomize();
   }
 
+  getGraphics() {
+    return this.graficosService.getGraphics().subscribe(response => {
+      const datos = response as GraphicsData[];
+      datos.forEach(propiedad => {
+        this.cantidad.push(propiedad.cantidad);
+        this.zona.push(propiedad.zona);
+      });
+    });
+  }
   /* Empieza barchar */
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -38,52 +44,43 @@ export class HomeComponentComponent implements OnInit {
     },
     plugins: {
       legend: {
-        display: true,
+        display: true
       },
       datalabels: {
         anchor: 'end',
         align: 'end'
       }
     }
-
-
   };
-
+  
   public barChartType: ChartType = 'bar';
-  public barChartPlugins = [
-    DataLabelsPlugin
-  ];
-
+  public barChartPlugins = [DataLabelsPlugin];
+  
   public barChartData: ChartData<'bar'> = {
-    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
+    labels: this.zona,
+    //labels: [],
     datasets: [
-      { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-      { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+      //{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+      { data: this.cantidad, label: 'Series A' }
+      //{ data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
     ]
   };
 
   // events
-  public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+  public chartClicked({ event, active }: { event?: ChartEvent; active?: {}[] }): void {
     console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+  public chartHovered({ event, active }: { event?: ChartEvent; active?: {}[] }): void {
     console.log(event, active);
   }
 
   public randomize(): void {
+    this.getGraphics();
     // Only Change 3 values
-    this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.round(Math.random() * 100),
-      56,
-      Math.round(Math.random() * 100),
-      40];
+    this.barChartData.datasets[0].data =[]
 
     this.chart?.update();
   }
   /* Termina barchar */
-
 }

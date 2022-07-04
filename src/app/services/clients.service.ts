@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { Client } from '../models/client';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ClientsService {
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
 
   getClients() {
     return this.http.get(`${environment.apiClients}`);
@@ -26,10 +25,10 @@ export class ClientsService {
   }
 
   editClient(client: Client, id: number) {
-    return this.http.put(`${environment.apiClients}/${id}`, client)
+    return this.http.put(`${environment.apiClients}/${id}`, client);
   }
 
   deleteClient(id: number) {
-    return this.http.delete(`${environment.apiClients}/${id}`)
+    return this.http.delete(`${environment.apiClients}/${id}`);
   }
 }

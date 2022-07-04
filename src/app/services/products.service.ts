@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
-
+import { environment } from 'src/environments/environment';
 export interface ProductClientData {
   descripcion: string;
   precio_base: string;
@@ -12,12 +11,11 @@ export interface ProductClientData {
   id: number;
 }
 
-
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProductsService {
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
   getProducts() {
     return this.http.get(`${environment.apiProducts}`);
   }
@@ -29,24 +27,27 @@ export class ProductsService {
     return this.http.get(`${environment.apiProducts}/${id}`);
   }
   editProduct(id: any, product: Product) {
-    return this.http.put(`${environment.apiProducts}/${id}`, product)
+    return this.http.put(`${environment.apiProducts}/${id}`, product);
   }
 
   postProduct(product: Product) {
     return this.http.post(`${environment.apiProducts}/crear`, product);
   }
   deleteProduct(id: number) {
-    return this.http.delete(`${environment.apiProducts}/${id}`)
+    return this.http.delete(`${environment.apiProducts}/${id}`);
   }
 
   editarProductoPorCliente(idCliente: string, productos: ProductClientData[]) {
-    return this.http.post(`${environment.apiProducts}/editarPrecioPorCliente`, { idCliente, productos });
+    return this.http.post(`${environment.apiProducts}/editarPrecioPorCliente`, {
+      idCliente,
+      productos
+    });
   }
-  aumentarPorcentaje(valor : number, productos: ProductClientData[]) {
-    return this.http.put(`${environment.apiProducts}/aumentarPrecios`, {valor, productos });
+  aumentarPorcentaje(valor: number, productos: ProductClientData[]) {
+    return this.http.put(`${environment.apiProducts}/aumentarPrecios`, { valor, productos });
   }
 
-  aumentarPorNumero(valorNum : number, productos: ProductClientData[]) {
-    return this.http.put(`${environment.apiProducts}/aumentarValor`, {valorNum, productos });
+  aumentarPorNumero(valorNum: number, productos: ProductClientData[]) {
+    return this.http.put(`${environment.apiProducts}/aumentarValor`, { valorNum, productos });
   }
 }
