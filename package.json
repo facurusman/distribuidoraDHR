@@ -22,12 +22,14 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "apexcharts": "^3.35.3",
     "chart.js": "^3.7.1",
     "chartjs-plugin-datalabels": "^2.0.0",
     "date-fns": "^2.28.0",
     "express": "^4.18.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.23",
+    "ng-apexcharts": "^1.7.1",
     "ng2-charts": "^3.0.8",
     "path": "^0.12.7",
     "rxjs": "~7.5.0",
@@ -50,7 +52,8 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.5.2"
   },
-  "engines": { "node": "16.13.1", "npm": "8.4.0" }
-
-
+  "engines": {
+    "node": "16.13.1",
+    "npm": "8.4.0"
+  }
 }

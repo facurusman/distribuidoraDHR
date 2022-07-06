@@ -38,6 +38,7 @@ import { EditUsuariosComponent } from './components/edit-usuarios/edit-usuarios.
 import { EliminarDialogoListas, ListasComponent } from './components/listas/listas.component';
 import { EditListComponent } from './components/edit-list/edit-list.component';
 import { GraphicsService } from './services/graphics.service';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { GraphicsService } from './services/graphics.service';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    NgApexchartsModule,
   ],
   exports: [RouterModule],
   providers: [
