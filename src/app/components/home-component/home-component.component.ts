@@ -5,6 +5,20 @@ import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { GraphicsData } from 'src/app/models/GraphicsData';
 import { GraphicsService } from 'src/app/services/graphics.service';
+import { ChartComponent } from "ng-apexcharts";
+
+import {
+  ApexNonAxisChartSeries,
+  ApexResponsive,
+  ApexChart
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+};
 
 @Component({
   selector: 'app-home-component',
@@ -12,15 +26,40 @@ import { GraphicsService } from 'src/app/services/graphics.service';
   styleUrls: ['./home-component.component.scss']
 })
 export class HomeComponentComponent implements OnInit {
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-  data: GraphicsData[];
+  
+  
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions> | any;
+
   zona: string[] = [];
   cantidad: number[] = [];
-  constructor(private router: Router, private graficosService: GraphicsService) {}
+  constructor(private router: Router, private graficosService: GraphicsService) {
+    this.chartOptions = {
+      series: this.cantidad,
+      chart: {
+        width: 600,
+        type: "pie"
+      },
+      labels: this.zona,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  }
 
   ngOnInit(): void {
     this.getGraphics();
-    this.randomize();
+    
   }
 
   getGraphics() {
@@ -30,57 +69,29 @@ export class HomeComponentComponent implements OnInit {
         this.cantidad.push(propiedad.cantidad);
         this.zona.push(propiedad.zona);
       });
+
+      this.chartOptions = {
+        series: this.cantidad,
+        chart: {
+          width: 600,
+          type: "pie"
+        },
+        labels: this.zona,
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200
+              },
+              legend: {
+                position: "bottom"
+              }
+            }
+          }
+        ]
+      };
     });
   }
-  /* Empieza barchar */
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: {
-      x: {},
-      y: {
-        min: 10
-      }
-    },
-    plugins: {
-      legend: {
-        display: true
-      },
-      datalabels: {
-        anchor: 'end',
-        align: 'end'
-      }
-    }
-  };
   
-  public barChartType: ChartType = 'bar';
-  public barChartPlugins = [DataLabelsPlugin];
-  
-  public barChartData: ChartData<'bar'> = {
-    labels: this.zona,
-    //labels: [],
-    datasets: [
-      //{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-      { data: this.cantidad, label: 'Series A' }
-      //{ data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-    ]
-  };
-
-  // events
-  public chartClicked({ event, active }: { event?: ChartEvent; active?: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event?: ChartEvent; active?: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public randomize(): void {
-    this.getGraphics();
-    // Only Change 3 values
-    this.barChartData.datasets[0].data =[]
-
-    this.chart?.update();
-  }
-  /* Termina barchar */
 }

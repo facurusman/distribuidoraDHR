@@ -1,14 +1,16 @@
-<div class="grid2x2">
-  <div class="box box1"><div>
-    <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-            [type]="barChartType" (chartHover)="chartHovered($event)" >
-          </canvas>
+<div class="">
+  <!--<div class="box box1"><div>
+
   </div></div>
   <div class="box box2"><div>
-    <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-    [type]="barChartType" (chartHover)="chartHovered($event)" >
-  </canvas>
+   
   
   </div></div>
-  
+-->
+<apx-chart
+[series]="chartOptions.series"
+[chart]="chartOptions.chart"
+[labels]="chartOptions.labels"
+[responsive]="chartOptions.responsive"
+></apx-chart>
 </div>
