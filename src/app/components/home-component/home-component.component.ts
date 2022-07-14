@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { GraphicsData } from 'src/app/models/GraphicsData';
 import { GraphicsService } from 'src/app/services/graphics.service';
 import { ChartComponent } from "ng-apexcharts";
@@ -26,8 +25,8 @@ export type ChartOptions = {
   styleUrls: ['./home-component.component.scss']
 })
 export class HomeComponentComponent implements OnInit {
-  
-  
+
+
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
 
@@ -59,7 +58,7 @@ export class HomeComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGraphics();
-    
+
   }
 
   getGraphics() {
@@ -93,5 +92,5 @@ export class HomeComponentComponent implements OnInit {
       };
     });
   }
-  
+
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
 import { ClientData } from 'src/app/models/ClientData';
 import { ProductData } from 'src/app/models/ProductData';
 import { SaleData } from 'src/app/models/SaleData';
@@ -15,6 +14,7 @@ import { Sale } from 'src/app/models/sale';
 import { MatIconModule } from '@angular/material/icon';
 import { UntypedFormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-sales',
