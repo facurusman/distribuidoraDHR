@@ -12,7 +12,7 @@ import { ProductData } from 'src/app/models/ProductData';
 import { DialogData } from 'src/app/models/DialogData';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { ProductUpPriceData } from 'src/app/models/ProductUpPriceData';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { UntypedFormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { UsersService } from 'src/app/services/users.service';
 import { User } from 'src/app/models/user';
@@ -20,7 +20,7 @@ import { UserData } from 'src/app/models/UserData';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
@@ -40,7 +40,7 @@ export class UsuariosComponent implements AfterViewInit {
   creado: boolean;
   displayedColumns: string[] = ['email', 'rol', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<UserData>();
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  emailFormControl = new UntypedFormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

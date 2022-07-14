@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { UntypedFormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,7 +13,7 @@ import { PDFService } from 'src/app/services/pdf.service';
 import { ListsService } from '../../services/lists.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
@@ -38,7 +38,7 @@ export class ListasComponent {
     this.creado = false;
   }
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  emailFormControl = new UntypedFormControl('', [Validators.required, Validators.email]);
 
   displayedColumnsListas: string[] = ['id', 'nombre', 'porcentaje', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<ListData>();

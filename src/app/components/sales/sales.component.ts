@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { UntypedFormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -17,7 +17,7 @@ import { PDFService } from 'src/app/services/pdf.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { SaleProductData } from 'src/app/models/SaleProductData';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
@@ -31,7 +31,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./sales.component.scss'],
 })
 export class SalesComponent implements OnInit {
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  emailFormControl = new UntypedFormControl('', [Validators.required, Validators.email]);
   selection = new SelectionModel<SaleData>(true, []);
   dataSourceVentas = new MatTableDataSource<SaleData>();
   displayedColumnsVentas: string[] = ['select','id', 'idCliente', 'fecha', 'total', 'exports'];

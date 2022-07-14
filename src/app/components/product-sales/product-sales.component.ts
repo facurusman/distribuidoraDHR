@@ -13,8 +13,7 @@ import { SalesService } from 'src/app/services/sales.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Sale } from 'src/app/models/sale';
 import { MatIconModule } from '@angular/material/icon';
-import { prepareSyntheticPropertyName } from '@angular/compiler/src/render3/util';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 
 @Component({
@@ -23,7 +22,7 @@ import { map, Observable, startWith } from 'rxjs';
   styleUrls: ['./product-sales.component.scss']
 })
 export class ProductSalesComponent implements OnInit {
-  myControl = new FormControl();
+  myControl = new UntypedFormControl();
   options: ClientData[] = [];
   filteredOptions: Observable<ClientData[]>;
   displayedColumnsProductos: string[] = [
