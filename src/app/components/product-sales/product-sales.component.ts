@@ -192,12 +192,13 @@ export class ProductSalesComponent implements OnInit {
 
   onCreateSale() {
     if (this.deuda) {
-      this.total_final += this.deuda
+      this.total_final += this.deuda;
     }
     const sale = new Sale({
       idCliente: this.idCliente,
       fecha: this.fecha,
-      total: this.total_final
+      total: this.total_final,
+      deuda: this.deuda
     });
     this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
       let idVentaNueva = response.idVentaCreada;
