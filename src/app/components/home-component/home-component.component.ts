@@ -72,7 +72,7 @@ export class HomeComponentComponent implements OnInit {
       this.chartOptions = {
         series: this.cantidad,
         chart: {
-          width: 650,
+          width: 850,
           type: "pie"
         },
         labels: this.zona,
