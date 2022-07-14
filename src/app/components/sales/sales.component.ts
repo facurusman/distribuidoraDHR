@@ -153,6 +153,7 @@ export class SalesComponent implements OnInit {
     });
   }
 
+  
   exportarPDFUnaSolaVenta(idCliente : number, idVenta: number){
 
     this.saleService.getPropertiesClient(idCliente, idVenta).subscribe( (response:any) => {
