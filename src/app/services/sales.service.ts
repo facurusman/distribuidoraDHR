@@ -15,6 +15,7 @@ export class SalesService {
     return this.http.get(`${environment.apiSales}/${id}`);
   }
   postSale(sale: Sale, productos: ProductData[]) {
+    console.log(sale);
     return this.http.post(`${environment.apiSales}/crear`, { sale, productos });
   }
   filterSale(fecha_inicial: Date, fecha_final: Date) {

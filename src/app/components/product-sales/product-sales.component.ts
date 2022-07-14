@@ -200,6 +200,7 @@ export class ProductSalesComponent implements OnInit {
       total: this.total_final,
       deuda: this.deuda
     });
+    console.log(sale, this.deuda);
     this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
       let idVentaNueva = response.idVentaCreada;
       this.saleService
