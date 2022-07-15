@@ -49,7 +49,7 @@ export class AuthService {
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000000);
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           const rol = response.rol;
           this.saveAuthData(token, expirationDate, rol);
           if (rol == '1') {
