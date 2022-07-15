@@ -35,6 +35,8 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     this.error = false
     this.autoAuthUser();
+    console.log(this.getAuthData());
+
   }
 
   getToken() {
