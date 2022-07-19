@@ -56,7 +56,8 @@ export class ProductSalesComponent implements OnInit {
   total_final: number = 0;
   deuda: number = 0;
   idVenta: number;
-  porcentajeCliente: number
+  porcentajeCliente: number;
+  cargados: boolean;
 
   constructor(
     private readonly saleService: SalesService,
@@ -190,31 +191,46 @@ export class ProductSalesComponent implements OnInit {
     this.allProductsClient(idCliente);
   }
 
-  onCreateSale() {
-    if (this.deuda) {
-      this.total_final += this.deuda;
+  longitudCarrito(){
+    if (this.productosEnCarrito.length > 0) {
+      return true;
     }
-    const sale = new Sale({
-      idCliente: this.idCliente,
-      fecha: this.fecha,
-      total: this.total_final,
-      deuda: this.deuda
-    });
-    console.log(sale, this.deuda);
-    this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
-      let idVentaNueva = response.idVentaCreada;
-      this.saleService
-      .getPropertiesClient(this.idCliente, idVentaNueva)
-      .subscribe((response: any) => {
-        const source = `data:application/pdf;base64,${response.finalString}`;
-        const link = document.createElement('a');
-        link.href = source;
-        link.download = `ventaProducto.pdf`;
-        link.click();
-        setTimeout(() => {
-          location.reload()
-        }, 100);
+    return false;
+  }
+
+  onCreateSale() {
+    if (this.productosEnCarrito.length >0) {
+      if (this.deuda) {
+        this.total_final += this.deuda;
+      }else{
+        this.deuda = 0;
+        this.total_final += this.deuda;
+      }
+      const sale = new Sale({
+        idCliente: this.idCliente,
+        fecha: this.fecha,
+        total: this.total_final,
+        deuda: this.deuda
       });
-    });
+      console.log(sale, this.deuda);
+      this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
+        let idVentaNueva = response.idVentaCreada;
+        this.saleService
+        .getPropertiesClient(this.idCliente, idVentaNueva)
+        .subscribe((response: any) => {
+          const source = `data:application/pdf;base64,${response.finalString}`;
+          const link = document.createElement('a');
+          link.href = source;
+          link.download = `ventaProducto.pdf`;
+          link.click();
+          setTimeout(() => {
+            location.reload()
+          }, 100);
+        });
+      });
+    }else{
+      this.cargados = false;
+    }
+
   }
 }
