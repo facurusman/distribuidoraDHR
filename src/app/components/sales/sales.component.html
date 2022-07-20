@@ -21,8 +21,8 @@
         </div>
 
 
-        <button mat-button (click)="generarPDFClients()">Exportar Clientes</button>
-        <button mat-button (click)="generarPDFProducts()">Exportar Productos</button>
+        <button mat-raised-button (click)="generarPDFClients()"  [disabled]="!longitudVentasChequeadas()">Exportar Clientes</button>
+        <button mat-raised-button (click)="generarPDFProducts()"  [disabled]="!longitudVentasChequeadas()">Exportar Productos</button>
         <button mat-button (click)="generarPDF()">PDF</button>
       </div>
       <mat-form-field appearance="standard" class="filter-class">

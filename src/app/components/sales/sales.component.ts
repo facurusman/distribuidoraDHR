@@ -124,6 +124,13 @@ export class SalesComponent implements OnInit {
     }
   }
 
+  longitudVentasChequeadas(){
+    if (this.ventasSeleccionadas.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
   generarPDF() {
       this.pdfService.generarPDFVentas().subscribe((response: any) => {
       const source = `data:application/pdf;base64,${response.finalString}`;
