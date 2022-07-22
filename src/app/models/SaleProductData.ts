@@ -1,7 +1,7 @@
 export interface SaleProductData {
   id: number;
   idCliente: number;
-  fecha: Date;
+  fecha: any;
   selected: boolean;
   total: number;
 }

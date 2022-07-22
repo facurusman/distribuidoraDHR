@@ -64,12 +64,16 @@ export class SalesComponent implements OnInit {
       this.saleService.getSalesByClient(this.id).subscribe((response) => {
         const sale = response as SaleData[]
         this.dataSourceVentas.data = sale
-
+        sale.forEach(elemente =>{
+          elemente.fecha = elemente.fecha.slice(0,-14)
+        });
       })
     } else {
       this.saleService.getSales().subscribe((response) => {
         const sale = response as SaleData[]
-        console.log(sale);
+        sale.forEach(elemente =>{
+          elemente.fecha = elemente.fecha.slice(0,-14)
+        });
 
         this.dataSourceVentas.data = sale
       });
@@ -88,8 +92,10 @@ export class SalesComponent implements OnInit {
         idSeleccionados.push(vs.id)
       })
       sales.forEach(s => {
+        s.fecha = s.fecha.slice(0,-14)
         if(idSeleccionados.includes(s.id)){
           s.selected = true
+          s = s.fecha.slice(0,-14)
         }
       })
       this.dataSourceVentas.data = sales
