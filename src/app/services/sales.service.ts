@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Sale } from '../models/sale';
 import { ProductData } from 'src/app/models/ProductData';
 import { environment } from 'src/environments/environment';
+import { DatePipe } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +20,11 @@ export class SalesService {
     return this.http.post(`${environment.apiSales}/crear`, { sale, productos });
   }
   filterSale(fecha_inicial: Date, fecha_final: Date) {
-    return this.http.post(`${environment.apiSales}/`, { fecha_inicial, fecha_final });
+    var datePipe = new DatePipe("en-US");
+    var fecha_inicial_pipe = datePipe.transform(fecha_inicial, 'yyyy/MM/dd');
+    var fecha_final_pipe = datePipe.transform(fecha_final, 'yyyy/MM/dd');
+    console.log(fecha_inicial_pipe, fecha_final_pipe)
+    return this.http.post(`${environment.apiSales}/`, { fecha_inicial_pipe, fecha_final_pipe });
   }
   getPropertiesClient(idCliente: any, idVenta: any) {
     return this.http.post(`${environment.apiSales}/propiedades`, { idCliente, idVenta });
