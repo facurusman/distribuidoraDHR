@@ -69,6 +69,7 @@ export class SalesComponent implements OnInit {
     } else {
       this.saleService.getSales().subscribe((response) => {
         const sale = response as SaleData[]
+        console.log(sale);
         this.dataSourceVentas.data = sale
       });
     }
