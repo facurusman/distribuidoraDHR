@@ -25,13 +25,7 @@ export class ProductSalesComponent implements OnInit {
   myControl = new UntypedFormControl();
   options: ClientData[] = [];
   filteredOptions: Observable<ClientData[]>;
-  displayedColumnsProductos: string[] = [
-    'id',
-    'descripcion',
-    'cantidad',
-    'precio',
-    'agregar'
-  ];
+  displayedColumnsProductos: string[] = ['id', 'descripcion', 'cantidad', 'precio', 'agregar'];
   dataSourceProductos = new MatTableDataSource<ProductData>();
   @ViewChild('TableProductosPaginator', { static: true }) tableProductosPaginator: MatPaginator;
   @ViewChild('TableProductosSort', { static: true }) tableProductosSort: MatSort;
@@ -58,6 +52,7 @@ export class ProductSalesComponent implements OnInit {
   idVenta: number;
   porcentajeCliente: number;
   cargados: boolean;
+  cantidadNueva: number;
 
   constructor(
     private readonly saleService: SalesService,
@@ -76,7 +71,7 @@ export class ProductSalesComponent implements OnInit {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.name)),
-      map(name => (name ? this._filter(name) : this.options.slice())),
+      map(name => (name ? this._filter(name) : this.options.slice()))
     );
   }
 
@@ -104,14 +99,13 @@ export class ProductSalesComponent implements OnInit {
       const user = response as ProductData[];
       user.forEach(element => {
         if (element.precio) {
-          let descuento = (+element.precio * this.porcentajeCliente)/100
-          let descontado = +element.precio - descuento ;
-          element.precio = descontado
-
-        }else{
-          let descuento = (+element.precio_base * this.porcentajeCliente)/100
-          let descontado = +element.precio_base - descuento ;
-          element.precio_base = descontado
+          let descuento = (+element.precio * this.porcentajeCliente) / 100;
+          let descontado = +element.precio - descuento;
+          element.precio = descontado;
+        } else {
+          let descuento = (+element.precio_base * this.porcentajeCliente) / 100;
+          let descontado = +element.precio_base - descuento;
+          element.precio_base = descontado;
         }
       });
 
@@ -126,28 +120,35 @@ export class ProductSalesComponent implements OnInit {
       const clientes = response as ClientData[];
       clientes.forEach(element => {
         this.clientList.push(element);
-        this.options.push(element)
+        this.options.push(element);
       });
     });
   }
 
   agregarElemento(producto: ProductData) {
-    if (producto.cantidad) {
-      if (producto.precio) {
-        this.total_final += +producto.precio * producto.cantidad;
-        this.total = +producto.precio * producto.cantidad;
-      } else {
-        this.total_final += +producto.precio_base * producto.cantidad;
-        this.total = +producto.precio_base * producto.cantidad;
-      }
+    const productoRepetido = this.productosEnCarrito.filter(p => p.id == producto.id);
+    if (!producto.cantidad) {
+      producto.cantidad = 1;
+    }
+    if (producto.precio) {
+      this.total_final += +producto.precio * producto.cantidad;
+      this.total = +producto.precio * producto.cantidad;
     } else {
-      if (producto.precio) {
-        this.total_final += +producto.precio;
-        this.total = +producto.precio;
-      } else {
-        this.total_final += +producto.precio_base;
-        this.total = +producto.precio_base;
-      }
+      this.total_final += +producto.precio_base * producto.cantidad;
+      this.total = +producto.precio_base * producto.cantidad;
+    }
+
+    if (productoRepetido.length > 0) {
+      productoRepetido.forEach(element => {
+        this.cantidadNueva = +element.cantidad + +producto.cantidad; //este cambia la cantidad vieja a la cantidad nueva
+        producto.cantidad = this.cantidadNueva;
+        //esta linea hace bien el total
+        this.total += element.total;
+        //de aca para abajo elimina el nuevo producto que agregaria
+        const indice = this.productosEnCarrito.findIndex(p => p.id == element.id);
+        this.productosEnCarrito.splice(indice, 1);
+        this.productosEnCarrito = [...this.productosEnCarrito];
+      });
     }
     this.productosEnCarrito.push({
       id: producto.id,
@@ -155,12 +156,10 @@ export class ProductSalesComponent implements OnInit {
       precio_base: producto.precio_base,
       cantidad: producto.cantidad,
       descripcion: producto.descripcion,
-      total : this.total
+      total: this.total
     });
     this.dataSourceCarrito = new MatTableDataSource<ProductData>(this.productosEnCarrito);
-
   }
-
   eliminarElemento(producto: ProductData) {
     const indice = this.productosEnCarrito.findIndex(p => p.id == producto.id);
     this.productosEnCarrito.splice(indice, 1);
@@ -169,10 +168,10 @@ export class ProductSalesComponent implements OnInit {
     if (producto.cantidad) {
       if (producto.precio) {
         this.total_final -= +producto.precio * producto.cantidad;
-        this.total -= +producto.precio * producto.cantidad
+        this.total -= +producto.precio * producto.cantidad;
       } else {
         this.total_final -= +producto.precio_base * producto.cantidad;
-        this.total -= +producto.precio_base *  producto.cantidad
+        this.total -= +producto.precio_base * producto.cantidad;
       }
     } else {
       if (producto.precio) {
@@ -184,14 +183,13 @@ export class ProductSalesComponent implements OnInit {
       }
     }
   }
-
   clickEnSelector(idCliente: number, porcentaje: number) {
-    this.porcentajeCliente = porcentaje
+    this.porcentajeCliente = porcentaje;
     this.idCliente = idCliente;
     this.allProductsClient(idCliente);
   }
 
-  longitudCarrito(){
+  longitudCarrito() {
     if (this.productosEnCarrito.length > 0) {
       return true;
     }
@@ -199,10 +197,10 @@ export class ProductSalesComponent implements OnInit {
   }
 
   onCreateSale() {
-    if (this.productosEnCarrito.length >0) {
+    if (this.productosEnCarrito.length > 0) {
       if (this.deuda) {
         this.total_final += this.deuda;
-      }else{
+      } else {
         this.deuda = 0;
         this.total_final += this.deuda;
       }
@@ -216,21 +214,20 @@ export class ProductSalesComponent implements OnInit {
       this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
         let idVentaNueva = response.idVentaCreada;
         this.saleService
-        .getPropertiesClient(this.idCliente, idVentaNueva)
-        .subscribe((response: any) => {
-          const source = `data:application/pdf;base64,${response.finalString}`;
-          const link = document.createElement('a');
-          link.href = source;
-          link.download = `ventaProducto.pdf`;
-          link.click();
-          setTimeout(() => {
-            location.reload()
-          }, 100);
-        });
+          .getPropertiesClient(this.idCliente, idVentaNueva)
+          .subscribe((response: any) => {
+            const source = `data:application/pdf;base64,${response.finalString}`;
+            const link = document.createElement('a');
+            link.href = source;
+            link.download = `ventaProducto.pdf`;
+            link.click();
+            setTimeout(() => {
+              location.reload();
+            }, 100);
+          });
       });
-    }else{
+    } else {
       this.cargados = false;
     }
-
   }
 }
