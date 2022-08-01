@@ -101,11 +101,11 @@ export class ProductSalesComponent implements OnInit {
         if (element.precio) {
           let descuento = (+element.precio * this.porcentajeCliente) / 100;
           let descontado = +element.precio - descuento;
-          element.precio = descontado;
+          element.precio = Number(descontado.toFixed());
         } else {
           let descuento = (+element.precio_base * this.porcentajeCliente) / 100;
           let descontado = +element.precio_base - descuento;
-          element.precio_base = descontado;
+          element.precio_base = Number(descontado.toFixed());
         }
       });
 
