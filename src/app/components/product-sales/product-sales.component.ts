@@ -170,22 +170,19 @@ export class ProductSalesComponent implements OnInit {
     this.productosEnCarrito.splice(indice, 1);
     this.productosEnCarrito = [...this.productosEnCarrito];
     this.dataSourceCarrito = new MatTableDataSource<ProductData>(this.productosEnCarrito);
-    if (producto.cantidad) {
-      if (producto.precio) {
-        this.total_final -= +producto.precio * producto.cantidad;
-        this.total -= +producto.precio * producto.cantidad;
-      } else {
-        this.total_final -= +producto.precio_base * producto.cantidad;
-        this.total -= +producto.precio_base * producto.cantidad;
-      }
+    if (!producto.cantidad) {
+      producto.cantidad = 1;
+    }
+    if (producto.precio) {
+      this.total_final -= +producto.precio * producto.cantidad;
+      this.total = +producto.precio * producto.cantidad;
+      this.total_final = Number(this.total_final.toFixed());
+      this.total = Number(this.total.toFixed());
     } else {
-      if (producto.precio) {
-        this.total_final -= +producto.precio;
-        this.total -= +producto.precio;
-      } else {
-        this.total_final -= +producto.precio_base;
-        this.total -= +producto.precio_base;
-      }
+      this.total_final -= +producto.precio_base * producto.cantidad;
+      this.total = +producto.precio_base * producto.cantidad;
+      this.total_final = Number(this.total_final.toFixed());
+      this.total = Number(this.total.toFixed());
     }
   }
   clickEnSelector(idCliente: number, porcentaje: number) {
