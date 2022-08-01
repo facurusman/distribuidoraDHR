@@ -133,9 +133,13 @@ export class ProductSalesComponent implements OnInit {
     if (producto.precio) {
       this.total_final += +producto.precio * producto.cantidad;
       this.total = +producto.precio * producto.cantidad;
+      this.total_final = Number(this.total_final.toFixed());
+      this.total = Number(this.total.toFixed());
     } else {
       this.total_final += +producto.precio_base * producto.cantidad;
       this.total = +producto.precio_base * producto.cantidad;
+      this.total_final = Number(this.total_final.toFixed());
+      this.total = Number(this.total.toFixed());
     }
 
     if (productoRepetido.length > 0) {
@@ -144,6 +148,7 @@ export class ProductSalesComponent implements OnInit {
         producto.cantidad = this.cantidadNueva;
         //esta linea hace bien el total
         this.total += element.total;
+        this.total = Number(this.total.toFixed());
         //de aca para abajo elimina el nuevo producto que agregaria
         const indice = this.productosEnCarrito.findIndex(p => p.id == element.id);
         this.productosEnCarrito.splice(indice, 1);
