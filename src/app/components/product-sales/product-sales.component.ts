@@ -211,7 +211,7 @@ export class ProductSalesComponent implements OnInit {
         idCliente: this.idCliente,
         fecha: this.fecha,
         total: this.total_final,
-        deuda: this.deuda
+        deuda: this.deuda ? this.deuda : 0
       });
       console.log(sale, this.deuda);
       this.facturaNueva = 1;
