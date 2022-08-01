@@ -53,6 +53,7 @@ export class ProductSalesComponent implements OnInit {
   porcentajeCliente: number;
   cargados: boolean;
   cantidadNueva: number;
+  facturaNueva: number = 0;
 
   constructor(
     private readonly saleService: SalesService,
@@ -213,6 +214,7 @@ export class ProductSalesComponent implements OnInit {
         deuda: this.deuda
       });
       console.log(sale, this.deuda);
+      this.facturaNueva = 1;
       this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
         let idVentaNueva = response.idVentaCreada;
         this.saleService
