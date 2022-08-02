@@ -20,6 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class AuthComponent implements OnInit {
+  loginPulsado: number = 0;
   emailFormControl = new UntypedFormControl('', [Validators.required, Validators.email]);
   public showPassword: boolean = false;
   isLoading = false;
@@ -126,6 +127,7 @@ export class AuthComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
+    this.loginPulsado = 1;
     this.authService.postLogin(form.value.email, form.value.password)
     if (this.isAuthenticated == false || this.error == true) {
       this.error = true;
