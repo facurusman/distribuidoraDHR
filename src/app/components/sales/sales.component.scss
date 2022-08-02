@@ -1,7 +1,7 @@
 table {
   width: 100%;
+  overflow: auto;
 }
-
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -10,8 +10,11 @@ table {
 td,
 th {
   width: 16.66%;
+  overflow: auto;
 }
-
+.mat-elevation-z8{
+  overflow: auto;
+}
 .filter-class {
   background-color: #FAFAFA;
 }
@@ -146,8 +149,7 @@ input::-webkit-inner-spin-button {
   border-radius: 10px;
   background-color: #002b5c;
   color: #fafafa;
-  display: flex;
-  justify-content: center;
+  height: fit-content;
   margin: 25px 10px;
 }
 
@@ -169,14 +171,9 @@ input::-webkit-inner-spin-button {
 }
 
 .button-search {
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
-.button-search button {
-  display: flex;
-  width: 20%;
-}
 
 .tabla-completa h1 {
   font-size: 25px;
@@ -205,6 +202,9 @@ input::-webkit-inner-spin-button {
     display: flex;
     flex-direction: column;
   }
+  .exports button{
+    margin-top: 0px;
+  }
 
   .tabla-completa h1 {
     padding: 5px;
@@ -215,5 +215,10 @@ input::-webkit-inner-spin-button {
     width: 50vw;
     margin: auto;
     justify-content: flex-start;
+  }
+  .inputDate{
+    display: flex;
+    justify-content: center;
+    margin: auto;
   }
 }

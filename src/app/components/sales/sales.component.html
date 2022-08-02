@@ -17,13 +17,11 @@
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <div class="button-search">
-          <button mat-raised-button color="primary" (click)="updateTableFilter()" class="button-search">Buscar</button>
+          <button mat-button color="primary" (click)="updateTableFilter()" class="button-search">Buscar</button>
         </div>
-
-
-        <button mat-raised-button (click)="generarPDFClients()"  [disabled]="!longitudVentasChequeadas()">Exportar Clientes</button>
-        <button mat-raised-button (click)="generarPDFProducts()"  [disabled]="!longitudVentasChequeadas()">Exportar Productos</button>
-        <button mat-button (click)="generarPDF()">PDF</button>
+        <button mat-button color="primary"(click)="generarPDFClients()"  [disabled]="!longitudVentasChequeadas()">Exportar Clientes</button>
+        <button mat-button color="primary" (click)="generarPDFProducts()"  [disabled]="!longitudVentasChequeadas()">Exportar Productos</button>
+        <button mat-button color="primary" (click)="generarPDF()">PDF</button>
       </div>
       <mat-form-field appearance="standard" class="filter-class">
         <mat-label class="label-search">Busqueda</mat-label>
