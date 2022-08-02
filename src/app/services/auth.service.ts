@@ -55,7 +55,7 @@ export class AuthService {
           if (rol == '1') {
             this.router.navigateByUrl('/dyg/home');
           } else {
-            this.router.navigateByUrl('/dyg/clients');
+            this.router.navigateByUrl('/dyg/sales');
           }
         } else {
           this.authStatusListener.next(false);
