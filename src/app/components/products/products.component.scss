@@ -164,9 +164,11 @@ input::-webkit-inner-spin-button {
 }
 
 .descripcion{
-  width: 40%;
+  width: 45%;
 }
-
+.opciones{
+  width: 10%;
+}
 @media (max-width:1000px) {
   .container-child {
     display: flex;

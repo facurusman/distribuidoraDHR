@@ -45,7 +45,6 @@ export class ClientsComponent implements AfterViewInit {
   emailFormControl = new UntypedFormControl('', [Validators.required, Validators.email]);
 
   displayedColumnsClientes: string[] = [
-    'id',
     'nombre',
     'telefono',
     'zona',

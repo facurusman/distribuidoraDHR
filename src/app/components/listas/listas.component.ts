@@ -40,7 +40,7 @@ export class ListasComponent {
 
   emailFormControl = new UntypedFormControl('', [Validators.required, Validators.email]);
 
-  displayedColumnsListas: string[] = ['id', 'nombre', 'porcentaje', 'editar', 'eliminar'];
+  displayedColumnsListas: string[] = ['nombre', 'porcentaje', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<ListData>();
   matcher = new MyErrorStateMatcher();
 
