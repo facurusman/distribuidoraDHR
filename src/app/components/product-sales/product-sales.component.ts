@@ -198,9 +198,12 @@ export class ProductSalesComponent implements OnInit {
     }
     return false;
   }
-
+  contadorFacturas(){
+    this.facturaNueva += 1;
+    return this.facturaNueva;
+  }
   onCreateSale() {
-    if (this.productosEnCarrito.length > 0) {
+    if (this.longitudCarrito() && this.contadorFacturas() == 1) {
       if (this.deuda) {
         this.total_final += this.deuda;
       } else {
@@ -213,23 +216,37 @@ export class ProductSalesComponent implements OnInit {
         total: this.total_final ?this.total_final : 0,
         deuda: this.deuda ? this.deuda : 0
       });
-      console.log(sale, this.deuda);
-      this.facturaNueva = 1;
-      this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
-        let idVentaNueva = response.idVentaCreada;
-        this.saleService
-          .getPropertiesClient(this.idCliente, idVentaNueva)
-          .subscribe((response: any) => {
-            const source = `data:application/pdf;base64,${response.finalString}`;
-            const link = document.createElement('a');
-            link.href = source;
-            link.download = `ventaProducto.pdf`;
-            link.click();
-            setTimeout(() => {
-              location.reload();
-            }, 100);
-          });
-      });
+      try {
+        this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
+          let idVentaNueva = response.idVentaCreada;
+          if(response.Status !== 200){
+            alert("se creo mal la venta")
+            throw new Error("se creo mal la venta");
+          }else{
+            this.saleService
+            .getPropertiesClient(this.idCliente, idVentaNueva)
+            .subscribe((response: any) => {
+              if(response.Status !== 200){
+                alert("se creo mal el pdf")
+                throw new Error("se creo mal el pdf");
+              }else{
+                const source = `data:application/pdf;base64,${response.finalString}`;
+                const link = document.createElement('a');
+                link.href = source;
+                link.download = `ventaProducto.pdf`;
+                link.click();
+                setTimeout(() => {
+                  location.reload();
+                }, 100);
+              }
+            });
+          }
+       
+        });
+      } catch (error) {
+        alert("Ocurrio un error al intentar facturar")
+        throw new Error("Ocurrio un error al intentar facturar");
+      }
     } else {
       this.cargados = false;
     }
