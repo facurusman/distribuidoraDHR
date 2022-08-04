@@ -199,7 +199,7 @@ export class ProductSalesComponent implements OnInit {
     return false;
   }
   contadorFacturas(){
-    this.facturaNueva += 1;
+    this.facturaNueva = 1;
     return this.facturaNueva;
   }
   onCreateSale() {
