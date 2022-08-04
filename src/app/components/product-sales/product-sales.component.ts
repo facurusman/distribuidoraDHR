@@ -203,6 +203,7 @@ export class ProductSalesComponent implements OnInit {
     return this.facturaNueva;
   }
   onCreateSale() {
+    this.facturaNueva = 1;
     if (this.longitudCarrito() && this.contadorFacturas() == 1) {
       if (this.deuda) {
         this.total_final += this.deuda;
@@ -245,6 +246,9 @@ export class ProductSalesComponent implements OnInit {
         });
       } catch (error) {
         alert("Ocurrio un error al intentar facturar")
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
         throw new Error("Ocurrio un error al intentar facturar");
       }
     } else {
