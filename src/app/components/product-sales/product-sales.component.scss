@@ -1,5 +1,9 @@
 table {
   width: 100%;
+  overflow:scroll;
+}
+.mat-elevation-z8{
+  overflow: auto;
 }
 
 .mat-form-field {
@@ -24,33 +28,6 @@ th {
   margin-left: 15px;
 }
 
-.tabla-completa {
-  background-color: #b8b5b447;
-  padding: 10px 30px 30px 30px;
-  height: calc(100vh);
-}
-
-.mat-tab-labels {
-  background-color: red;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-  flex-wrap: wrap;
-  background-color: #002b5c;
-}
-
-.container button {
-  background-color: #002b5c;
-  color: #fff;
-  border-radius: 17px;
-  width: 75%;
-  align-self: center;
-  height: 42px;
-}
 
 .container-tabla1 {
   flex-grow: 1;
@@ -67,7 +44,7 @@ th {
   align-items: flex-start;
   background-color: #002b5c;
   //altura del fondo azul
-  height: calc(100vh);
+  height: 100vh
 }
 
 .tabla-completa-venta {
@@ -174,9 +151,6 @@ input::-webkit-inner-spin-button {
   text-align: center;
   color: #000;
   text-decoration: none;
-
-
-
 }
 
 
@@ -186,22 +160,50 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
     justify-content: center;
     background-color: #fff;
-    width: 50%;
     border-radius: 15px;
     padding: 20px;
     margin: auto;
   }
+  .container-tabla1{
+    flex-grow: 1;
+    display: flex;
+    margin-left: 20px;
+    flex-direction: column;
+  }
+  .container-venta{
+    display: block;
+    background-color: #002b5c;
+    //altura del fondo azul
+    height: 100%;
+  }
 }
 
-@media (max-width:600px) {
+@media (max-width:650px) {
   .container-child {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: #fff;
-    width: 70%;
     border-radius: 15px;
-    padding: 20px;
+    padding: 30px;
+    margin: auto;
+    width: 85%;
+  }
+  .container-child table{
+    width: 80%;
     margin: auto;
   }
+  .container-tabla1{
+    flex-grow: 1;
+    display: flex;
+    margin-left: 20px;
+    flex-direction: column;
+  }
+  .container-venta{
+    display: block;
+    background-color: #002b5c;
+    //altura del fondo azul
+    height: 100%;
+  }
+
 }
