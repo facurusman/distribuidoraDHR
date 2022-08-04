@@ -203,7 +203,7 @@ export class ProductSalesComponent implements OnInit {
     return this.facturaNueva;
   }
   onCreateSale() {
-    this.facturaNueva = 1;
+    this.facturaNueva = 0;
     if (this.longitudCarrito() && this.contadorFacturas() == 1) {
       if (this.deuda) {
         this.total_final += this.deuda;
