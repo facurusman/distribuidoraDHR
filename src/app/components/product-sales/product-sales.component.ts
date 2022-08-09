@@ -218,31 +218,32 @@ export class ProductSalesComponent implements OnInit {
         deuda: this.deuda ? this.deuda : 0
       });
       try {
-        this.saleService.postSale(sale, this.productosEnCarrito).subscribe((response: any) => {
-          let idVentaNueva = response.idVentaCreada;
-          if(response.Status !== 200){
+        this.saleService.postSale(sale, this.productosEnCarrito).subscribe(async(response: any) => {
+          let idVentaNueva = await response.idVentaCreada;
+          let status = await response.Status
+          if(status !== 200){
             alert("se creo mal la venta")
             throw new Error("se creo mal la venta");
           }else{
             this.saleService
             .getPropertiesClient(this.idCliente, idVentaNueva)
-            .subscribe((response: any) => {
-              if(response.Status !== 200){
+            .subscribe(async(response: any) => {
+              let status = await response.Status
+              if(status !== 200){
                 alert("se creo mal el pdf")
                 throw new Error("se creo mal el pdf");
               }else{
-                const source = `data:application/pdf;base64,${response.finalString}`;
+                const source = `data:application/pdf;base64,${await response.finalString}`;
                 const link = document.createElement('a');
-                link.href = source;
-                link.download = `ventaProducto.pdf`;
-                link.click();
-                setTimeout(() => {
+                link.href = await source;
+                link.download = await `ventaProducto.pdf`;
+                await link.click();
+                await setTimeout(() => {
                   location.reload();
                 }, 100);
               }
             });
           }
-       
         });
       } catch (error) {
         alert("Ocurrio un error al intentar facturar")
