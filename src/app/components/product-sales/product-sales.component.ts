@@ -25,12 +25,11 @@ export class ProductSalesComponent implements OnInit {
   myControl = new UntypedFormControl();
   options: ClientData[] = [];
   filteredOptions: Observable<ClientData[]>;
-  displayedColumnsProductos: string[] = ['id', 'descripcion', 'cantidad', 'precio', 'agregar'];
+  displayedColumnsProductos: string[] = ['descripcion', 'cantidad', 'precio', 'agregar'];
   dataSourceProductos = new MatTableDataSource<ProductData>();
   @ViewChild('TableProductosPaginator', { static: true }) tableProductosPaginator: MatPaginator;
   @ViewChild('TableProductosSort', { static: true }) tableProductosSort: MatSort;
   displayedColumnsCarrito: string[] = [
-    'idProducto',
     'descripcion',
     'cantidad',
     'precio',
