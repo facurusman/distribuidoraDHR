@@ -198,15 +198,15 @@ input::-webkit-inner-spin-button {
     width: 100%;
     overflow:scroll;
   }
-
+  .mat-elevation-z8{
+    overflow: auto;
+  }
   td,
   th {
     width: 35%;
   }
 
-  .mat-elevation-z8{
-    overflow: auto;
-  }
+
 
   .exports {
     display: flex;

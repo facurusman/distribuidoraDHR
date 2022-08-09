@@ -195,6 +195,22 @@ input::-webkit-inner-spin-button {
     margin: auto;
     justify-content: flex-start;
   }
+   .exports {
+    display: flex;
+    flex-direction: column;
+  }
+  .exports button{
+    width: 50%;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .inputDate{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 80%;
+  }
 }
 
 @media (max-width:600px) {
