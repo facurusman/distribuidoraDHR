@@ -131,7 +131,7 @@
       <p class="total">
         El total es de $<input matInput placeholder="Ej. 100" [(ngModel)]="total_final" />
       </p>
-      <button mat-raised-button color="primary" (click)="onCreateSale()" (click)="contadorFacturas()" [disabled]="this.facturaNueva > 1" >Confirmar</button>
+      <button mat-raised-button color="primary" (click)="onCreateSale()" [disabled]="this.facturaNueva" >Confirmar</button>
     </div>
   </div>
 </div>

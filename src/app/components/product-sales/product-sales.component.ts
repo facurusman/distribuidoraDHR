@@ -52,7 +52,7 @@ export class ProductSalesComponent implements OnInit {
   porcentajeCliente: number;
   cargados: boolean;
   cantidadNueva: number;
-  facturaNueva: number = 0;
+  facturaNueva: boolean = false;
 
   constructor(
     private readonly saleService: SalesService,
@@ -197,13 +197,11 @@ export class ProductSalesComponent implements OnInit {
     }
     return false;
   }
-  contadorFacturas(){
-    this.facturaNueva = 1;
-    return this.facturaNueva;
-  }
   onCreateSale() {
-    this.facturaNueva = 0;
-    if (this.longitudCarrito() && this.contadorFacturas() == 1) {
+    if(this.longitudCarrito()){
+      this.facturaNueva = true;
+    }
+    if (this.longitudCarrito() && this.facturaNueva == true) {
       if (this.deuda) {
         this.total_final += this.deuda;
       } else {
