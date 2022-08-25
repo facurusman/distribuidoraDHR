@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       } else {
         this.error = false;
       }
-      const authData: AuthData = { email: form.value.email, password: form.value.password };\
+      const authData: AuthData = { email: form.value.email, password: form.value.password };
       if(!this.loginNuevo){
         this.authService.postLogin(authData);
         this.loginNuevo = true;
