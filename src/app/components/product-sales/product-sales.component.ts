@@ -47,7 +47,7 @@ export class ProductSalesComponent implements OnInit {
   selected = 'option2';
   id: number = 0;
   total_final: number = 0;
-  deuda: number = 0;
+  deuda: number;
   idVenta: number;
   porcentajeCliente: number;
   cargados: boolean;
