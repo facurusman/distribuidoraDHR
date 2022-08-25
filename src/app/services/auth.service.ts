@@ -36,30 +36,40 @@ export class AuthService {
   postLogin(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
     this.http
-      .post<{ token: string; expiresIn: number; rol: string }>(
+      .post<{ token: string; expiresIn: number; rol: string; Status: number }>(
         `${environment.apiUsers}/login`,
         authData
       )
-      .subscribe(response => {
-        const token = response.token;
-        this.token = token;
-        if (token) {
-          const expiresInDuration = response.expiresIn;
-          this.setAuthTimer(expiresInDuration);
-          this.isAuthenticated = true;
-          this.authStatusListener.next(true);
-          const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-          const rol = response.rol;
-          this.saveAuthData(token, expirationDate, rol);
-          if (rol == '1') {
-            this.router.navigateByUrl('/dyg/home');
+      .subscribe(async(response: any) => {
+        if (await response.Status == 200) {
+          console.log("biennnn");
+          const token = await response.token;
+          this.token = token;
+          if (token) {
+            const expiresInDuration = await response.expiresIn;
+            this.setAuthTimer(expiresInDuration);
+            this.isAuthenticated = true;
+            this.authStatusListener.next(true);
+            const now = new Date();
+            const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+            const rol = await response.rol;
+            this.saveAuthData(token, expirationDate, rol);
+            if (rol == '1') {
+              this.router.navigateByUrl('/dyg/home');
+            } else {
+              this.router.navigateByUrl('/dyg/sales');
+            }
           } else {
-            this.router.navigateByUrl('/dyg/sales');
+            this.authStatusListener.next(false);
           }
-        } else {
-          this.authStatusListener.next(false);
+        }else{
+          setTimeout(() => {
+            alert("Login incorrecto")
+            location.reload();
+          }, 1000);
+          throw new Error("Login incorrecto");
         }
+
       });
   }
 
