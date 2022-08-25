@@ -202,10 +202,7 @@ export class ProductSalesComponent implements OnInit {
       this.facturaNueva = true;
     }
     if (this.longitudCarrito() && this.facturaNueva == true) {
-      if (this.deuda) {
-        this.total_final += this.deuda;
-      } else {
-        this.deuda = 0;
+      if (this.deuda > 0) {
         this.total_final += this.deuda;
       }
       const sale = new Sale({
