@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   public token: any;
   private tokenTimer: any;
   error: boolean = true;
-
+  loginNuevo : boolean = false;
   matcher = new MyErrorStateMatcher();
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -53,7 +53,10 @@ export class LoginComponent implements OnInit {
         this.error = false;
       }
       const authData: AuthData = { email: form.value.email, password: form.value.password };
-      this.authService.postLogin(authData);
+      if (!this.loginNuevo) {
+       this.authService.postLogin(authData);
+        this.loginNuevo = true;
+      }
     } catch (error) {
       throw new Error('Logeamos mal');
     }
