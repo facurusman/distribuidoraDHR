@@ -218,19 +218,13 @@ export class ProductSalesComponent implements OnInit {
         this.saleService.postSale(sale, this.productosEnCarrito).subscribe(async(response: any) => {
           let idVentaNueva = await response.idVentaCreada;
           let status = await response.Status
-          if(status !== 200){
-            alert("se creo mal la venta")
-            throw new Error("se creo mal la venta");
-          }else{
+          if(status === 200){
             this.saleService
             .getPropertiesClient(this.idCliente, idVentaNueva)
-            .subscribe(async(response: any) => {
-              let status = await response.Status
-              if(status !== 200){
-                alert("se creo mal el pdf")
-                throw new Error("se creo mal el pdf");
-              }else{
-                const source = `data:application/pdf;base64,${await response.finalString}`;
+            .subscribe(async(res: any) => {
+              let statuspdf = await res.Status
+              if(statuspdf === 200){
+                const source = `data:application/pdf;base64,${await res.finalString}`;
                 const link = document.createElement('a');
                 link.href = source;
                 link.download =   `ventaProducto.pdf`;
@@ -238,8 +232,20 @@ export class ProductSalesComponent implements OnInit {
                 await setTimeout(() => {
                   location.reload();
                 }, 100);
+              }else{
+                setTimeout(() => {
+                  alert("Se creo mal el pdf")
+                  location.reload();
+                }, 1000);
+                throw new Error("Se creo mal el pdf");
               }
             });
+          }else{
+            setTimeout(() => {
+              alert("Se creo mal la venta")
+              location.reload();
+            }, 1000);
+            throw new Error("Se creo mal la venta");
           }
         });
       } catch (error) {

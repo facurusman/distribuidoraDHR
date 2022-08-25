@@ -17,7 +17,7 @@ export class SalesService {
   }
   postSale(sale: Sale, productos: ProductData[]) {
     console.log(sale);
-    return this.http.post(`${environment.apiSales}/crear`, { sale, productos });
+    return this.http.post<{ idVentaCreada: number; Status: number}>(`${environment.apiSales}/crear`, { sale, productos });
   }
   filterSale(fecha_inicial: Date, fecha_final: Date) {
     var datePipe = new DatePipe("en-US");
@@ -26,6 +26,6 @@ export class SalesService {
     return this.http.post(`${environment.apiSales}/`, { fecha_inicial_pipe, fecha_final_pipe });
   }
   getPropertiesClient(idCliente: any, idVenta: any) {
-    return this.http.post(`${environment.apiSales}/propiedades`, { idCliente, idVenta });
+    return this.http.post<{ finalString: any; Status: number}>(`${environment.apiSales}/propiedades`, { idCliente, idVenta });
   }
 }
