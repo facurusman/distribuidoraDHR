@@ -32,40 +32,35 @@
         matSort
         #TableProductosSort="matSort"
       >
-        <!-- Position Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-          <td mat-cell *matCellDef="let element">{{ element.id ? element.id : '-' }}</td>
-        </ng-container>
 
         <!-- Position Column -->
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="descripcion">Descripcion</th>
+          <td mat-cell *matCellDef="let element" class="descripcion">
             {{ element.descripcion ? element.descripcion : '-' }}
           </td>
         </ng-container>
 
         <!-- Position Column -->
         <ng-container matColumnDef="cantidad">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
-          <td mat-cell *matCellDef="let element">
-            <input matInput placeholder="Ej: 8" type="number" [(ngModel)]="element.cantidad" />
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="cantidad">Cantidad</th>
+          <td mat-cell *matCellDef="let element" class="cantidad">
+            <input matInput placeholder="Ej: 8" type="number" [(ngModel)]="element.cantidad" style="margin: auto auto auto 5px;"/>
           </td>
         </ng-container>
         <!-- Name Column -->
         <ng-container matColumnDef="precio">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="precio">Precio</th>
+          <td mat-cell *matCellDef="let element" class="precio">
             <input matInput placeholder="Ej: 8" type="text" [(ngModel)]="element.precio" *ngIf="element.precio">
             <input matInput placeholder="Ej: 8" type="text" [(ngModel)]="element.precio_base" *ngIf="!element.precio">
           </td>
         </ng-container>
         <!-- Name Column -->
         <ng-container matColumnDef="agregar">
-          <th mat-header-cell *matHeaderCellDef>Agregar</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon class="button_add" (click)="agregarElemento(element)"> add_circle</mat-icon>
+          <th mat-header-cell *matHeaderCellDef class="agregar">Agregar</th>
+          <td mat-cell *matCellDef="let element" class="agregar">
+            <mat-icon class="button_add" (click)="agregarElemento(element)" style="margin: auto auto auto 5px;"> add_circle</mat-icon>
           </td>
         </ng-container>
 
@@ -91,22 +86,16 @@
         <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="idProducto">
-          <th mat-header-cell *matHeaderCellDef>ID-P</th>
-          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-        </ng-container>
-
         <!-- Name Column -->
-        <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef>Descripcion</th>
-          <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
+        <ng-container matColumnDef="descripcion" class="descripcion2">
+          <th mat-header-cell *matHeaderCellDef class="descripcion2">Descripcion</th>
+          <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.descripcion }}</td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="cantidad">
-          <th mat-header-cell *matHeaderCellDef>Cantidad</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef class="cantidad2" >Cantidad</th>
+          <td mat-cell *matCellDef="let element"  class="cantidad2" style="margin: auto auto auto 5px;">
             {{ element.cantidad ? element.cantidad : '1' }}
           </td>
         </ng-container>
@@ -114,22 +103,22 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="precio">
           <th mat-header-cell *matHeaderCellDef>Precio</th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element" style="margin: auto auto auto 5px;">
             {{ element.precio ? element.precio : element.precio_base }}
           </td>
-        </ng-container>
+        </ng-container> 
 
-        <!-- Weight Column -->
+        <!-- Weight Column --> 
         <ng-container matColumnDef="total">
-          <th mat-header-cell *matHeaderCellDef>Total</th>
-          <td mat-cell *matCellDef="let element">{{ element.total ? element.total : '-' }}</td>
+          <th mat-header-cell *matHeaderCellDef class="total">Total</th>
+          <td mat-cell *matCellDef="let element" class="total" style="margin: auto auto auto 5px;">{{ element.total ? element.total : '-' }}</td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="eliminar">
-          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon class="button_add" (click)="eliminarElemento(element)">cancel</mat-icon>
+          <th mat-header-cell *matHeaderCellDef class="eliminar">Eliminar</th>
+          <td mat-cell *matCellDef="let element" class="eliminar" >
+            <mat-icon class="button_add" (click)="eliminarElemento(element)" style="margin: auto auto auto 5px;">cancel</mat-icon>
           </td>
         </ng-container>
 
@@ -142,7 +131,7 @@
       <p class="total">
         El total es de $<input matInput placeholder="Ej. 100" [(ngModel)]="total_final" />
       </p>
-      <button mat-raised-button color="primary" (click)="onCreateSale()" (click)="contadorFacturas()" [disabled]="this.facturaNueva > 1" >Confirmar</button>
+      <button mat-raised-button color="primary" (click)="onCreateSale()" [disabled]="this.facturaNueva" >Confirmar</button>
     </div>
   </div>
 </div>
