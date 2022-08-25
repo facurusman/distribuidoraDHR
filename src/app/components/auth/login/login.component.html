@@ -13,7 +13,7 @@
         <mat-error *ngIf="passwordInput.invalid">Por favor ingrese una contraseña valida</mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Login</button>
+      <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading" [disabled]="this.loginNuevo">Login</button>
     </form>
   </div>
 </div>
