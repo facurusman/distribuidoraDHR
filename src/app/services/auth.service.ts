@@ -33,9 +33,8 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  postLogin(email: string, password: string) {
-    const authData: AuthData = { email: email, password: password };
-    this.http
+  postLogin(authData: AuthData) {
+    return this.http
       .post<{ token: string; expiresIn: number; rol: string; Status: number }>(
         `${environment.apiUsers}/login`,
         authData

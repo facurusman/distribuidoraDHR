@@ -22,7 +22,6 @@ import { HomeComponentComponent } from './components/home-component/home-compone
 import { ErroresComponent } from './components/errores/errores.component';
 import { CoreComponent } from './components/core/core.component';
 import { UsersService } from './services/users.service';
-import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
 import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { ProductClientComponent } from './components/product-client/product-client.component';
@@ -50,7 +49,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     HomeComponentComponent,
     ErroresComponent,
     CoreComponent,
-    AuthComponent,
     EditClientComponent,
     ProductClientComponent,
     EditProductComponent,

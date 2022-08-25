@@ -10,7 +10,6 @@ import { CoreComponent } from './components/core/core.component';
 import { EditClientComponent } from './components/edit-client/edit-client.component';
 import { AuthGuard } from './components/auth/login/auth.guard';
 import { ProductClientComponent } from './components/product-client/product-client.component';
-import { AuthComponent } from './components/auth/auth.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { ProductSalesComponent } from './components/product-sales/product-sales.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
@@ -19,7 +18,7 @@ import { ListasComponent } from './components/listas/listas.component';
 import { EditListComponent } from './components/edit-list/edit-list.component';
 import { IsAuthGuard } from './components/auth/login/isAuth.guard';
 const routes: Routes = [
-  { path: '', component: AuthComponent, canActivate: [IsAuthGuard]},
+  { path: '', component: LoginComponent, canActivate: [IsAuthGuard]},
   {
     path: 'dyg',
     component: CoreComponent,
