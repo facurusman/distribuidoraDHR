@@ -29,15 +29,13 @@ export class LoginComponent implements OnInit {
   public token: any;
   private tokenTimer: any;
   error: boolean = true;
-  loginNuevo : boolean = false;
+  loginNuevo: boolean = false;
   matcher = new MyErrorStateMatcher();
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.error = false;
   }
-
-
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
@@ -55,11 +53,15 @@ export class LoginComponent implements OnInit {
         this.error = false;
       }
       const authData: AuthData = { email: form.value.email, password: form.value.password };
-      if(!this.loginNuevo){
+      if (!this.loginNuevo) {
         this.authService.postLogin(authData);
         this.loginNuevo = true;
       }
     } catch (error) {
+      form.reset();
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
       throw new Error('Logeamos mal');
     }
   }
