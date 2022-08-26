@@ -129,7 +129,7 @@
         Deuda $<input matInput placeholder="Ej. 100" [(ngModel)]="deuda" type="number" />
       </p>
       <p class="total">
-        El total es de $<input matInput placeholder="Ej. 100" [(ngModel)]="total_final" />
+        El total es de $<input matInput placeholder="Ej. 100" [(ngModel)]="total_final" type="number" />
       </p>
       <button mat-raised-button color="primary" (click)="onCreateSale()" [disabled]="this.facturaNueva" >Confirmar</button>
     </div>
