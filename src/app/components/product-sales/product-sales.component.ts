@@ -29,13 +29,7 @@ export class ProductSalesComponent implements OnInit {
   dataSourceProductos = new MatTableDataSource<ProductData>();
   @ViewChild('TableProductosPaginator', { static: true }) tableProductosPaginator: MatPaginator;
   @ViewChild('TableProductosSort', { static: true }) tableProductosSort: MatSort;
-  displayedColumnsCarrito: string[] = [
-    'descripcion',
-    'cantidad',
-    'precio',
-    'total',
-    'eliminar'
-  ];
+  displayedColumnsCarrito: string[] = ['descripcion', 'cantidad', 'precio', 'total', 'eliminar'];
   dataSourceCarrito = new MatTableDataSource<ProductData>();
   productosEnCarrito: ProductData[] = [];
 
@@ -46,7 +40,7 @@ export class ProductSalesComponent implements OnInit {
   clientList: ClientData[] = [];
   selected = 'option2';
   id: number = 0;
-  total_final: number = 0;
+  total_final: number;
   deuda: number;
   idVenta: number;
   porcentajeCliente: number;
@@ -130,6 +124,9 @@ export class ProductSalesComponent implements OnInit {
     if (!producto.cantidad) {
       producto.cantidad = 1;
     }
+    if (!this.total_final) {
+      this.total_final = 0;
+    }
     if (producto.precio) {
       this.total_final += +producto.precio * producto.cantidad;
       this.total = +producto.precio * producto.cantidad;
@@ -198,7 +195,7 @@ export class ProductSalesComponent implements OnInit {
     return false;
   }
   onCreateSale() {
-    if(this.longitudCarrito()){
+    if (this.longitudCarrito()) {
       this.facturaNueva = true;
     }
     if (this.longitudCarrito() && this.facturaNueva == true) {
@@ -208,49 +205,51 @@ export class ProductSalesComponent implements OnInit {
       const sale = new Sale({
         idCliente: this.idCliente ? this.idCliente : 0,
         fecha: this.fecha ? this.fecha : new Date(),
-        total: this.total_final ?this.total_final : 0,
+        total: this.total_final ? this.total_final : 0,
         deuda: this.deuda ? this.deuda : 0
       });
       try {
-        this.saleService.postSale(sale, this.productosEnCarrito).subscribe(async(response: any) => {
-          let idVentaNueva = await response.idVentaCreada;
-          let status = await response.Status
-          if(status === 200){
-            this.saleService
-            .getPropertiesClient(this.idCliente, idVentaNueva)
-            .subscribe(async(res: any) => {
-              let statuspdf = await res.Status
-              if(statuspdf === 200){
-                const source = `data:application/pdf;base64,${await res.finalString}`;
-                const link = document.createElement('a');
-                link.href = source;
-                link.download =   `ventaProducto.pdf`;
-                link.click();
-                await setTimeout(() => {
-                  location.reload();
-                }, 100);
-              }else{
-                setTimeout(() => {
-                  alert("Se creo mal el pdf")
-                  location.reload();
-                }, 1000);
-                throw new Error("Se creo mal el pdf");
-              }
-            });
-          }else{
-            setTimeout(() => {
-              alert("Se creo mal la venta")
-              location.reload();
-            }, 1000);
-            throw new Error("Se creo mal la venta");
-          }
-        });
+        this.saleService
+          .postSale(sale, this.productosEnCarrito)
+          .subscribe(async (response: any) => {
+            let idVentaNueva = await response.idVentaCreada;
+            let status = await response.Status;
+            if (status === 200) {
+              this.saleService
+                .getPropertiesClient(this.idCliente, idVentaNueva)
+                .subscribe(async (res: any) => {
+                  let statuspdf = await res.Status;
+                  if (statuspdf === 200) {
+                    const source = `data:application/pdf;base64,${await res.finalString}`;
+                    const link = document.createElement('a');
+                    link.href = source;
+                    link.download = `ventaProducto.pdf`;
+                    link.click();
+                    await setTimeout(() => {
+                      location.reload();
+                    }, 100);
+                  } else {
+                    setTimeout(() => {
+                      alert('Se creo mal el pdf');
+                      location.reload();
+                    }, 1000);
+                    throw new Error('Se creo mal el pdf');
+                  }
+                });
+            } else {
+              setTimeout(() => {
+                alert('Se creo mal la venta');
+                location.reload();
+              }, 1000);
+              throw new Error('Se creo mal la venta');
+            }
+          });
       } catch (error) {
-        alert("Ocurrio un error al intentar facturar")
+        alert('Ocurrio un error al intentar facturar');
         setTimeout(() => {
           location.reload();
         }, 1000);
-        throw new Error("Ocurrio un error al intentar facturar");
+        throw new Error('Ocurrio un error al intentar facturar');
       }
     } else {
       this.cargados = false;
