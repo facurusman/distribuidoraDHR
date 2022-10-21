@@ -220,14 +220,15 @@ export class ProductSalesComponent implements OnInit {
                 .subscribe(async (res: any) => {
                   let statuspdf = await res.Status;
                   if (statuspdf === 200) {
-                    const source = `data:application/pdf;base64,${await res.finalString}`;
-                    const link = document.createElement('a');
-                    link.href = source;
-                    link.download = `ventaProducto.pdf`;
-                    link.click();
-                    await setTimeout(() => {
-                      location.reload();
-                    }, 100);
+                    // const source = `data:application/pdf;base64,${await res.finalString}`;
+                    // const link = document.createElement('a');
+                    // link.href = source;
+                    // link.download = `ventaProducto.pdf`;
+                    // link.click();
+                    // await setTimeout(() => {
+                    //   location.reload();
+                    // }, 100);
+                    location.reload();
                   } else {
                     setTimeout(() => {
                       alert('Se creo mal el pdf');
